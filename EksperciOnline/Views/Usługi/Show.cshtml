@@ -1,0 +1,73 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container mt-5 bg-secondary bg-opacity-50 py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h2>Nazwa Usługi</h2>
+            <div class="container-fluid bg-dark text-white py-4">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <img src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Background Image" class="img-fluid">
+                    </div>
+                    <div class="col">
+                        <div class="media align-items-center">
+                            <img src="https://images.pexels.com/photos/2059151/pexels-photo-2059151.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Avatar" class="rounded-circle mr-3" style="width: 100px;">
+                            <div class="media-body">
+                                <h5 class="mt-0">Tytuł banera</h5>
+                                Treść banera lub dodatkowe informacje.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p><strong>Data Publikacji:</strong> 27 czerwca 2024</p>
+            <p><strong>Ocena:</strong> 4.5 / 5</p>
+            <p><strong>Opis:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero et arcu aliquet, eu interdum nisl mollis.</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-10">
+            <h3>Komentarze</h3>
+            <div class="mb-3">
+                <form>
+                    <div class="mb-3">
+                        <label for="komentarz" class="form-label">Komentarz</label>
+                        <textarea class="form-control" id="komentarz" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ocena" class="form-label">Ocena (od 1 do 5)</label>
+                        <input type="number" class="form-control" id="ocena" min="1" max="5" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
+                </form>
+            </div>
+
+            <div class="mt-4">
+                <h4>Lista komentarzy</h4>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Imię Nazwisko</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p class="card-text"><small class="text-muted">Data: 25 czerwca 2024</small></p>
+                        <p class="card-text"><small class="text-muted">Ocena: 4</small></p>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Inny Użytkownik</h5>
+                        <p class="card-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p class="card-text"><small class="text-muted">Data: 26 czerwca 2024</small></p>
+                        <p class="card-text"><small class="text-muted">Ocena: 5</small></p>
+                    </div>
+                </div>
+                <!-- Tutaj można dodać więcej komentarzy w podobny sposób -->
+            </div>
+        </div>
+    </div>
+</div>
