@@ -2,16 +2,20 @@
 
 namespace EksperciOnline.Controllers
 {
-    public class AdminKategorieController : Controller
+    public class ServicesController : Controller
     {
+        [HttpGet]
+        public IActionResult List()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
-
         [HttpGet]
-        public IActionResult List()
+        public IActionResult Show()
         {
             return View();
         }

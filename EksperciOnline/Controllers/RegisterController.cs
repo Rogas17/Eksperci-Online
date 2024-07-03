@@ -2,9 +2,9 @@
 
 namespace EksperciOnline.Controllers
 {
-    public class SearchController : Controller
+    public class RegisterController : Controller
     {
-        public IActionResult List()
+        public IActionResult Show()
         {
             return View();
         }

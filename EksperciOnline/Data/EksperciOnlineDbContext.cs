@@ -9,7 +9,7 @@ namespace EksperciOnline.Data
         {
         }
 
-        public DbSet<Usługa> Usługi { get; set; }
-        public DbSet<Kategoria> Kategorie { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

@@ -2,12 +2,8 @@
 
 namespace EksperciOnline.Controllers
 {
-    public class UsługiController : Controller
+    public class LoginController : Controller
     {
-        public IActionResult Add()
-        {
-            return View();
-        }
         public IActionResult Show()
         {
             return View();
