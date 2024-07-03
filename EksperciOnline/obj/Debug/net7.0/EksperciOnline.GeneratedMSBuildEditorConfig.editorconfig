@@ -9,71 +9,67 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = EksperciOnline
 build_property.RootNamespace = EksperciOnline
-build_property.ProjectDir = C:\Users\kubix\OneDrive\Dokumenty\GitHub\Eksperci-Online\EksperciOnline\
+build_property.ProjectDir = C:\Users\Admin\Documents\GitHub\Eksperci-Online\EksperciOnline\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\kubix\OneDrive\Dokumenty\GitHub\Eksperci-Online\EksperciOnline
+build_property.MSBuildProjectDirectory = C:\Users\Admin\Documents\GitHub\Eksperci-Online\EksperciOnline
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/AdminKategorie/Add.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5LYXRlZ29yaWVcQWRkLmNzaHRtbA==
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/AdminCategories/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5DYXRlZ29yaWVzXEFkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/AdminKategorie/List.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5LYXRlZ29yaWVcTGlzdC5jc2h0bWw=
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/AdminCategories/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5DYXRlZ29yaWVzXExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Home/Index.cshtml]
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Home/Privacy.cshtml]
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Login/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/Login/Show.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cU2hvdy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Oferty/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2ZlcnR5XEluZGV4LmNzaHRtbA==
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/Register/Show.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcU2hvdy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Register/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcSW5kZXguY3NodG1s
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/Services/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZXNcQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Search/List.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VhcmNoXExpc3QuY3NodG1s
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/Services/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZXNcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Shared/Error.cshtml]
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/Services/Show.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZXNcU2hvdy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Usługi/Add.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXPFgnVnaVxBZGQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Usługi/Show.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXPFgnVnaVxTaG93LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/_ViewImports.cshtml]
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/_ViewStart.cshtml]
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kubix/OneDrive/Dokumenty/GitHub/Eksperci-Online/EksperciOnline/Views/Shared/_Layout.cshtml]
+[C:/Users/Admin/Documents/GitHub/Eksperci-Online/EksperciOnline/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-wwe8uki0kp

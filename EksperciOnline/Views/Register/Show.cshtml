@@ -1,47 +1,13 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Rejestracja - Eksperci Online</title>
-    <style>
-        .navbar-custom {
-            background-color: #4a00e0;
-        }
+﻿@{
+    ViewData["Title"] = "Rejestracja";
+}
 
-            .navbar-custom .navbar-brand, .navbar-custom .nav-link {
-                color: #ffffff;
-            }
+<div class="container d-flex justify-content-center min-vh-100">
+    <div class="bg-secondary bg-opacity-50 p-4" style="max-width: 500px; width: 100%;">
 
-        .register-container {
-            max-width: 500px;
-            margin: 100px auto;
-            padding: 20px;
-            background-color: #3e3e3e;
-            border-radius: 10px;
-            color: #ffffff;
-        }
-
-            .register-container h2 {
-                text-align: center;
-                margin-bottom: 20px;
-            }
-
-        .btn-custom {
-            background-color: #4a00e0;
-            color: #ffffff;
-            border: none;
-        }
-
-            .btn-custom:hover {
-                background-color: #3700b3;
-            }
-    </style>
-</head>
-<body>
-    <div class="container register-container">
-        <h2>Rejestracja</h2>
+        <h2 class="text-center pt-5 mb-5">Rejestracja</h2>
         <form>
-            <div class="form-row">
+            <div class="form-row row mb-2">
                 <div class="form-group col-md-6">
                     <label for="firstName">Imię</label>
                     <input type="text" class="form-control" id="firstName" placeholder="Wprowadź imię">
@@ -51,25 +17,24 @@
                     <input type="text" class="form-control" id="lastName" placeholder="Wprowadź nazwisko">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
                 <label for="username">Nazwa Użytkownika</label>
                 <input type="text" class="form-control" id="username" placeholder="Wprowadź nazwę użytkownika">
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="Wprowadź email">
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
                 <label for="password">Hasło</label>
                 <input type="password" class="form-control" id="password" placeholder="Wprowadź hasło">
             </div>
-            <div class="form-group">
+            <div class="form-group mb-4">
                 <label for="confirmPassword">Powtórz hasło</label>
                 <input type="password" class="form-control" id="confirmPassword" placeholder="Powtórz hasło">
             </div>
-            <button type="submit" class="btn btn-custom btn-block">Zarejestruj się</button>
+            <button type="submit" class="btn btn-info btn-block">Zarejestruj się</button>
         </form>
     </div>
+</div>
 
-</body>
-</html>

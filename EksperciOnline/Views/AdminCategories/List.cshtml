@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Kategorie";
+}
+
+<div class="bg-secondary bg-opacity-50 py-2">
+    <div class="container">
+        <h1>Kategorie</h1>
+    </div>
+</div>
+<div class="container mt-4">
+    <div class="container py-3">
+        <button class="btn btn-info">
+            <a class="nav-link" asp-area="" asp-controller="AdminCategories" asp-action="Add">Dodaj Kategorię</a>
+        </button>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Zdjęcie</th>
+                <th scope="col">Nazwa kategorii</th>
+                <th scope="col">Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><img src="placeholder.jpg" alt="Zdjęcie" class="img-thumbnail" style="max-width: 100px;"></td>
+                <td>Kategoria A</td>
+                <td><button class="btn btn-primary">Edytuj</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><img src="placeholder.jpg" alt="Zdjęcie" class="img-thumbnail" style="max-width: 100px;"></td>
+                <td>Kategoria B</td>
+                <td><button class="btn btn-primary">Edytuj</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

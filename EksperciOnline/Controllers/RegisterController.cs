@@ -4,7 +4,7 @@ namespace EksperciOnline.Controllers
 {
     public class RegisterController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Show()
         {
             return View();
         }

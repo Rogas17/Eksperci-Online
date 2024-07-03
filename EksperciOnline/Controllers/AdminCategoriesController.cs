@@ -2,13 +2,15 @@
 
 namespace EksperciOnline.Controllers
 {
-    public class UsługiController : Controller
+    public class AdminCategoriesController : Controller
     {
+        [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
-        public IActionResult Show()
+        [HttpGet]
+        public IActionResult List()
         {
             return View();
         }
