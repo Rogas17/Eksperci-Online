@@ -2,7 +2,15 @@
     ViewData["Title"] = "Kategorie";
 }
 
-<div class="bg-secondary bg-opacity-50 py-2">
+<style>
+    img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%; /* Makes images circular */
+    }
+</style>
+
+<div class="bg-light py-2">
     <div class="container">
         <h1>Kategorie</h1>
     </div>
@@ -23,18 +31,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td><img src="placeholder.jpg" alt="Zdjęcie" class="img-thumbnail" style="max-width: 100px;"></td>
-                <td>Kategoria A</td>
-                <td><button class="btn btn-primary">Edytuj</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><img src="placeholder.jpg" alt="Zdjęcie" class="img-thumbnail" style="max-width: 100px;"></td>
-                <td>Kategoria B</td>
-                <td><button class="btn btn-primary">Edytuj</button></td>
-            </tr>
+            @for (int i = 1; i <= 4; i++)
+            {
+                <tr>
+
+                    <td>@i</td>
+                    <td><img src="https://images.pexels.com/photos/4226876/pexels-photo-4226876.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Zdjęcie"></td>
+                    <td>Kategoria A</td>
+                    <td><a class="btn btn-info" asp-area="" asp-controller="AdminCategories" asp-action="Edit">Edytuj</a></td>
+
+                </tr>
+            }
         </tbody>
     </table>
 </div>

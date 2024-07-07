@@ -19,5 +19,9 @@ namespace EksperciOnline.Controllers
         {
             return View();
         }
+        public IActionResult Edit()
+        {
+            return View();
+        }
     }
 }

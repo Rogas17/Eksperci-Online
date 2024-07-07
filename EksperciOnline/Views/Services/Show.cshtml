@@ -2,29 +2,62 @@
     ViewData["Title"] = "Oferta";
 }
 
-<div class="container mt-5 bg-secondary bg-opacity-50 py-4">
+<style>
+    .rating {
+        color: #ffdd00;
+    }
+
+    .banner {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        background: url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=600') no-repeat center center;
+        background-size: cover;
+    }
+
+    .avatar {
+        position: absolute;
+        bottom: 50px;
+        left: 20%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 5px solid white;
+    }
+</style>
+
+<div class="container mt-5 bg-light py-4">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <h2>Nazwa Usługi</h2>
-            <div class="container-fluid bg-dark text-white py-4">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <img src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Background Image" class="img-fluid">
-                    </div>
-                    <div class="col">
-                        <div class="media align-items-center">
-                            <img src="https://images.pexels.com/photos/2059151/pexels-photo-2059151.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Avatar" class="rounded-circle mr-3" style="width: 100px;">
-                            <div class="media-body">
-                                <h5 class="mt-0">Tytuł banera</h5>
-                                Treść banera lub dodatkowe informacje.
-                            </div>
+            <span class="badge bg-info">Informatyk</span>
+            <div class="container my-4">
+                <div class="banner">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <img src="https://images.pexels.com/photos/2059151/pexels-photo-2059151.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Avatar" class="avatar">
+                        </div>
+                        <div class="col-md-4 bg-black bg-opacity-75 my-2 text-center">
+                            <h3 class="my-2">500 - 800 PLN</h3>
+                            <a class="btn btn-info mb-2" asp-area="" asp-controller="Messege" asp-action="List">Napisz do mnie</a><br />
+                            <label class="mb-2">Lub zadzwoń do mnie</label>
+                            <h4>123456789</h4>
+                            <label class="mb-2">Usługodawca</label>
+                            <h4>Adam Adam</h4>
                         </div>
                     </div>
                 </div>
             </div>
             <p><strong>Data Publikacji:</strong> 27 czerwca 2024</p>
             <p><strong>Ocena:</strong> 4.5 / 5</p>
-            <p><strong>Opis:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero et arcu aliquet, eu interdum nisl mollis.</p>
+            <p>
+                <strong>Opis:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus lobortis dolor in tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc iaculis felis vitae dolor tempus sagittis vel at ligula. Quisque ut elit eros. Vivamus sed dapibus risus. Maecenas aliquam nunc diam, a venenatis lectus gravida in. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed pretium neque sit amet porta tristique. Nulla porttitor egestas magna eu mollis. Nullam placerat tortor eu ex pulvinar facilisis. Cras et ligula laoreet, rhoncus libero id, ultrices justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis quis felis et nulla bibendum interdum. Suspendisse ullamcorper enim lectus, eu vulputate nibh eleifend vel. Maecenas lectus elit, dignissim non luctus eget, pulvinar a enim.<br /><br />
+
+                Proin at neque rhoncus, mollis lectus sed, scelerisque est. Curabitur ligula metus, mattis quis venenatis nec, aliquet nec nisl. Mauris molestie scelerisque risus, a dictum lectus. Cras eros eros, ultricies et urna at, egestas mattis turpis. Vestibulum vitae sapien ac massa imperdiet sollicitudin. Suspendisse potenti. Aenean bibendum quam nec massa malesuada, varius semper justo lobortis. Aenean quis mi a turpis tristique finibus. Maecenas bibendum laoreet diam, in venenatis ipsum ultricies non.<br /><br />
+
+                Donec finibus nulla a sem elementum vulputate. Duis eget tortor in turpis scelerisque porttitor. In viverra turpis vitae sem iaculis, eu bibendum mauris convallis. Proin volutpat scelerisque massa, vel ultricies mauris vulputate id. Mauris at laoreet massa, tincidunt imperdiet ligula. Donec laoreet quam ut mauris varius iaculis. Proin imperdiet rhoncus erat, eget volutpat urna cursus sed. Ut enim sem, gravida non magna fermentum, sodales euismod nibh. Nullam non odio venenatis, rutrum mi sit amet, efficitur nisl. Morbi eu eleifend odio. Sed quis nisl in est iaculis interdum vel ut augue. Praesent vitae posuere turpis. Aliquam erat volutpat. Integer nunc nibh, vehicula sed tortor at, mattis molestie metus. Duis imperdiet ex tellus, sed pellentesque sem rutrum non. Pellentesque faucibus justo non neque feugiat porttitor.<br /><br />
+            </p>
         </div>
     </div>
 
@@ -41,7 +74,7 @@
                         <label for="ocena" class="form-label">Ocena (od 1 do 5)</label>
                         <input type="number" class="form-control" id="ocena" min="1" max="5" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
+                    <button type="submit" class="btn btn-info">Dodaj komentarz</button>
                 </form>
             </div>
 

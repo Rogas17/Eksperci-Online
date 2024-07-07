@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Wiadomości";
+}
+
+<style>
+    .message-container {
+        height: 80vh; /* Wysokość kontenera na wiadomości */
+        overflow-y: scroll; /* Scrollowanie w pionie */
+    }
+
+    .user-list {
+        height: 100vh; /* Wysokość kontenera na listę użytkowników */
+        overflow-y: scroll; /* Scrollowanie w pionie */
+    }
+</style>
+
+<div class="bg-light py-2">
+    <div class="container">
+        <h1>Wiadomości</h1>
+    </div>
+</div>
+
+<div class="container-fluid px-5">
+    <div class="row mt-5">
+        <!-- Panel z użytkownikami -->
+        <div class="col-md-3">
+            <div class="user-list bg-light rounded-2">
+                <!-- Lista użytkowników -->
+                <div class="list-group me-2 p-1">
+                    @for (int i = 1; i <= 15; i++)
+                    {
+                        <a href="#" class="list-group-item list-group-item-action m-1">Użytkownik @i<br />123456789</a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel z wiadomościami wybranego użytkownika i Twoimi wiadomościami -->
+        <div class="col-md-9">
+            <div class="card bg-info pt-2">
+                <div class="row mx-2">
+                    <div class="col-md-5">
+                        <label>Imię i nazwisko</label>
+                        <h3>Użytkownik 1</h3>
+                    </div>
+                    <div class="col-md-7 text-end">
+                        <label>Numer telefonu</label>
+                        <h3>1234565789</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="message-container bg-light rounded-2">
+                <div class="card bg-secondary my-3 ms-2 me-5">
+                    <div class="card-header">Użytkownik 1</div>
+                    <div class="card-body">
+                        <div class="message">
+                            <p>Wiadomość 1 od Użytkownika 1</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Twoje wiadomości -->
+                <div class="card bg-info my-3 me-2 ms-5">
+                    <div class="card-header">Moje wiadomości</div>
+                    <div class="card-body">
+                        <div class="message">
+                            <p>Moja wiadomość 1</p>
+                        </div>
+                        <div class="message">
+                            <p>Moja wiadomość 2</p>
+                        </div>
+                        <!-- Dodaj więcej Twoich wiadomości tutaj -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formularz do wpisywania wiadomości -->
+            <div class="input-group mt-3">
+                <textarea class="form-control" placeholder="Wpisz wiadomość..." aria-label="Wpisz wiadomość"></textarea>
+                <div class="input-group-append">
+                    <button class="btn btn-info py-3" type="button">Wyślij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
