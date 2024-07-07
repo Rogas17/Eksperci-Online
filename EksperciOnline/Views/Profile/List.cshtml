@@ -23,13 +23,13 @@
                     <label>Imię i nazwisko</label>
                     <h2 class="fw-bold lh-1 mb-3">Adam Adam</h2>
                     <label>Numer Telefonu</label>
-                    <h3 class="fw-bold lh-1 mb-3">123456789</h3>
+                    <h4 class="fw-bold lh-1 mb-3">123456789</h4>
                 </div>
                 <div class="col-md-5">
                     <label>Nazwa Użytkownika</label>
-                    <h3 class="fw-bold lh-1 mb-3">Adamowski</h3>
+                    <h4 class="fw-bold lh-1 mb-3">Adamowski</h4>
                     <label>E-mail</label>
-                    <h3 class="fw-bold lh-1 mb-3">adamowski@ekspert.online</h3>
+                    <h4 class="fw-bold lh-1 mb-3">adamowski@ekspert.online</h4>
                 </div>
             </div>
             <a class="btn btn-info" asp-area="" asp-controller="Profile" asp-action="Edit">Edytuj Konto</a>
@@ -64,10 +64,17 @@
                         <label>Numer Telefonu</label>
                         <h4>123456789</h4>
                         <label>Edytuj usługę</label><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Show">Zobacz więcej <i class="bi bi-chevron-right"></i></a>
+                    </div>
+                    <div class="col-md-6 text-end">
                         <a class="btn btn-info mt-3" asp-area="" asp-controller="Services" asp-action="Edit">Edytuj</a>
                     </div>
                 </div>
-                <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Show">Zobacz więcej <i class="bi bi-chevron-right"></i></a>
+                
             </div>
         }
         

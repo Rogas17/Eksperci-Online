@@ -99,10 +99,18 @@
                             <label>Numer Telefonu</label>
                             <h4>123456789</h4>
                             <label>lub napisz do mnie</label><br />
-                            <a class="btn btn-info mt-3" asp-area="" asp-controller="Messege" asp-action="List">Napisz <i class="bi bi-chat"></i></a>
+                            
                         </div>
                     </div>
-                    <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Show">Zobacz więcej <i class="bi bi-chevron-right"></i></a>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Show">Zobacz więcej <i class="bi bi-chevron-right"></i></a>
+                            <a class="btn btn-info">Dodaj Do ulubionych <i class="bi bi-heart"></i></a>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <a class="btn btn-info" asp-area="" asp-controller="Messege" asp-action="List">Napisz <i class="bi bi-chat"></i></a>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
