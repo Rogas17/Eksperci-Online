@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "Dodaj Ofertę";
+}
+
+<style>
+    .banner {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        background: url('https://placehold.co/600x400') no-repeat center center;
+        background-size: cover;
+    }
+
+    .avatar {
+        position: absolute;
+        bottom: 50px;
+        left: 20%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 5px solid white;
+    }
+</style>
+
+<div class="container bg-light px-5 py-4">
+    <h2>Formularz Edytowania Usługi</h2>
+    <form>
+        <!-- Tytuł Usługi -->
+        <div class="form-group mb-2">
+            <label for="title">Tytuł Usługi*</label>
+            <input type="text" class="form-control" id="tytuł" required>
+        </div>
+
+        <div class="container my-4">
+            <div class="banner" id="bannerDiv">
+                <div class="row">
+                    <div class="col-md-7">
+                        <img src="https://placehold.co/400" alt="Avatar" class="avatar" id="avatarImg">
+                    </div>
+                    <div class="col-md-4 bg-black bg-opacity-75 my-2 text-center">
+                        <h3 class="my-2" id="priceRange">Od - Do PLN</h3>
+                        <a class="btn btn-info mb-2">Napisz do mnie</a><br />
+                        <label class="mb-2">Lub zadzwoń do mnie</label>
+                        <h4 id="phone">Numer Telefonu</h4>
+                        <label class="mb-2">Usługodawca</label>
+                        <h4 id="serviceProvider">Imię i Nazwisko</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Avatar -->
+        <div class="form-group mb-2">
+            <label for="avatar">Avatar</label>
+            <input type="file" class="form-control" id="avatar" accept="image/*">
+        </div>
+
+        <!-- Zdjęcie Banera -->
+        <div class="form-group mb-2">
+            <label for="banner">Zdjęcie Banera</label>
+            <input type="file" class="form-control" id="banner" accept="image/*">
+        </div>
+
+        <!-- Lokalizacja -->
+        <div class="form-group mb-2">
+            <label for="location">Lokalizacja*</label>
+            <input type="text" class="form-control" id="lokalizacja" required>
+        </div>
+
+        <!-- Numer Telefonu -->
+        <div class="form-group mb-2">
+            <label for="phone">Numer Telefonu</label>
+            <input type="tel" class="form-control" id="nrTelefonu">
+        </div>
+
+        <!-- Cena od - do -->
+        <div class="form-row row mb-2">
+            <div class="form-group col-md-6">
+                <label for="priceFrom">Cena od*</label>
+                <input type="number" class="form-control" id="cenaOd" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="priceTo">Cena do*</label>
+                <input type="number" class="form-control" id="cenaDo" required>
+            </div>
+        </div>
+
+        <!-- Opis -->
+        <div class="form-group mb-2">
+            <label for="description">Opis*</label>
+            <textarea class="form-control" id="opis" rows="4" required></textarea>
+        </div>
+
+        <!-- Krótki Opis -->
+        <div class="form-group mb-2">
+            <label for="shortDescription">Krótki Opis*</label>
+            <textarea class="form-control" id="krótkiOpis" rows="2" required></textarea>
+        </div>
+
+        <!-- Wybierz kategorię -->
+        <div class="form-group mb-2">
+            <label for="category">Wybierz kategorię*</label>
+            <select class="form-control" id="kategoria" required>
+                <option value="">Wybierz...</option>
+                <option value="kategoria1">Kategoria 1</option>
+                <option value="kategoria2">Kategoria 2</option>
+                <option value="kategoria3">Kategoria 3</option>
+                <!-- Dodaj więcej kategorii w razie potrzeby -->
+            </select>
+        </div>
+        <div class="form-check form-switch mb-2">
+            <input class="form-check-input" type="checkbox" id="visibility">
+            <label class="form-check-label" for="visibility">Czy post ma być widoczny?</label>
+        </div>
+
+        <!-- Przycisk zatwierdzenia -->
+        <button type="submit" class="btn btn-info my-2">Edytuj</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('nrTelefonu').addEventListener('input', function () {
+        document.getElementById('phone').innerText = this.value;
+    });
+
+    document.getElementById('cenaOd').addEventListener('input', updatePriceRange);
+    document.getElementById('cenaDo').addEventListener('input', updatePriceRange);
+
+    function updatePriceRange() {
+        const cenaOd = document.getElementById('cenaOd').value;
+        const cenaDo = document.getElementById('cenaDo').value;
+        document.getElementById('priceRange').innerText = `${cenaOd} - ${cenaDo} PLN`;
+    }
+
+    document.getElementById('avatar').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('avatarImg').src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('banner').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('bannerDiv').style.backgroundImage = `url(${e.target.result})`;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

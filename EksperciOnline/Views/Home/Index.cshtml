@@ -1,8 +1,49 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Strona Główna";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .img-wrapper {
+        text-align: center; /* Center-align text */
+        padding: 10px; /* Add some padding around the images */
+    }
+
+    img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%; /* Makes images circular */
+    }
+</style>
+
+<div class="container my-3 py-2">
+    <div class="row justify-content-center my-4">
+        <div class="card bg-light py-3 col-12 col-md-8 text-center">
+            <h2 class="fw-bold lh-1 mb-3">Wyszukaj usługi</h2>
+            <form class="d-flex justify-content-center">
+                <div class="input-group">
+                    <input class="form-control form-control-lg" type="text" placeholder="Szukaj" aria-label="Szukaj">
+                    <input class="form-control form-control-lg" type="text" placeholder="Lokalizacja" aria-label="Lokalizacja" style="max-width: 200px;">
+                    <button class="btn btn-info btn-lg" type="submit">Szukaj <i class="bi bi-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="bg-light">
+    <div class="container my-3 py-5">
+        <h2 class="fw-bold lh-1 mb-3 text-center">Kategorie</h2>
+        <div class="row justify-content-center py-2">
+            @for (int i = 1; i <= 12; i++)
+            {
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2 img-wrapper">
+                    <a asp-area="" asp-controller="Services" asp-action="List">
+                        <img src="https://images.pexels.com/photos/4226876/pexels-photo-4226876.jpeg?auto=compress&cs=tinysrgb&w=600"
+                             alt="Eksperci Online" />
+                        <p class="mt-2">Kategoria @i</p>
+                    </a>
+
+                </div>
+            }
+        </div>
+    </div>
 </div>
