@@ -10848,11 +10848,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\EksperciOnline.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\EksperciOnline.csproj",
       "projectName": "EksperciOnline",
-      "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\EksperciOnline.csproj",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\EksperciOnline.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

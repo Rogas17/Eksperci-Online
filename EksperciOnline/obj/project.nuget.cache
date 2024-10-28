@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UucZrbMI4qM=",
+  "dgSpecHash": "RS5U6AcnHyg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\EksperciOnline.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\EksperciOnline.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\cloudinarydotnet\\1.26.2\\cloudinarydotnet.1.26.2.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",

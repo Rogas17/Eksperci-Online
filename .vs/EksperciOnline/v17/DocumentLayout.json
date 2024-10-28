@@ -1,105 +1,12 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\documents\\github\\eksperci-online\\ekspercionline\\views\\profile\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\views\\profile\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\documents\\github\\eksperci-online\\ekspercionline\\views\\favorite\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\views\\favorite\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\documents\\github\\eksperci-online\\ekspercionline\\views\\services\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\views\\services\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\documents\\github\\eksperci-online\\ekspercionline\\views\\register\\show.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\views\\register\\show.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\documents\\github\\eksperci-online\\ekspercionline\\views\\profile\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\views\\profile\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    }
-  ],
+  "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\",
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 4,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "List.cshtml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\Views\\Favorite\\List.cshtml",
-              "RelativeDocumentMoniker": "EksperciOnline\\Views\\Favorite\\List.cshtml",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\Views\\Favorite\\List.cshtml",
-              "RelativeToolTip": "EksperciOnline\\Views\\Favorite\\List.cshtml",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAAEAAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-07T17:35:08.798Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "List.cshtml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\Views\\Services\\List.cshtml",
-              "RelativeDocumentMoniker": "EksperciOnline\\Views\\Services\\List.cshtml",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\Views\\Services\\List.cshtml",
-              "RelativeToolTip": "EksperciOnline\\Views\\Services\\List.cshtml",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAAAHAAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-07T17:29:41.795Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\Views\\Profile\\Edit.cshtml",
-              "RelativeDocumentMoniker": "EksperciOnline\\Views\\Profile\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\Views\\Profile\\Edit.cshtml",
-              "RelativeToolTip": "EksperciOnline\\Views\\Profile\\Edit.cshtml",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAuwCoAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-07T17:23:48.309Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Show.cshtml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\Views\\Register\\Show.cshtml",
-              "RelativeDocumentMoniker": "EksperciOnline\\Views\\Register\\Show.cshtml",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\Views\\Register\\Show.cshtml",
-              "RelativeToolTip": "EksperciOnline\\Views\\Register\\Show.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-07T17:21:05.341Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "List.cshtml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\Views\\Profile\\List.cshtml",
-              "RelativeDocumentMoniker": "EksperciOnline\\Views\\Profile\\List.cshtml",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\GitHub\\Eksperci-Online\\EksperciOnline\\Views\\Profile\\List.cshtml",
-              "RelativeToolTip": "EksperciOnline\\Views\\Profile\\List.cshtml",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABkAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-07T17:19:14.199Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }
