@@ -1,4 +1,5 @@
-﻿@{
+﻿@model EksperciOnline.Models.ViewModels.AddCategoryRequest
+@{
     ViewData["Title"] = "Dodaj Kategorie";
 }
 
@@ -13,14 +14,14 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form method="post">
                         <div class="form-group">
-                            <label for="nazwa-kategorii">Nazwa kategorii</label>
-                            <input type="text" class="form-control" id="nazwa-kategorii" placeholder="Wprowadź nazwę kategorii">
+                            <label>Nazwa kategorii</label>
+                            <input type="text" class="form-control" id="nazwa-kategorii" placeholder="Wprowadź nazwę kategorii" asp-for="NazwaKategorii">
                         </div>
                         <div class="form-group">
-                            <label for="url-zdjecia">URL zdjęcia</label>
-                            <input type="text" class="form-control" id="url-zdjecia" placeholder="Wprowadź URL zdjęcia">
+                            <label>URL zdjęcia</label>
+                            <input type="text" class="form-control" id="url-zdjecia" placeholder="Wprowadź URL zdjęcia" asp-for="UrlZdjęcia">
                         </div>
                         <button type="submit" class="btn btn-primary my-3">Wyślij</button>
                     </form>
