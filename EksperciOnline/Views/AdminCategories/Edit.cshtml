@@ -14,22 +14,29 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <form method="post">
-                        <div class="form-group">
-                            <label>Nazwa kategorii</label>
-                            <input type="text" class="form-control" id="id" asp-for="Id" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label>Nazwa kategorii</label>
-                            <input type="text" class="form-control" id="nazwaKategorii" placeholder="Wprowadź nazwę kategorii" asp-for="NazwaKategorii">
-                        </div>
-                        <div class="form-group">
-                            <label>URL zdjęcia</label>
-                            <input type="text" class="form-control" id="urlZdjecia" placeholder="Wprowadź URL zdjęcia" asp-for="UrlZdjęcia">
-                        </div>
-                        <button type="submit" class="btn btn-info my-3">Edytuj</button>
-                        <button type="submit" class="btn btn-danger my-3" asp-area="" asp-controller="AdminCategories" asp-action="Delete">Usuń</button>
-                    </form>
+                    @if (Model != null)
+                    {
+                        <form method="post">
+                            <div class="form-group">
+                                <label>Nazwa kategorii</label>
+                                <input type="text" class="form-control" id="id" asp-for="Id" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Nazwa kategorii</label>
+                                <input type="text" class="form-control" id="nazwaKategorii" placeholder="Wprowadź nazwę kategorii" asp-for="NazwaKategorii">
+                            </div>
+                            <div class="form-group">
+                                <label>URL zdjęcia</label>
+                                <input type="text" class="form-control" id="urlZdjecia" placeholder="Wprowadź URL zdjęcia" asp-for="UrlZdjęcia">
+                            </div>
+                            <button type="submit" class="btn btn-info my-3">Edytuj</button>
+                            <button type="submit" class="btn btn-danger my-3" asp-area="" asp-controller="AdminCategories" asp-action="Delete">Usuń</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <p>Nie znaleziono kategorii</p>
+                    }
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 using EksperciOnline.Data;
+using EksperciOnline.Repositiories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<EksperciOnlineDbContext>(options =>
 options.UseSqlite(builder.Configuration.GetConnectionString("localDb")));
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 

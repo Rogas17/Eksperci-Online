@@ -1,17 +1,19 @@
 ﻿using EksperciOnline.Data;
 using EksperciOnline.Models.Domain;
 using EksperciOnline.Models.ViewModels;
+using EksperciOnline.Repositiories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EksperciOnline.Controllers
 {
     public class AdminCategoriesController : Controller
     {
-        private readonly EksperciOnlineDbContext eksperciOnlineDbContext;
+        private readonly ICategoryRepository categoryRepository;
 
-        public AdminCategoriesController(EksperciOnlineDbContext eksperciOnlineDbContext)
+        public AdminCategoriesController(ICategoryRepository categoryRepository)
         {
-            this.eksperciOnlineDbContext = eksperciOnlineDbContext;
+            this.categoryRepository = categoryRepository;
         }
 
         [HttpGet]
@@ -22,7 +24,7 @@ namespace EksperciOnline.Controllers
 
         [HttpPost]
         [ActionName("Add")]
-        public IActionResult Add(AddCategoryRequest addCategoryRequest)
+        public async Task<IActionResult> Add(AddCategoryRequest addCategoryRequest)
         {
             //Mapping AddCategoryRequest to Category domain model
             var kategoria = new Kategoria
@@ -31,27 +33,28 @@ namespace EksperciOnline.Controllers
                 UrlZdjęcia = addCategoryRequest.UrlZdjęcia
             };
 
-            eksperciOnlineDbContext.Kategorie.Add(kategoria);
-            eksperciOnlineDbContext.SaveChanges();
+            await categoryRepository.AddAsync(kategoria);
 
             return RedirectToAction("List");
         }
 
+
         [HttpGet]
         [ActionName("List")]
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
             // use dbContext to read the categories
-            var kategorie = eksperciOnlineDbContext.Kategorie.ToList();
+            var kategorie = await categoryRepository.GetAllAsync();
 
 
             return View(kategorie);
         }
 
+
         [HttpGet]
-        public IActionResult Edit(Guid id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            var kategoria = eksperciOnlineDbContext.Kategorie.FirstOrDefault(x => x.Id == id);
+            var kategoria = await categoryRepository.GetAsync(id);
 
             if (kategoria != null)
             {
@@ -67,7 +70,7 @@ namespace EksperciOnline.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(EditCategoryRequest editCategoryRequest)
+        public async Task<IActionResult> Edit(EditCategoryRequest editCategoryRequest)
         {
             var kategoria = new Kategoria
             {
@@ -76,33 +79,29 @@ namespace EksperciOnline.Controllers
                 UrlZdjęcia = editCategoryRequest.UrlZdjęcia
             };
 
-            var existingCategory = eksperciOnlineDbContext.Kategorie.Find(kategoria.Id);
+            var updatedCategory = await categoryRepository.UpdateAsync(kategoria);
 
-            if (existingCategory != null)
+            if (updatedCategory != null)
             {
-                existingCategory.NazwaKategorii = kategoria.NazwaKategorii;
-                existingCategory.UrlZdjęcia = kategoria.UrlZdjęcia;
-
-                eksperciOnlineDbContext.SaveChanges();
-
                 // Show success notification
-                return RedirectToAction("List");
             }
-            // Show error notification
+            else
+            {
+                // Show error notification
+            }
+
             return RedirectToAction("Edit", new { id = editCategoryRequest.Id });
         }
 
+
         [HttpPost]
-        public IActionResult Delete(EditCategoryRequest editCategoryRequest) 
+        public async Task<IActionResult> Delete(EditCategoryRequest editCategoryRequest) 
         {
-            var kategoria = eksperciOnlineDbContext.Kategorie.Find(editCategoryRequest.Id);
+            var deletedCategory = await categoryRepository.DeleteAsync(editCategoryRequest.Id);
 
-            if (kategoria != null) 
+            if (deletedCategory != null)
             {
-                eksperciOnlineDbContext.Kategorie.Remove(kategoria);
-                eksperciOnlineDbContext.SaveChanges();
-
-                // Show success notification
+                //Show success notification
                 return RedirectToAction("List");
             }
 
