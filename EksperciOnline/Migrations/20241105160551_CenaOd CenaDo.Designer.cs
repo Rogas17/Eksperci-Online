@@ -3,6 +3,7 @@ using System;
 using EksperciOnline.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksperciOnline.Migrations
 {
     [DbContext(typeof(EksperciOnlineDbContext))]
-    partial class EksperciOnlineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241105160551_CenaOd CenaDo")]
+    partial class CenaOdCenaDo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.20");
@@ -42,18 +45,11 @@ namespace EksperciOnline.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Autor")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<double>("CenaDo")
                         .HasColumnType("REAL");
 
                     b.Property<double>("CenaOd")
                         .HasColumnType("REAL");
-
-                    b.Property<DateTime>("DataPulikacji")
-                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("KategoriaId")
                         .HasColumnType("TEXT");

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model EksperciOnline.Models.ViewModels.AddServicesRequest
+@{
     ViewData["Title"] = "Dodaj Ofertę";
 }
 
@@ -25,11 +26,11 @@
 
 <div class="container bg-light px-5 py-4">
     <h2>Formularz Usługi</h2>
-    <form>
+    <form method="post">
         <!-- Tytuł Usługi -->
         <div class="form-group mb-2">
-            <label for="title">Tytuł Usługi*</label>
-            <input type="text" class="form-control" id="tytuł" required>
+            <label>Tytuł Usługi*</label>
+            <input type="text" class="form-control" id="tytuł" required asp-for="Tytuł">
         </div>
 
         <div class="container my-4">
@@ -52,66 +53,73 @@
 
         <!-- Avatar -->
         <div class="form-group mb-2">
-            <label for="avatar">Avatar</label>
-            <input type="file" class="form-control" id="avatar" accept="image/*">
+            <label>Avatar</label>
+            <input type="file" class="form-control" id="avatar" asp-for="UrlZdjęcia">
         </div>
 
         <!-- Zdjęcie Banera -->
         <div class="form-group mb-2">
-            <label for="banner">Zdjęcie Banera</label>
-            <input type="file" class="form-control" id="banner" accept="image/*">
+            <label>Zdjęcie Banera</label>
+            <input type="file" class="form-control" id="banner" asp-for="UrlBaneru">
         </div>
 
         <!-- Lokalizacja -->
         <div class="form-group mb-2">
-            <label for="location">Lokalizacja*</label>
-            <input type="text" class="form-control" id="lokalizacja" required>
+            <label>Lokalizacja*</label>
+            <input type="text" class="form-control" id="lokalizacja" required asp-for="Lokalizacja">
         </div>
 
         <!-- Numer Telefonu -->
         <div class="form-group mb-2">
-            <label for="phone">Numer Telefonu</label>
-            <input type="tel" class="form-control" id="nrTelefonu">
+            <label>Numer Telefonu*</label>
+            <input type="tel" class="form-control" id="nrTelefonu" required asp-for="NrTelefonu">
         </div>
 
         <!-- Cena od - do -->
         <div class="form-row row mb-2">
             <div class="form-group col-md-6">
-                <label for="priceFrom">Cena od*</label>
-                <input type="number" class="form-control" id="cenaOd" required>
+                <label>Cena od*</label>
+                <input type="number" class="form-control" id="cenaOd" required asp-for="CenaOd">
             </div>
             <div class="form-group col-md-6">
-                <label for="priceTo">Cena do*</label>
-                <input type="number" class="form-control" id="cenaDo" required>
+                <label>Cena do*</label>
+                <input type="number" class="form-control" id="cenaDo" required asp-for="CenaDo">
             </div>
         </div>
 
         <!-- Opis -->
         <div class="form-group mb-2">
-            <label for="description">Opis*</label>
-            <textarea class="form-control" id="opis" rows="4" required></textarea>
+            <label>Opis*</label>
+            <textarea class="form-control" id="opis" rows="4" required asp-for="Opis"></textarea>
         </div>
 
         <!-- Krótki Opis -->
         <div class="form-group mb-2">
             <label for="shortDescription">Krótki Opis*</label>
-            <textarea class="form-control" id="krótkiOpis" rows="2" required></textarea>
+            <textarea class="form-control" id="krótkiOpis" rows="2" required asp-for="KrótkiOpis"></textarea>
         </div>
 
         <!-- Wybierz kategorię -->
         <div class="form-group mb-2">
-            <label for="category">Wybierz kategorię*</label>
-            <select class="form-control" id="kategoria" required>
-                <option value="">Wybierz...</option>
-                <option value="kategoria1">Kategoria 1</option>
-                <option value="kategoria2">Kategoria 2</option>
-                <option value="kategoria3">Kategoria 3</option>
-                <!-- Dodaj więcej kategorii w razie potrzeby -->
+            <label>Wybierz kategorię*</label>
+            <select class="form-control" id="kategoria" asp-items="@Model.Kategorie" asp-for="WybranaKategoria">
+                
             </select>
         </div>
+
+        <div class="form-group mb-2">
+            <label>Autor</label>
+            <input type="text" class="form-control" id="autor" asp-for="Autor" readonly placeholder="Adam Adam">
+        </div>
+
+        <div class="form-group mb-2">
+            <label>Data Publikacji</label>
+            <input type="date" class="form-control" id="dataPublikacji" asp-for="DataPulikacji" readonly>
+        </div>
+
         <div class="form-check form-switch mb-2">
-            <input class="form-check-input" type="checkbox" id="visibility">
-            <label class="form-check-label" for="visibility">Czy post ma być widoczny?</label>
+            <input class="form-check-input" type="checkbox" id="widoczność" asp-for="Widoczność">
+            <label class="form-check-label">Czy post ma być widoczny?</label>
         </div>
 
         <!-- Przycisk zatwierdzenia -->

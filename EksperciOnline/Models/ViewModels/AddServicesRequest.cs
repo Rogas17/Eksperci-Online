@@ -1,8 +1,10 @@
-﻿namespace EksperciOnline.Models.Domain
+﻿using EksperciOnline.Models.Domain;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace EksperciOnline.Models.ViewModels
 {
-    public class Usługa
+    public class AddServicesRequest
     {
-        public Guid Id { get; set; }
         public string Tytuł { get; set; }
         public string Lokalizacja { get; set; }
         public int? NrTelefonu { get; set; }
@@ -16,7 +18,7 @@
         public DateTime DataPulikacji { get; set; }
         public string Autor { get; set; }
 
-
-        public Kategoria Kategoria { get; set; }
+        public IEnumerable<SelectListItem> Kategorie { get; set; }
+        public string WybranaKategoria { get; set; }
     }
 }
