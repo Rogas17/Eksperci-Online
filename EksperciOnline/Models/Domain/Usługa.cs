@@ -16,7 +16,7 @@
         public DateTime DataPulikacji { get; set; }
         public string Autor { get; set; }
 
-
+        // Navigation Property
         public Kategoria Kategoria { get; set; }
     }
 }

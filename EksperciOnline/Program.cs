@@ -11,6 +11,7 @@ builder.Services.AddDbContext<EksperciOnlineDbContext>(options =>
 options.UseSqlite(builder.Configuration.GetConnectionString("localDb")));
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 
 var app = builder.Build();
 

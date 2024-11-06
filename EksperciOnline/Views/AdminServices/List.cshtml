@@ -1,0 +1,44 @@
+﻿@model List<EksperciOnline.Models.Domain.Usługa>
+@{
+    ViewData["Title"] = "Usługi";
+}
+
+<div class="bg-light py-2">
+    <div class="container">
+        <h1>Usługi</h1>
+    </div>
+</div>
+<div class="container mt-4">
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Tytuł</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Kategoria</th>
+                    <th scope="col">Data Publikacji</th>
+                    <th scope="col">Akcja</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usługa in Model)
+                {
+                    <tr>
+                        <td>@usługa.Id</td>
+                        <td>@usługa.Tytuł</td>
+                        <td>@usługa.Autor</td>
+                        <td>@usługa.Kategoria.NazwaKategorii</td>
+                        <td>@usługa.DataPulikacji</td>
+                        <td><a asp-area="" asp-controller="Services" asp-action="Edit" asp-route-id="@usługa.Id">Edytuj</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Brak Usług</p>
+    }
+</div>

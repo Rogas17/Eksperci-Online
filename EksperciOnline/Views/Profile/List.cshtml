@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<EksperciOnline.Models.Domain.Usługa>
+@{
     ViewData["Title"] = "Profil";
 }
 
@@ -19,20 +20,25 @@
     <div class="row">
         <div class="container bg-light p-3 mb-3 rounded-3">
             <div class="row">
+
                 <div class="col-md-4">
                     <label>Imię i nazwisko</label>
                     <h2 class="fw-bold lh-1 mb-3">Adam Adam</h2>
                     <label>Numer Telefonu</label>
                     <h4 class="fw-bold lh-1 mb-3">123456789</h4>
                 </div>
+
                 <div class="col-md-5">
                     <label>Nazwa Użytkownika</label>
                     <h4 class="fw-bold lh-1 mb-3">Adamowski</h4>
                     <label>E-mail</label>
                     <h4 class="fw-bold lh-1 mb-3">adamowski@ekspert.online</h4>
                 </div>
+
             </div>
+
             <a class="btn btn-info" asp-area="" asp-controller="Profile" asp-action="Edit">Edytuj Konto</a>
+
         </div>
     </div>
 </div>
@@ -43,40 +49,54 @@
             <h2 class="text-center fw-bold lh-1 mb-3">Moje Usługi</h2>
         </div>
         <a class="btn btn-info" asp-area="" asp-controller="Profile" asp-action="Add">Dodaj Usługę +</a>
-        @for (int i = 1; i <= 4; i++)
+        @if (Model != null && Model.Any())
         {
-            <div class="container bg-light p-3 mb-3 rounded-3">
-                <div class="row">
-                    <div class="col-md-2 text-center">
-                        <img src="https://via.placeholder.com/100" class="avatar" style="height: 150px; width: 150px;" alt="Placeholder Image">
-                        <p class="rating">★★★★★<br />(256 votes)</p>
+            @foreach (var usługa in Model)
+            {
+                <div class="container bg-light p-3 mb-3 rounded-3">
+                    <div class="row">
+                        <div class="col-md-2 text-center">
+                            <img src="https://via.placeholder.com/100" class="avatar" style="height: 150px; width: 150px;" alt="Placeholder Image">
+                            <p class="rating">★★★★★<br />(256 votes)</p>
+                        </div>
+
+                        <div class="col-md-7">
+                            <h4>@usługa.Tytuł</h4>
+                            <span class="badge bg-info">@usługa.Kategoria.NazwaKategorii</span>
+                            <p>@usługa.KrótkiOpis</p>
+                            <label>Usługodawca:</label>
+                            <p>@usługa.Autor</p>
+                        </div>
+
+                        <div class="col-md-3 text-end">
+                            <label>Cena</label>
+                            <h4 class="fw-bold">@usługa.CenaOd - @usługa.CenaDo PLN</h4>
+                            <label>Numer Telefonu</label>
+                            <h4>@usługa.NrTelefonu</h4>
+                            <label>Edytuj usługę</label><br />
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        <h4>Naprawa Laptopów, Poznań</h4>
-                        <span class="badge bg-info">Informatyk</span>
-                        <p>Naprawiam laptopy wszelkiej marki...</p>
-                        <label>Usługodawca:</label>
-                        <p>Adam Adam</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@usługa.Id">Zobacz więcej <i class="bi bi-chevron-right"></i></a>
+                        </div>
+
+                        <div class="col-md-6 text-end">
+                            <a class="btn btn-info mt-3" asp-area="" asp-controller="Services" asp-action="Edit" asp-route-id="@usługa.Id">Edytuj</a>
+                        </div>
                     </div>
-                    <div class="col-md-3 text-end">
-                        <label>Cena</label>
-                        <h4 class="fw-bold">500 - 800 PLN</h4>
-                        <label>Numer Telefonu</label>
-                        <h4>123456789</h4>
-                        <label>Edytuj usługę</label><br />
-                    </div>
+
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Show">Zobacz więcej <i class="bi bi-chevron-right"></i></a>
-                    </div>
-                    <div class="col-md-6 text-end">
-                        <a class="btn btn-info mt-3" asp-area="" asp-controller="Services" asp-action="Edit">Edytuj</a>
-                    </div>
-                </div>
-                
+            }
+        }
+        else
+        {
+            <div class="container bg-light pt-2 mb-3 rounded-3">
+                <h2 class="text-center fw-bold lh-1 mb-3">Nie oferujesz żadnych usług</h2>
             </div>
         }
+
         
 
     </div>

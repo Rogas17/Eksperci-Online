@@ -9,19 +9,25 @@ namespace EksperciOnline.Controllers
         
 
         [HttpGet]
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult Show()
+        public async Task<IActionResult> Show()
         {
             return View();
         }
 
-        public IActionResult Edit()
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
         {
+            // Retrieve the result from the repository
+
+
+            // Pass data to view
+
             return View();
         }
     }
