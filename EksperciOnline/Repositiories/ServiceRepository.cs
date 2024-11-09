@@ -20,9 +20,18 @@ namespace EksperciOnline.Repositiories
             return usługa;
         }
 
-        public Task<Usługa?> DeleteAsync(Guid id)
+        public async Task<Usługa?> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existingService = await eksperciOnlineDbContext.Usługi.FindAsync(id);
+
+            if (existingService != null)
+            {
+                eksperciOnlineDbContext.Usługi.Remove(existingService);
+                await eksperciOnlineDbContext.SaveChangesAsync();
+                return existingService;
+            }
+
+            return null;
         }
 
         public async Task<IEnumerable<Usługa>> GetAllAsync()
@@ -30,14 +39,36 @@ namespace EksperciOnline.Repositiories
             return await eksperciOnlineDbContext.Usługi.Include(x => x.Kategoria).ToListAsync();
         }
 
-        public Task<Usługa?> GetAsnyc(Guid id)
+        public async Task<Usługa?> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await eksperciOnlineDbContext.Usługi.Include(x => x.Kategoria).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<Usługa?> UpdateAsync(Usługa usługa)
+        public async Task<Usługa?> UpdateAsync(Usługa usługa)
         {
-            throw new NotImplementedException();
+            var existingCategory = await eksperciOnlineDbContext.Usługi.Include(x => x.Kategoria).FirstOrDefaultAsync(x => x.Id == usługa.Id);
+
+            if (existingCategory != null)
+            {
+                existingCategory.Id = usługa.Id;
+                existingCategory.Tytuł = usługa.Tytuł;
+                existingCategory.Lokalizacja = usługa.Lokalizacja;
+                existingCategory.NrTelefonu = usługa.NrTelefonu;
+                existingCategory.CenaOd = usługa.CenaOd;
+                existingCategory.CenaDo = usługa.CenaDo;
+                existingCategory.Opis = usługa.Opis;
+                existingCategory.KrótkiOpis = usługa.KrótkiOpis;
+                existingCategory.Widoczność = usługa.Widoczność;
+                existingCategory.UrlZdjęcia = usługa.UrlZdjęcia;
+                existingCategory.UrlBaneru = usługa.UrlBaneru;
+                existingCategory.DataPulikacji = usługa.DataPulikacji;
+                existingCategory.Autor = usługa.Autor;
+                existingCategory.Kategoria = usługa.Kategoria;
+
+                await eksperciOnlineDbContext.SaveChangesAsync();
+                return existingCategory;
+            }
+            return null;
         }
     }
 }

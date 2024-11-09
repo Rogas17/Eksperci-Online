@@ -48,7 +48,7 @@
         <div class="container bg-light pt-2 mb-3 rounded-3">
             <h2 class="text-center fw-bold lh-1 mb-3">Moje Usługi</h2>
         </div>
-        <a class="btn btn-info" asp-area="" asp-controller="Profile" asp-action="Add">Dodaj Usługę +</a>
+        <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Add">Dodaj Usługę +</a>
         @if (Model != null && Model.Any())
         {
             @foreach (var usługa in Model)

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EksperciOnline")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7985cb1d8fe3e91eb38f4b1318a2ac9cc05da755")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+752371d0ef62a9e399a1eadbc10fd1743ecaff48")]
 [assembly: System.Reflection.AssemblyProductAttribute("EksperciOnline")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EksperciOnline")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -6,7 +6,7 @@ namespace EksperciOnline.Repositiories
     {
         Task<IEnumerable<Usługa>> GetAllAsync();
 
-        Task<Usługa?> GetAsnyc(Guid id);
+        Task<Usługa?> GetAsync(Guid id);
 
         Task<Usługa> AddAsync(Usługa usługa);
 
