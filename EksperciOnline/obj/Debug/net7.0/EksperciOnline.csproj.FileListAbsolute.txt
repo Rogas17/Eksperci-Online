@@ -1061,3 +1061,4 @@ C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\obj\Debug\net7.0\refint\Ek
 C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\obj\Debug\net7.0\EksperciOnline.pdb
 C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\obj\Debug\net7.0\EksperciOnline.genruntimeconfig.cache
 C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\obj\Debug\net7.0\ref\EksperciOnline.dll
+C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\bin\Debug\net7.0\dotenv.net.dll
