@@ -71,7 +71,9 @@ namespace EksperciOnline.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            return View();
+            var usługa = await serviceRepository.GetAllAsync();
+
+            return View(usługa);
         }
 
         [HttpGet]

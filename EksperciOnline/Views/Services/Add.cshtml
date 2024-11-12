@@ -37,7 +37,7 @@
             <div class="baner" id="banerShow" style="background-image: url('');">
                 <div class="row">
                     <div class="col-md-7">
-                        <img src="" class="zdjęcie" id="zdjęcieShow" alt="Profile Image">
+                        <img src="" class="zdjęcie" id="zdjęcieShow">
                     </div>
                     <div class="col-md-4 bg-black bg-opacity-75 my-2 text-center">
                         <h3 class="my-2" id="priceRange">Od - Do PLN</h3>
@@ -151,7 +151,9 @@
     }
 
 
-    var editor = new FroalaEditor('#opis');
+        var editor = new FroalaEditor('#opis', {
+            imageUploadURL: '/api/images'
+        });
 
 
     const featuredImageUpload = document.getElementById('zdjęcieUpload');
