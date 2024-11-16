@@ -77,9 +77,11 @@ namespace EksperciOnline.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Show()
+        public async Task<IActionResult> Show(Guid id)
         {
-            return View();
+            var usługa = await serviceRepository.GetAsync(id);
+
+            return View(usługa);
         }
 
         [HttpGet]

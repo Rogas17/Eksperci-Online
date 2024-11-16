@@ -3,6 +3,14 @@
     ViewData["Title"] = "Dodaj Kategorie";
 }
 
+<style>
+    img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+    }
+</style>
+
 <div class="bg-light py-2">
     <div class="container">
         <h1>Dodaj nową kategorię</h1>
@@ -17,12 +25,21 @@
                     <form method="post">
                         <div class="form-group">
                             <label>Nazwa kategorii</label>
-                            <input type="text" class="form-control" id="nazwa-kategorii" placeholder="Wprowadź nazwę kategorii" asp-for="NazwaKategorii">
+                            <input type="text" class="form-control" id="nazwa-kategorii" asp-for="NazwaKategorii">
                         </div>
-                        <div class="form-group">
-                            <label>URL zdjęcia</label>
-                            <input type="text" class="form-control" id="url-zdjecia" placeholder="Wprowadź URL zdjęcia" asp-for="UrlZdjęcia">
+
+                        <div class="form-group mb-2">
+                            <label>Zdjęcie profilowe</label>
+                            <input type="file" class="form-control" id="zdjęcieUpload">
+
+                            <img src="" id="zdjęcieShow" style="display:none" />
                         </div>
+
+                        <div class="form-group mb-2">
+                            <label>Url zdjęcia kategorii</label>
+                            <input type="text" class="form-control" id="urlZdjęcia" asp-for="UrlZdjęcia">
+                        </div>
+
                         <button type="submit" class="btn btn-primary my-3">Wyślij</button>
                     </form>
                 </div>
@@ -30,3 +47,33 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+<script>
+    const featuredImageUpload = document.getElementById('zdjęcieUpload');
+    const featuredImageUrl = document.getElementById('urlZdjęcia');
+    const featuredZdjęcieShow = document.getElementById('zdjęcieShow');
+
+    async function uploadZdjęcie(e) {
+        console.log(e.target.files[0]);
+
+        let data = new FormData();
+        data.append('file', e.target.files[0]);
+
+        await fetch('/api/images', {
+            method: 'POST',
+            headers: {
+                'Accept': '*/*',
+            },
+            body: data
+        }).then(response => response.json())
+            .then(result => {
+                featuredImageUrl.value = result.link;
+                featuredZdjęcieShow.src = result.link;
+                featuredZdjęcieShow.style.display = 'block';
+            });
+    }
+
+    featuredImageUpload.addEventListener('change', uploadZdjęcie);
+</script>
+}

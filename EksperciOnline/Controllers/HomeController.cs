@@ -1,4 +1,5 @@
 ﻿using EksperciOnline.Models;
+using EksperciOnline.Repositiories;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,22 @@ namespace EksperciOnline.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICategoryRepository categoryRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            ICategoryRepository categoryRepository
+            )
         {
             _logger = logger;
+            this.categoryRepository = categoryRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            // get all categories
+            var kategorie = await categoryRepository.GetAllAsync();
+
+            return View(kategorie);
         }
 
         public IActionResult Privacy()
