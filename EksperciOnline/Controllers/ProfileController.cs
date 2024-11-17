@@ -1,8 +1,7 @@
-﻿using EksperciOnline.Repositiories;
+﻿using EksperciOnline.Models.ViewModels;
+using EksperciOnline.Repositiories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using EksperciOnline.Models.ViewModels;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using EksperciOnline.Models.Domain;
 
 namespace EksperciOnline.Controllers
 {
@@ -10,11 +9,16 @@ namespace EksperciOnline.Controllers
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IServiceRepository serviceRepository;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public ProfileController(ICategoryRepository categoryRepository, IServiceRepository serviceRepository)
+        public ProfileController(ICategoryRepository categoryRepository,
+            IServiceRepository serviceRepository,
+            UserManager<IdentityUser> userManager
+            )
         {
             this.categoryRepository = categoryRepository;
             this.serviceRepository = serviceRepository;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -26,9 +30,47 @@ namespace EksperciOnline.Controllers
         }
 
         
-
         [HttpGet]
         public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
+        {
+            var identityUser = new IdentityUser
+            {
+                UserName = registerViewModel.Username,
+                Email = registerViewModel.Email,
+                PhoneNumber = registerViewModel.PhoneNumber
+            };
+
+            var identityResult = await userManager.CreateAsync(identityUser, registerViewModel.Password);
+
+            if (identityResult.Succeeded)
+            {
+                // assign this user the "User" role
+                var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, "User");
+
+                if (roleIdentityResult.Succeeded)
+                { 
+                    //Show success notification
+                    return RedirectToAction("Register");
+                }
+            }
+            //Show error notification
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Login()
         {
             return View();
         }

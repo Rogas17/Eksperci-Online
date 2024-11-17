@@ -46,10 +46,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Desktop/Eksperci-Online/EksperciOnline/Views/Login/Show.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cU2hvdy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Admin/Desktop/Eksperci-Online/EksperciOnline/Views/Messege/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVzc2VnZVxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -62,8 +58,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Desktop/Eksperci-Online/EksperciOnline/Views/Register/Show.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcU2hvdy5jc2h0bWw=
+[C:/Users/Admin/Desktop/Eksperci-Online/EksperciOnline/Views/Profile/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/Desktop/Eksperci-Online/EksperciOnline/Views/Profile/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/Desktop/Eksperci-Online/EksperciOnline/Views/Services/Add.cshtml]

@@ -5,7 +5,7 @@ namespace EksperciOnline.Data
 {
     public class EksperciOnlineDbContext : DbContext
     {
-        public EksperciOnlineDbContext(DbContextOptions options) : base(options)
+        public EksperciOnlineDbContext(DbContextOptions<EksperciOnlineDbContext> options) : base(options)
         {
         }
 
