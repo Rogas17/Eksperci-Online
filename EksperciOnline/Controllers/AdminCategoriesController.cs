@@ -2,11 +2,13 @@
 using EksperciOnline.Models.Domain;
 using EksperciOnline.Models.ViewModels;
 using EksperciOnline.Repositiories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace EksperciOnline.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminCategoriesController : Controller
     {
         private readonly ICategoryRepository categoryRepository;

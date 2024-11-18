@@ -1,8 +1,10 @@
 ﻿using EksperciOnline.Repositiories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EksperciOnline.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminServicesController : Controller
     {
         private readonly IServiceRepository serviceRepository;
@@ -11,6 +13,8 @@ namespace EksperciOnline.Controllers
         {
             this.serviceRepository = serviceRepository;
         }
+
+
         public async Task<IActionResult> List()
         {
             // Call the repository

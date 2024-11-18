@@ -2,6 +2,7 @@
 using EksperciOnline.Models.Domain;
 using EksperciOnline.Models.ViewModels;
 using EksperciOnline.Repositiories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -19,6 +20,7 @@ namespace EksperciOnline.Controllers
             this.serviceRepository = serviceRepository;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -32,6 +34,7 @@ namespace EksperciOnline.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Add(AddServicesRequest addServicesRequest)
         {
@@ -84,6 +87,7 @@ namespace EksperciOnline.Controllers
             return View(usługa);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -125,6 +129,7 @@ namespace EksperciOnline.Controllers
             return View(null);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Edit(EditServiceRequest editServiceRequest)
         {
@@ -174,6 +179,7 @@ namespace EksperciOnline.Controllers
             return RedirectToAction("Edit");
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Delete(EditServiceRequest editServiceRequest)
         {

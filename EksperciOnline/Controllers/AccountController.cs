@@ -1,26 +1,31 @@
 ﻿using EksperciOnline.Models.ViewModels;
 using EksperciOnline.Repositiories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EksperciOnline.Controllers
 {
-    public class ProfileController : Controller
+    public class AccountController : Controller
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IServiceRepository serviceRepository;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
 
-        public ProfileController(ICategoryRepository categoryRepository,
+        public AccountController(ICategoryRepository categoryRepository,
             IServiceRepository serviceRepository,
-            UserManager<IdentityUser> userManager
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager
             )
         {
             this.categoryRepository = categoryRepository;
             this.serviceRepository = serviceRepository;
             this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> List()
         {
@@ -29,7 +34,7 @@ namespace EksperciOnline.Controllers
             return View(usługi);
         }
 
-        
+        [Authorize]
         [HttpGet]
         public IActionResult Edit()
         {
@@ -70,7 +75,44 @@ namespace EksperciOnline.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public IActionResult Login(string ReturnUrl)
+        {
+            var model = new LoginViewModel
+            {
+                ReturnUrl = ReturnUrl,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        {
+            var signInResult = await signInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, false, false);
+
+            if (signInResult != null && signInResult.Succeeded)
+            {
+                if (!string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl))
+                {
+                    return Redirect(loginViewModel.ReturnUrl);
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Show errors
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult AccessDenied()
         {
             return View();
         }

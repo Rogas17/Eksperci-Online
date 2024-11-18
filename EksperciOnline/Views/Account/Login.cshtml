@@ -1,23 +1,30 @@
-﻿@{
+﻿@model EksperciOnline.Models.ViewModels.LoginViewModel
+@{
     ViewData["Title"] = "Logowanie";
 }
 
 <div class="container d-flex justify-content-center min-vh-100">
     <div class="bg-light p-4" style="max-width: 500px; width: 100%;">
         <h2 class="text-center pt-5 mb-5">Logowanie</h2>
-        <form>
+
+        <form method="post">
             <div class="form-group mb-2">
                 <label for="username">Nazwa użytkownika</label>
-                <input type="text" class="form-control" id="username" placeholder="Wprowadź nazwę użytkownika">
+                <input type="text" class="form-control" id="nazwaUżytkownika" placeholder="Wprowadź nazwę użytkownika" asp-for="Username">
             </div>
+
             <div class="form-group mb-2">
                 <label for="password">Hasło</label>
-                <input type="password" class="form-control" id="password" placeholder="Wprowadź hasło">
+                <input type="password" class="form-control" id="hasło" placeholder="Wprowadź hasło" asp-for="Password">
             </div>
+
             <div class="form-group mb-2">
                 <a href="#">Nie pamiętasz hasła?</a>
             </div>
+
             <button type="submit" class="btn btn-info btn-block">Zaloguj się</button>
+
+            <input type="hidden" asp-for="ReturnUrl" />
         </form>
     </div>
 </div>

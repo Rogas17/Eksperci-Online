@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -54,35 +56,54 @@
                             <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="List">Oferty</a>
                         </li>
                         <li class="nav-item">
-                        <li class="nav-item me-2">
-                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                                <div class="btn-group" role="group">
-                                    <button id="btnGroupDrop3" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Funkcje Admina</button>
-                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
-                                        <a class="dropdown-item" asp-area="" asp-controller="AdminCategories" asp-action="List">Kategorie</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="AdminServices" asp-action="List">Usługi</a>
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                            <li class="nav-item me-2">
+                                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                    <div class="btn-group" role="group">
+                                        <button id="btnGroupDrop3" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Funkcje Admina</button>
+
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
+                                            <a class="dropdown-item" asp-area="" asp-controller="AdminCategories" asp-action="List">Kategorie</a>
+
+                                            <a class="dropdown-item" asp-area="" asp-controller="AdminServices" asp-action="List">Usługi</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                            }
+                            
                     </ul>
 
                     <ul class="navbar-nav">
-                        <li class="nav-item me-2">
-                            <a class="btn btn-info" asp-area="" asp-controller="Messege" asp-action="List"><i class="bi bi-chat"></i> Wiadomości</a>
-                        </li>
-                        <li class="nav-item me-2">
-                            <a class="btn btn-info" asp-area="" asp-controller="Favorite" asp-action="List"><i class="bi bi-heart"></i> Ulubione</a>
-                        </li>
-                        <li class="nav-item me-2">
-                            <a class="btn btn-info" asp-area="" asp-controller="Profile" asp-action="List"><i class="bi bi-person-circle"></i> Profil</a>
-                        </li>
-                        <li class="nav-item me-2">
-                            <a class="btn btn-light" asp-area="" asp-controller="Profile" asp-action="Login">Zaloguj się</a>
-                        </li>
-                        <li class="nav-item me-2">
-                            <a class="btn btn-info" asp-area="" asp-controller="Profile" asp-action="Register"><i class="bi bi-person-add"></i> Zarejestruj się</a>
-                        </li>
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item me-2">
+                                <a class="btn btn-info" asp-area="" asp-controller="Messege" asp-action="List"><i class="bi bi-chat"></i> Wiadomości</a>
+                            </li>
+
+                            <li class="nav-item me-2">
+                                <a class="btn btn-info" asp-area="" asp-controller="Favorite" asp-action="List"><i class="bi bi-heart"></i> Ulubione</a>
+                            </li>
+
+                            <li class="nav-item me-2">
+                                <a class="btn btn-info" asp-area="" asp-controller="Account" asp-action="List"><i class="bi bi-person-circle"></i> @User?.Identity?.Name</a>
+                            </li>
+
+                            <li class="nav-item me-2">
+                                <a class="btn btn-light" asp-area="" asp-controller="Account" asp-action="Logout">Wyloguj się</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item me-2">
+                                <a class="btn btn-light" asp-area="" asp-controller="Account" asp-action="Login">Zaloguj się</a>
+                            </li>
+
+                            <li class="nav-item me-2">
+                                <a class="btn btn-info" asp-area="" asp-controller="Account" asp-action="Register"><i class="bi bi-person-add"></i> Zarejestruj się</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
