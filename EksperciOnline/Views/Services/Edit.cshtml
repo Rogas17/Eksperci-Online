@@ -3,44 +3,21 @@
     ViewData["Title"] = "Dodaj Ofertę";
 }
 
-<style>
-    .baner {
-        position: relative;
-        width: 100%;
-        height: 300px;
-        background: no-repeat center;
-        background-size: cover;
-    }
-
-    .zdjęcie {
-        position: absolute;
-        bottom: 50px;
-        left: 20%;
-        transform: translateX(-50%);
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        border: 5px solid white;
-    }
-</style>
-
-
 <div class="container bg-light px-5 py-4">
     <h2>Edytuj Usługę</h2>
     <form method="post">
         <!-- Tytuł Usługi -->
         <div class="form-group mb-2">
             <label>Tytuł Usługi*</label>
-            <input type="text" class="form-control" id="tytuł" required asp-for="Tytuł">
+            <input type="text" class="form-control" id="tytuł" asp-for="Tytuł">
         </div>
 
-        <div class="container my-4">
-            <div class="baner" id="banerShow" style="background-image: url(@Model.UrlBaneru);">
+        <div class="container my-4 baner" id="banerShow" style="background-image: url(@Model.UrlBaneru);">
                 <div class="row">
                     <div class="col-md-7">
                         @if (Model.UrlZdjęcia != null)
                         {
-                            <img src="@Model.UrlZdjęcia" class="zdjęcie" id="zdjęcieShow">
+                            <img src="@Model.UrlZdjęcia" class="zdjecie" id="zdjęcieShow">
                         }
                         else
                         {
@@ -56,7 +33,6 @@
                         <h4 id="serviceProvider">@Model.Autor</h4>
                     </div>
                 </div>
-            </div>
         </div>
 
         <!-- Avatar -->
@@ -82,37 +58,37 @@
         <!-- Lokalizacja -->
         <div class="form-group mb-2">
             <label>Lokalizacja*</label>
-            <input type="text" class="form-control" id="lokalizacja" required asp-for="Lokalizacja">
+            <input type="text" class="form-control" id="lokalizacja" asp-for="Lokalizacja">
         </div>
 
         <!-- Numer Telefonu -->
         <div class="form-group mb-2">
             <label>Numer Telefonu</label>
-            <input type="text" class="form-control" id="nrTelefonu" asp-for="NrTelefonu">
+            <input type="text" class="form-control" id="nrTelefonu" asp-for="NrTelefonu" maxlength="9" pattern="\d{9}">
         </div>
 
         <!-- Cena od - do -->
         <div class="form-row row mb-2">
             <div class="form-group col-md-6">
                 <label>Cena od*</label>
-                <input type="number" class="form-control" id="cenaOd" required asp-for="CenaOd">
+                <input type="number" class="form-control" id="cenaOd" asp-for="CenaOd">
             </div>
             <div class="form-group col-md-6">
                 <label>Cena do*</label>
-                <input type="number" class="form-control" id="cenaDo" required asp-for="CenaDo">
+                <input type="number" class="form-control" id="cenaDo" asp-for="CenaDo">
             </div>
         </div>
 
         <!-- Opis -->
         <div class="form-group mb-2">
             <label>Opis*</label>
-            <textarea class="form-control" id="opis" rows="4" required asp-for="Opis"></textarea>
+            <textarea class="form-control" id="opis" rows="4" asp-for="Opis"></textarea>
         </div>
 
         <!-- Krótki Opis -->
         <div class="form-group mb-2">
             <label for="shortDescription">Krótki Opis*</label>
-            <textarea class="form-control" id="krótkiOpis" rows="2" required asp-for="KrótkiOpis"></textarea>
+            <textarea class="form-control" id="krótkiOpis" rows="2" asp-for="KrótkiOpis"></textarea>
         </div>
 
         <!-- Wybierz kategorię -->
@@ -123,13 +99,8 @@
         </div>
 
         <div class="form-group mb-2">
-            <label>Autor</label>
+            <label>Nazwa użytkownika</label>
             <input type="text" class="form-control" id="autor" asp-for="Autor">
-        </div>
-
-        <div class="form-group mb-2">
-            <label>Data Publikacji</label>
-            <input type="date" class="form-control" id="dataPublikacji" asp-for="DataPulikacji" readonly>
         </div>
 
         <div class="form-check form-switch mb-2">
@@ -138,9 +109,10 @@
         </div>
 
             <!-- Przycisk zatwierdzenia -->
-            <div class="d-flex my-2">
+            <div class="d-flex justify-content-between my-2">
                 <button type="submit" class="btn btn-info">Edytuj</button>
                 <button type="submit" class="btn btn-danger ms-2" asp-area="" asp-controller="Services" asp-action="Delete">Usuń</button>
+                <input type="hidden" asp-for="DataPulikacji" />
             </div>
             
     </form>
@@ -212,6 +184,27 @@
                     featuredBanerShow.style.backgroundImage = `url(${result.link})`;
                 });
         }
+
+        // Short Description limitation
+        const shortDescription = document.getElementById('krótkiOpis');
+        const maxLength = 255;
+
+        shortDescription.addEventListener('input', function () {
+            const remaining = maxLength - this.value.length;
+
+            if (remaining < 0) {
+                this.value = this.value.substring(0, maxLength);
+            }
+
+            // Wyświetl licznik pozostałych znaków
+            let counter = document.getElementById('shortDescriptionCounter');
+            if (!counter) {
+                counter = document.createElement('div');
+                counter.id = 'shortDescriptionCounter';
+                this.parentNode.appendChild(counter);
+            }
+            counter.textContent = `Pozostało znaków: ${Math.max(remaining, 0)}`;
+        });
 
         featuredImageUpload.addEventListener('change', uploadZdjęcie);
         featuredBanerUpload.addEventListener('change', uploadBaner);

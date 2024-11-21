@@ -12,17 +12,20 @@ namespace EksperciOnline.Controllers
         private readonly IServiceRepository serviceRepository;
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IServiceCommentRepository serviceCommentRepository;
 
         public AccountController(ICategoryRepository categoryRepository,
             IServiceRepository serviceRepository,
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager
+            SignInManager<IdentityUser> signInManager,
+            IServiceCommentRepository serviceCommentRepository
             )
         {
             this.categoryRepository = categoryRepository;
             this.serviceRepository = serviceRepository;
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.serviceCommentRepository = serviceCommentRepository;
         }
 
         [Authorize]
@@ -31,7 +34,35 @@ namespace EksperciOnline.Controllers
         {
             var usługi = await serviceRepository.GetAllAsync();
 
-            return View(usługi);
+            var usługiViewModel = new List<UsługaViewModel>();
+
+            foreach (var usługa in usługi)
+            {
+                var comments = await serviceCommentRepository.GetCommentsByServiceIdAsync(usługa.Id);
+                double averageGrade = comments.Any() ? comments.Average(c => c.Grade) : 0;
+                int totalComments = comments.Count();
+
+                usługiViewModel.Add(new UsługaViewModel
+                {
+                    Id = usługa.Id,
+                    Tytuł = usługa.Tytuł,
+                    Lokalizacja = usługa.Lokalizacja,
+                    NrTelefonu = usługa.NrTelefonu,
+                    CenaOd = usługa.CenaOd,
+                    CenaDo = usługa.CenaDo,
+                    Opis = usługa.Opis,
+                    KrótkiOpis = usługa.KrótkiOpis,
+                    Widoczność = usługa.Widoczność,
+                    UrlZdjęcia = usługa.UrlZdjęcia,
+                    DataPulikacji = usługa.DataPulikacji,
+                    Autor = usługa.Autor,
+                    Kategoria = usługa.Kategoria,
+                    AverageGrade = averageGrade,
+                    TotalComments = totalComments
+                });
+            }
+
+            return View(usługiViewModel);
         }
 
         [Authorize]

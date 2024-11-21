@@ -3,6 +3,7 @@ using EksperciOnline.Models.Domain;
 using EksperciOnline.Models.ViewModels;
 using EksperciOnline.Repositiories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -13,11 +14,21 @@ namespace EksperciOnline.Controllers
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IServiceRepository serviceRepository;
+        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly IServiceCommentRepository serviceCommentRepository;
 
-        public ServicesController(ICategoryRepository categoryRepository, IServiceRepository serviceRepository)
+        public ServicesController(ICategoryRepository categoryRepository,
+            IServiceRepository serviceRepository,
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            IServiceCommentRepository serviceCommentRepository)
         {
             this.categoryRepository = categoryRepository;
             this.serviceRepository = serviceRepository;
+            this.signInManager = signInManager;
+            this.userManager = userManager;
+            this.serviceCommentRepository = serviceCommentRepository;
         }
 
         [Authorize]
@@ -51,7 +62,7 @@ namespace EksperciOnline.Controllers
                 Widoczność = addServicesRequest.Widoczność,
                 UrlZdjęcia = addServicesRequest.UrlZdjęcia,
                 UrlBaneru = addServicesRequest.UrlBaneru,
-                DataPulikacji = addServicesRequest.DataPulikacji,
+                DataPulikacji = DateTime.Now,
                 Autor = addServicesRequest.Autor,
             };
 
@@ -74,9 +85,37 @@ namespace EksperciOnline.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var usługa = await serviceRepository.GetAllAsync();
+            var usługi = await serviceRepository.GetAllAsync();
 
-            return View(usługa);
+            var usługiViewModel = new List<UsługaViewModel>();
+
+            foreach (var usługa in usługi)
+            {
+                var comments = await serviceCommentRepository.GetCommentsByServiceIdAsync(usługa.Id);
+                double averageGrade = comments.Any() ? comments.Average(c => c.Grade) : 0;
+                int totalComments = comments.Count();
+
+                usługiViewModel.Add(new UsługaViewModel
+                {
+                    Id = usługa.Id,
+                    Tytuł = usługa.Tytuł,
+                    Lokalizacja = usługa.Lokalizacja,
+                    NrTelefonu = usługa.NrTelefonu,
+                    CenaOd = usługa.CenaOd,
+                    CenaDo = usługa.CenaDo,
+                    Opis = usługa.Opis,
+                    KrótkiOpis = usługa.KrótkiOpis,
+                    Widoczność = usługa.Widoczność,
+                    UrlZdjęcia = usługa.UrlZdjęcia,
+                    DataPulikacji = usługa.DataPulikacji,
+                    Autor = usługa.Autor,
+                    Kategoria = usługa.Kategoria,
+                    AverageGrade = averageGrade,
+                    TotalComments = totalComments
+                });
+            }
+
+            return View(usługiViewModel);
         }
 
         [HttpGet]
@@ -84,7 +123,83 @@ namespace EksperciOnline.Controllers
         {
             var usługa = await serviceRepository.GetAsync(id);
 
-            return View(usługa);
+            var serviceDetailViewModel = new ServiceDetailViewModel();
+
+            if (usługa != null)
+            {
+
+                // Get total comments
+                var totalComments = await serviceCommentRepository.GetTotalComments(usługa.Id);
+
+                // Get comments for service
+                var serviceCommentsDomainModel = await serviceCommentRepository.GetCommentsByServiceIdAsync(usługa.Id);
+
+                // Oblicz średnią ocen
+                double averageGrade = 0;
+                if (serviceCommentsDomainModel.Any())
+                {
+                    averageGrade = serviceCommentsDomainModel.Average(c => c.Grade);
+                }
+
+                var serviceCommentForView = new List<ServiceCommentViewModel>();
+
+                foreach (var serviceComment in serviceCommentsDomainModel)
+                {
+                    serviceCommentForView.Add(new ServiceCommentViewModel
+                    {
+                        Description = serviceComment.Description,
+                        Grade = serviceComment.Grade,
+                        DateAdded = serviceComment.DateAdded,
+                        Username = (await userManager.FindByIdAsync(serviceComment.UserId.ToString())).UserName
+                    });
+                }
+
+                serviceDetailViewModel = new ServiceDetailViewModel
+                {
+                    Id = usługa.Id,
+                    Tytuł = usługa.Tytuł,
+                    Lokalizacja = usługa.Lokalizacja,
+                    NrTelefonu = usługa.NrTelefonu,
+                    CenaOd = usługa.CenaOd,
+                    CenaDo = usługa.CenaDo,
+                    Opis = usługa.Opis,
+                    KrótkiOpis = usługa.KrótkiOpis,
+                    Widoczność = usługa.Widoczność,
+                    UrlZdjęcia = usługa.UrlZdjęcia,
+                    UrlBaneru = usługa.UrlBaneru,
+                    DataPulikacji = usługa.DataPulikacji,
+                    Autor = usługa.Autor,
+                    Kategoria = usługa.Kategoria,
+                    TotalComments = totalComments,
+                    Comments = serviceCommentForView,
+                    AverageGrade = averageGrade
+                };
+            }
+
+            return View(serviceDetailViewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Show(ServiceDetailViewModel serviceDetailViewModel)
+        {
+            if (signInManager.IsSignedIn(User))
+            {
+                var domainModel = new ServiceComment
+                {
+                    ServiceId = serviceDetailViewModel.Id,
+                    Description = serviceDetailViewModel.CommentDescription,
+                    Grade = serviceDetailViewModel.Grade,
+                    UserId = Guid.Parse(userManager.GetUserId(User)),
+                    DateAdded = DateTime.Now,
+                };
+
+                await serviceCommentRepository.AddAsync(domainModel);
+                return RedirectToAction("Show", "Services",
+                    new { id = serviceDetailViewModel.Id });
+            }
+
+            return View();
         }
 
         [Authorize]

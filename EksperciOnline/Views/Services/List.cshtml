@@ -1,16 +1,7 @@
-﻿@model List<EksperciOnline.Models.Domain.Usługa>
+﻿@model List<EksperciOnline.Models.ViewModels.UsługaViewModel>
 @{
     ViewData["Title"] = "Oferty";
 }
-
-<style>
-    .zdjęcie {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        border: 5px solid white;
-    }
-</style>
 
 <div class="container my-3 py-2">
     <div class="row justify-content-center my-4">
@@ -80,10 +71,31 @@
                 @foreach (var usługa in Model)
                 {
                     <div class="container bg-light p-3 mb-3 rounded-3">
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-3 text-center">
-                                <img src="@usługa.UrlZdjęcia" class="zdjęcie">
-                                <p class="rating">★★★★★<br />(256 votes)</p>
+                                <img src="@usługa.UrlZdjęcia" class="zdjecieLista"><br />
+
+                                <span class="text-warning">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= Math.Floor(usługa.AverageGrade)) // Pełne gwiazdki
+                                        {
+                                            <i class="bi bi-star-fill"></i>
+                                        }
+                                        else if (i == Math.Ceiling(usługa.AverageGrade) && usługa.AverageGrade % 1 != 0) // Pół gwiazdki
+                                        {
+                                            <i class="bi bi-star-half"></i>
+                                        }
+                                        else // Puste gwiazdki
+                                        {
+                                            <i class="bi bi-star"></i>
+                                        }
+                                    }
+                                </span><br />
+
+                                <span class="text-warning">
+                                    (@usługa.TotalComments oceny)
+                                </span>
                             </div>
 
                             <div class="col-md-6">
@@ -97,8 +109,11 @@
                             <div class="col-md-3 text-end">
                                 <label>Cena</label>
                                 <h4 class="fw-bold">@usługa.CenaOd - @usługa.CenaDo PLN</h4>
-                                <label>Numer Telefonu</label>
-                                <h4>@usługa.NrTelefonu</h4>
+                                @if (usługa.NrTelefonu != null)
+                                {
+                                    <label>Numer Telefonu</label>
+                                    <h4>@usługa.NrTelefonu</h4>
+                                }
                                 <label>Data Publikacji</label>
                                 <p>@usługa.DataPulikacji.ToShortDateString()</p>
                             </div>
@@ -123,6 +138,7 @@
     </div>
 </div>
 
+@section Scripts{
 <script>
     var priceFrom = document.getElementById('price-from');
     var priceFromDisplay = document.getElementById('price-from-display');
@@ -147,3 +163,4 @@
 
     updateValues(); // Inicjalna aktualizacja wartości
 </script>
+}

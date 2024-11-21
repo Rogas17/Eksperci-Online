@@ -44,6 +44,19 @@ namespace EksperciOnline.Repositiories
             return await eksperciOnlineDbContext.Usługi.Include(x => x.Kategoria).FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<List<ServiceComment>> GetCommentsByServiceIdAsync(Guid serviceId)
+        {
+            return await eksperciOnlineDbContext.ServiceComment
+                .Where(c => c.ServiceId == serviceId)
+                .ToListAsync();
+        }
+
+        public async Task<int> GetTotalComments(Guid serviceId)
+        {
+            return await eksperciOnlineDbContext.ServiceComment
+                .CountAsync(c => c.ServiceId == serviceId);
+        }
+
         public async Task<Usługa?> UpdateAsync(Usługa usługa)
         {
             var existingCategory = await eksperciOnlineDbContext.Usługi.Include(x => x.Kategoria).FirstOrDefaultAsync(x => x.Id == usługa.Id);

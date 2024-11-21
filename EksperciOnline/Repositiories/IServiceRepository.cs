@@ -8,6 +8,10 @@ namespace EksperciOnline.Repositiories
 
         Task<Usługa?> GetAsync(Guid id);
 
+        Task<List<ServiceComment>> GetCommentsByServiceIdAsync(Guid serviceId);
+
+        Task<int> GetTotalComments(Guid serviceId);
+
         Task<Usługa> AddAsync(Usługa usługa);
 
         Task<Usługa?> UpdateAsync(Usługa usługa);

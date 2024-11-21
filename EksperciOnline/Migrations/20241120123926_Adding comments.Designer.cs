@@ -3,6 +3,7 @@ using System;
 using EksperciOnline.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksperciOnline.Migrations
 {
     [DbContext(typeof(EksperciOnlineDbContext))]
-    partial class EksperciOnlineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241120123926_Adding comments")]
+    partial class Addingcomments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.20");
@@ -66,6 +69,28 @@ namespace EksperciOnline.Migrations
                     b.HasIndex("UsługaId");
 
                     b.ToTable("ServiceComment");
+                });
+
+            modelBuilder.Entity("EksperciOnline.Models.Domain.ServiceLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("UsługaId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsługaId");
+
+                    b.ToTable("ServiceLike");
                 });
 
             modelBuilder.Entity("EksperciOnline.Models.Domain.Usługa", b =>
@@ -132,6 +157,13 @@ namespace EksperciOnline.Migrations
                         .HasForeignKey("UsługaId");
                 });
 
+            modelBuilder.Entity("EksperciOnline.Models.Domain.ServiceLike", b =>
+                {
+                    b.HasOne("EksperciOnline.Models.Domain.Usługa", null)
+                        .WithMany("Likes")
+                        .HasForeignKey("UsługaId");
+                });
+
             modelBuilder.Entity("EksperciOnline.Models.Domain.Usługa", b =>
                 {
                     b.HasOne("EksperciOnline.Models.Domain.Kategoria", "Kategoria")
@@ -151,6 +183,8 @@ namespace EksperciOnline.Migrations
             modelBuilder.Entity("EksperciOnline.Models.Domain.Usługa", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }

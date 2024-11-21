@@ -1,28 +1,11 @@
-﻿@model EksperciOnline.Models.Domain.Usługa
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+@inject UserManager<IdentityUser> userManager
+
+@model EksperciOnline.Models.ViewModels.ServiceDetailViewModel
 @{
     ViewData["Title"] = Model.Tytuł;
 }
-
-<style>
-    .baner {
-        position: relative;
-        width: 100%;
-        height: 300px;
-        background: no-repeat center;
-        background-size: cover;
-    }
-
-    .zdjęcie {
-        position: absolute;
-        bottom: 50px;
-        left: 20%;
-        transform: translateX(-50%);
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        border: 5px solid white;
-    }
-</style>
 
 <div class="container mt-5 bg-light py-4">
     @if (Model != null)
@@ -30,91 +13,139 @@
         <div class="row justify-content-center">
 
             <div class="col-md-10">
-
-                <div class=" mt-5 row">
-                    <div class="col-md-8">
-                        <h2>@Model.Tytuł</h2>
-                        <span class="badge bg-info">@Model.Kategoria.NazwaKategorii</span>
-                    </div>
+                <div class=" my-3 row">
+                    <h2>@Model.Tytuł</h2>
                 </div>
 
-                
+                <div class="d-flex justify-content-between mb-3">
+                    @if (Model.Comments != null && Model.Comments.Any())
+                    {
+                        <span>
+                            <span class="text-warning">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= Math.Floor(Model.AverageGrade)) // Pełne gwiazdki
+                                    {
+                                        <i class="bi bi-star-fill"></i>
+                                    }
+                                    else if (i == Math.Ceiling(Model.AverageGrade) && Model.AverageGrade % 1 != 0) // Pół gwiazdki
+                                    {
+                                        <i class="bi bi-star-half"></i>
+                                    }
+                                    else // Puste gwiazdki
+                                    {
+                                        <i class="bi bi-star"></i>
+                                    }
+                                }
+                            </span>
+                            @Model.TotalComments Recenzje
+                        </span>
+                    }
+                    else
+                    {
+                        <span>Brak Recenzji</span>
+                    }
 
-                <div class="container my-4">
-                    <div class="baner" id="banerShow" style="background-image: url(@Model.UrlBaneru);">
-                        <div class="row">
+                    <span>@Model.DataPulikacji.ToShortDateString()</span>
+                </div>
 
-                            <div class="col-md-7">
-                                <img src="@Model.UrlZdjęcia" class="zdjęcie" id="zdjęcieShow">
-                            </div>
+                <div>
+                    <span class="badge bg-info">@Model.Kategoria.NazwaKategorii</span>
+                </div>
 
-                            <div class="col-md-4 bg-black bg-opacity-75 my-2 text-center">
-                                <h3 class="my-2">@Model.CenaOd - @Model.CenaDo PLN</h3>
+                <div class="container my-4 baner" id="banerShow" style="background-image: url(@Model.UrlBaneru);">
+                    <div class="row">
 
-                                <a class="btn btn-info mb-2" asp-area="" asp-controller="Messege" asp-action="List">Napisz do mnie</a><br />
+                        <div class="col-md-7">
+                            <img src="@Model.UrlZdjęcia" class="zdjecie" id="zdjęcieShow">
+                        </div>
 
+                        <div class="col-md-4 bg-black bg-opacity-75 my-2 text-center">
+                            <h3 class="my-2">@Model.CenaOd - @Model.CenaDo PLN</h3>
+
+                            <a class="btn btn-info mb-2" asp-area="" asp-controller="Messege" asp-action="List">Napisz do mnie</a><br />
+
+                            @if (Model.NrTelefonu != null)
+                            {
                                 <label class="mb-2">Lub zadzwoń do mnie</label>
 
                                 <h4>@Model.NrTelefonu</h4>
+                            }
 
-                                <label class="mb-2">Usługodawca</label>
+                            <label class="mb-2">Usługodawca</label>
 
-                                <h4>@Model.Autor</h4>
-                            </div>
+                            <h4>@Model.Autor</h4>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <p><strong>Data Publikacji: </strong>@Model.DataPulikacji.ToShortDateString()</p>
-
-                    <p><strong>Ocena: </strong>4.5 / 5</p>
-                </div>
-
                 <div class="blog-details-content">
-                    <strong>Opis: </strong>@Html.Raw(@Model.Opis)
+                    @Html.Raw(@Model.Opis)
                 </div>
             </div>
         </div>
 
         <div class="row justify-content-center mt-4">
-            <div class="col-md-10">
-                <h3>Komentarze</h3>
-                <div class="mb-3">
-                    <form>
+            <div class="col-md-10 mb-3">
+                <h3>Napisz recenzje</h3>
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <form method="post">
+                        <div class="form-group">
+                            <span class="text-warning stars">
+                                <i class="bi bi-star" data-value="1"></i>
+                                <i class="bi bi-star" data-value="2"></i>
+                                <i class="bi bi-star" data-value="3"></i>
+                                <i class="bi bi-star" data-value="4"></i>
+                                <i class="bi bi-star" data-value="5"></i>
+                            </span>
+                        </div>
+
                         <div class="mb-3">
                             <label for="komentarz" class="form-label">Komentarz</label>
-                            <textarea class="form-control" id="komentarz" rows="3" required></textarea>
+                            <textarea class="form-control" id="komentarz" rows="3" asp-for="CommentDescription"></textarea>
                         </div>
+
                         <div class="mb-3">
-                            <label for="ocena" class="form-label">Ocena (od 1 do 5)</label>
-                            <input type="number" class="form-control" id="ocena" min="1" max="5" required>
+                            <button type="submit" class="btn btn-info">Dodaj komentarz</button>
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" id="ocena" name="Grade" asp-for="Grade" />
                         </div>
-                        <button type="submit" class="btn btn-info">Dodaj komentarz</button>
                     </form>
-                </div>
-
-                <div class="mt-4">
-                    <h4>Lista komentarzy</h4>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Imię Nazwisko</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <p class="card-text"><small class="text-muted">Data: 25 czerwca 2024</small></p>
-                            <p class="card-text"><small class="text-muted">Ocena: 4</small></p>
+                }
+                @if (Model.Comments != null && Model.Comments.Any())
+                {
+                    <div class="mt-4">
+                        <h4>Recenzje</h4>
+                        <div class="card mb-3">
+                            @foreach (var comment in Model.Comments)
+                            {
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <h5 class="card-title">@comment.Username</h5>
+                                        <span class="card-text"><small class="text-muted">@comment.DateAdded.ToShortDateString()</small></span>
+                                    </div>
+                                    <div class="mb-1">
+                                        <p class="card-text">@comment.Description</p>
+                                        <span class="card-text text-warning">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= comment.Grade)
+                                                {
+                                                    <i class="bi bi-star-fill"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-star"></i>
+                                                }
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Inny Użytkownik</h5>
-                            <p class="card-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            <p class="card-text"><small class="text-muted">Data: 26 czerwca 2024</small></p>
-                            <p class="card-text"><small class="text-muted">Ocena: 5</small></p>
-                        </div>
-                    </div>
-                    <!-- Tutaj można dodać więcej komentarzy w podobny sposób -->
-                </div>
+                }
             </div>
         </div>
     }
@@ -123,3 +154,53 @@
         <p>Nie znaleziono usługi</p>
     }
 </div>
+
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const stars = document.querySelectorAll(".stars i");
+            const gradeInput = document.getElementById("ocena"); // Pobranie ukrytego pola oceny
+            let selectedRating = 0; // Przechowuje aktualnie wybraną ocenę
+
+            stars.forEach((star, index) => {
+                // Obsługa efektu najazdu kursora
+                star.addEventListener("mouseover", () => {
+                    resetStars(); // Resetuj wszystkie gwiazdki
+                    fillStars(index + 1); // Wypełnij gwiazdki do obecnego indeksu
+                });
+
+                // Powrót do aktualnej oceny po zjechaniu kursora
+                star.addEventListener("mouseout", () => {
+                    resetStars();
+                    if (selectedRating > 0) {
+                        fillStars(selectedRating); // Przywróć wybrane gwiazdki
+                    }
+                });
+
+                // Ustawienie oceny po kliknięciu
+                star.addEventListener("click", () => {
+                    selectedRating = index + 1; // Ustaw aktualny wybór
+                    fillStars(selectedRating); // Wypełnij gwiazdki na stałe
+                    gradeInput.value = selectedRating; // Ustaw wartość w ukrytym polu
+                });
+            });
+
+            // Funkcja wypełniająca gwiazdki
+            function fillStars(count) {
+                for (let i = 0; i < count; i++) {
+                    stars[i].classList.remove("bi-star");
+                    stars[i].classList.add("bi-star-fill");
+                }
+            }
+
+            // Funkcja resetująca wszystkie gwiazdki do pustego stanu
+            function resetStars() {
+                stars.forEach(star => {
+                    star.classList.remove("bi-star-fill");
+                    star.classList.add("bi-star");
+                });
+            }
+        });
+
+    </script>
+}
