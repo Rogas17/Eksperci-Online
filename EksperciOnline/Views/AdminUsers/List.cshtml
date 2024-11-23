@@ -1,0 +1,94 @@
+﻿@model EksperciOnline.Models.ViewModels.UserViewModel
+@{
+    ViewData["Title"] = "Lista Użytkowników";
+}
+
+<div class="bg-light py-2">
+    <div class="container">
+        <h1>Lista Użytkowników</h1>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="container py-3">
+        <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalCreateUser">Dodaj Użytkownika</a>
+    </div>
+
+    @if (Model.Users != null || Model.Users.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nazwa użytkownika</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>@user.Username</td>
+                        <td>@user.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Nie znaleziono użytkowników</p>
+    }
+</div>
+
+
+<!-- Modal -->
+<form method="post">
+<div class="modal fade" id="modalCreateUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Swtórz nowego użytkownika</h5>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Nazwa Użytkownika</label>
+                    <input type="text" class="form-control" asp-for="Username"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="text" class="form-control" asp-for="Email"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Hasło</label>
+                    <input type="password" class="form-control" asp-for="Password"/>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input type="checkbox" id="chkUserRole" class="form-check-input" value="User" checked disabled />
+                        <label class="form-check-label" for="chkUserRole">User</label>
+                    </div>
+
+                    @if (User.IsInRole("SuperAdmin"))
+                    {
+                        <div class="form-check">
+                            <input type="checkbox" id="chkAdminRole" class="form-check-input" asp-for="AdminRoleCheckbox" />
+                            <label class="form-check-label" for="chkAdminRole">Admin</label>
+                        </div>
+                    }
+                    
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                <button type="submit" class="btn btn-primary">Zapisz Zmiany</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

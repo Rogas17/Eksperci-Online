@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\desktop\\eksperci-online\\ekspercionline\\views\\services\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\views\\services\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\desktop\\eksperci-online\\ekspercionline\\views\\adminusers\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\views\\adminusers\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\desktop\\eksperci-online\\ekspercionline\\views\\services\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\views\\services\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\desktop\\eksperci-online\\ekspercionline\\controllers\\adminuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\controllers\\adminuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\desktop\\eksperci-online\\ekspercionline\\views\\services\\show.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\views\\services\\show.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\desktop\\eksperci-online\\ekspercionline\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|c:\\users\\admin\\desktop\\eksperci-online\\ekspercionline\\models\\viewmodels\\userviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8A6BD33-4917-4B91-B37B-92454AB341B6}|EksperciOnline\\EksperciOnline.csproj|solutionrelative:ekspercionline\\models\\viewmodels\\userviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,54 +26,41 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Show.cshtml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Views\\Services\\Show.cshtml",
-              "RelativeDocumentMoniker": "EksperciOnline\\Views\\Services\\Show.cshtml",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Views\\Services\\Show.cshtml",
-              "RelativeToolTip": "EksperciOnline\\Views\\Services\\Show.cshtml",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAAAEQAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-21T16:22:59.128Z",
+              "DocumentIndex": 1,
+              "Title": "AdminUsersController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Controllers\\AdminUsersController.cs",
+              "RelativeDocumentMoniker": "EksperciOnline\\Controllers\\AdminUsersController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Controllers\\AdminUsersController.cs",
+              "RelativeToolTip": "EksperciOnline\\Controllers\\AdminUsersController.cs",
+              "ViewState": "AQIAADYAAAAAAAAAAAAwwEAAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T13:23:57.699Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ServicesController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Controllers\\ServicesController.cs",
-              "RelativeDocumentMoniker": "EksperciOnline\\Controllers\\ServicesController.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Controllers\\ServicesController.cs",
-              "RelativeToolTip": "EksperciOnline\\Controllers\\ServicesController.cs",
-              "ViewState": "AQIAAM4AAAAAAAAAAAA8wAQBAAA7AAAA",
+              "DocumentIndex": 2,
+              "Title": "UserViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Models\\ViewModels\\UserViewModel.cs",
+              "RelativeDocumentMoniker": "EksperciOnline\\Models\\ViewModels\\UserViewModel.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Models\\ViewModels\\UserViewModel.cs",
+              "RelativeToolTip": "EksperciOnline\\Models\\ViewModels\\UserViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-21T15:16:46.578Z",
+              "WhenOpened": "2024-11-23T13:16:49.045Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Views\\Services\\Edit.cshtml",
-              "RelativeDocumentMoniker": "EksperciOnline\\Views\\Services\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Views\\Services\\Edit.cshtml",
-              "RelativeToolTip": "EksperciOnline\\Views\\Services\\Edit.cshtml",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAB0AAAAfAAAA",
+              "Title": "List.cshtml",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Views\\AdminUsers\\List.cshtml",
+              "RelativeDocumentMoniker": "EksperciOnline\\Views\\AdminUsers\\List.cshtml",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Views\\AdminUsers\\List.cshtml",
+              "RelativeToolTip": "EksperciOnline\\Views\\AdminUsers\\List.cshtml",
+              "ViewState": "AQIAADYAAAAAAAAAAAAmwEoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-21T16:00:38.032Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Add.cshtml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Views\\Services\\Add.cshtml",
-              "RelativeDocumentMoniker": "EksperciOnline\\Views\\Services\\Add.cshtml",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Eksperci-Online\\EksperciOnline\\Views\\Services\\Add.cshtml",
-              "RelativeToolTip": "EksperciOnline\\Views\\Services\\Add.cshtml",
-              "ViewState": "AQIAACQAAAAAAAAAAAAuwDsAAAB3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-21T13:54:53.647Z",
+              "WhenOpened": "2024-11-23T11:36:23.742Z",
               "EditorCaption": ""
             }
           ]
