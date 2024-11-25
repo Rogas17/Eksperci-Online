@@ -56,7 +56,7 @@ namespace EksperciOnline.Data
                 UserName = "superadmin@eksperci.com",
                 Email = "superadmin@eksperci.com",
                 NormalizedEmail = "superadmin@eksperci.com".ToUpper(),
-                NormalizedUserName = "superadmin@eksperci.com",
+                NormalizedUserName = "superadmin@eksperci.com".ToUpper(),
                 Id = superAdminId
             };
 

@@ -28,6 +28,11 @@ namespace EksperciOnline.Controllers
         [ActionName("Add")]
         public async Task<IActionResult> Add(AddCategoryRequest addCategoryRequest)
         {
+            if (ModelState.IsValid == false)
+            {
+                return View();
+            }
+
             //Mapping AddCategoryRequest to Category domain model
             var kategoria = new Kategoria
             {
@@ -110,5 +115,7 @@ namespace EksperciOnline.Controllers
             // Show an error notification
             return RedirectToAction("Edit", new { id = editCategoryRequest.Id });
         }
+
+       
     }
 }

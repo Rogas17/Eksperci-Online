@@ -25,7 +25,8 @@
                     <form method="post">
                         <div class="form-group">
                             <label>Nazwa kategorii</label>
-                            <input type="text" class="form-control" id="nazwa-kategorii" asp-for="NazwaKategorii">
+                            <input type="text" class="form-control" id="nazwa-kategorii" asp-for="NazwaKategorii" required />
+                            <span class="text-warning" asp-validation-for="NazwaKategorii"></span>
                         </div>
 
                         <div class="form-group mb-2">
@@ -37,7 +38,8 @@
 
                         <div class="form-group mb-2">
                             <label>Url zdjęcia kategorii</label>
-                            <input type="text" class="form-control" id="urlZdjęcia" asp-for="UrlZdjęcia">
+                            <input type="text" class="form-control" id="urlZdjęcia" asp-for="UrlZdjęcia" required />
+                            <span class="text-warning" asp-validation-for="UrlZdjęcia"></span>
                         </div>
 
                         <button type="submit" class="btn btn-primary my-3">Wyślij</button>

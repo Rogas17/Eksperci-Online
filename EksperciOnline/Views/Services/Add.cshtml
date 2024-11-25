@@ -9,7 +9,8 @@
         <!-- Tytuł Usługi -->
         <div class="form-group mb-2">
             <label>Tytuł Usługi*</label>
-            <input type="text" class="form-control" id="tytuł" asp-for="Tytuł">
+            <input type="text" class="form-control" id="tytuł" asp-for="Tytuł" required>
+            <span class="text-warning" asp-validation-for="Tytuł"></span>
         </div>
 
         <div class="container my-4 baner" id="banerShow" style="background-image: url('');">
@@ -51,45 +52,48 @@
         <!-- Lokalizacja -->
         <div class="form-group mb-2">
             <label>Lokalizacja*</label>
-            <input type="text" class="form-control" id="lokalizacja" asp-for="Lokalizacja">
+            <input type="text" class="form-control" id="lokalizacja" asp-for="Lokalizacja" required>
+            <span class="text-warning" asp-validation-for="Lokalizacja"></span>
         </div>
 
         <!-- Numer Telefonu -->
         <div class="form-group mb-2">
             <label>Numer Telefonu</label>
-            <input type="text" class="form-control" id="nrTelefonu" asp-for="NrTelefonu" maxlength="9" pattern="\d{9}">
+            <input type="text" class="form-control" id="nrTelefonu" asp-for="NrTelefonu" maxlength="9">
         </div>
 
         <!-- Cena od - do -->
         <div class="form-row row mb-2">
             <div class="form-group col-md-6">
                 <label>Cena od*</label>
-                <input type="number" class="form-control" id="cenaOd" asp-for="CenaOd">
+                <input type="number" class="form-control" id="cenaOd" asp-for="CenaOd" required>
+                <span class="text-warning" asp-validation-for="CenaOd"></span>
             </div>
             <div class="form-group col-md-6">
                 <label>Cena do*</label>
-                <input type="number" class="form-control" id="cenaDo" asp-for="CenaDo">
+                <input type="number" class="form-control" id="cenaDo" asp-for="CenaDo" required>
+                <span class="text-warning" asp-validation-for="CenaDo"></span>
             </div>
         </div>
 
         <!-- Opis -->
         <div class="form-group mb-2">
             <label>Opis*</label>
-            <textarea class="form-control" id="opis" rows="4" asp-for="Opis"></textarea>
+            <textarea class="form-control" id="opis" rows="4" asp-for="Opis" required></textarea>
+            <span class="text-warning" asp-validation-for="Opis"></span>
         </div>
 
         <!-- Krótki Opis -->
         <div class="form-group mb-2">
             <label for="shortDescription">Krótki Opis*</label>
-            <textarea class="form-control" id="krótkiOpis" rows="2" asp-for="KrótkiOpis" maxlength="255"></textarea>
+            <textarea class="form-control" id="krótkiOpis" rows="2" asp-for="KrótkiOpis" maxlength="255" required></textarea>
+            <span class="text-warning" asp-validation-for="KrótkiOpis"></span>
         </div>
 
         <!-- Wybierz kategorię -->
         <div class="form-group mb-2">
             <label>Wybierz kategorię*</label>
-            <select class="form-control" id="kategoria" asp-items="@Model.Kategorie" asp-for="WybranaKategoria">
-                
-            </select>
+            <select class="form-control" id="kategoria" asp-items="@Model.Kategorie" asp-for="WybranaKategoria"></select>
         </div>
 
         <div class="form-group mb-2">

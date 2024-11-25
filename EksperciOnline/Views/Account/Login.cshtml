@@ -8,17 +8,19 @@
         <h2 class="text-center pt-5 mb-5">Logowanie</h2>
 
         <form method="post">
-            <div class="form-group mb-2">
+            <div class="form-group mb-3">
                 <label for="username">Nazwa użytkownika</label>
-                <input type="text" class="form-control" id="nazwaUżytkownika" placeholder="Wprowadź nazwę użytkownika" asp-for="Username">
+                <input type="text" class="form-control" id="nazwaUżytkownika" placeholder="Wprowadź nazwę użytkownika" asp-for="Username" required />
+                <span class="text-danger" asp-validation-for="Username"></span>
             </div>
 
-            <div class="form-group mb-2">
+            <div class="form-group mb-3">
                 <label for="password">Hasło</label>
-                <input type="password" class="form-control" id="hasło" placeholder="Wprowadź hasło" asp-for="Password">
+                <input type="password" class="form-control" id="hasło" placeholder="Wprowadź hasło" asp-for="Password" required minlenght="6" />
+                <span class="text-danger" asp-validation-for="Password"></span>
             </div>
 
-            <div class="form-group mb-2">
+            <div class="form-group mb-3">
                 <a href="#">Nie pamiętasz hasła?</a>
             </div>
 

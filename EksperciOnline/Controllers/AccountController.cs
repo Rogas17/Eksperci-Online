@@ -81,28 +81,33 @@ namespace EksperciOnline.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            var identityUser = new IdentityUser
+            if (ModelState.IsValid)
             {
-                UserName = registerViewModel.Username,
-                Email = registerViewModel.Email,
-                PhoneNumber = registerViewModel.PhoneNumber
-            };
+                var identityUser = new IdentityUser
+                {
+                    UserName = registerViewModel.Username,
+                    Email = registerViewModel.Email,
+                    PhoneNumber = registerViewModel.PhoneNumber
+                };
 
-            var identityResult = await userManager.CreateAsync(identityUser, registerViewModel.Password);
+                var identityResult = await userManager.CreateAsync(identityUser, registerViewModel.Password);
 
-            if (identityResult.Succeeded)
-            {
-                // assign this user the "User" role
-                var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, "User");
+                if (identityResult.Succeeded)
+                {
+                    // assign this user the "User" role
+                    var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, "User");
 
-                if (roleIdentityResult.Succeeded)
-                { 
-                    //Show success notification
-                    return RedirectToAction("Register");
+                    if (roleIdentityResult.Succeeded)
+                    {
+                        //Show success notification
+                        return RedirectToAction("Register");
+                    }
                 }
             }
+
             //Show error notification
             return View();
+
         }
 
         [HttpGet]
@@ -119,6 +124,11 @@ namespace EksperciOnline.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             var signInResult = await signInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, false, false);
 
             if (signInResult != null && signInResult.Succeeded)
