@@ -15,10 +15,12 @@ namespace EksperciOnline.Controllers
         }
 
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string? searchQuery)
         {
+            ViewBag.SearchQuery = searchQuery;
+
             // Call the repository
-            var blogPosts = await serviceRepository.GetAllAsync();
+            var blogPosts = await serviceRepository.GetAllAsync(searchQuery);
 
             return View(blogPosts);
         }

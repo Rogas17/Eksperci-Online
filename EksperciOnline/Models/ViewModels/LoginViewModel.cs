@@ -10,6 +10,6 @@ namespace EksperciOnline.Models.ViewModels
         [MinLength(6, ErrorMessage = "Hasło musi mieć coanjmniej 6 znaków")]
         public string Password { get; set; }
 
-        public string? ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; } = "/";
     }
 }

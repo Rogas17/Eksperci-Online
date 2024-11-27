@@ -4,7 +4,12 @@ namespace EksperciOnline.Repositiories
 {
     public interface ICategoryRepository
     {
-        Task<IEnumerable<Kategoria>> GetAllAsync();
+        Task<IEnumerable<Kategoria>> GetAllAsync(
+            string? searchQuery = null,
+            string? sortBy = null,
+            string? sortDirection = null,
+            int pageNumber = 1,
+            int pageSize = 100);
 
         Task<Kategoria?> GetAsync(Guid id);
 
@@ -13,5 +18,7 @@ namespace EksperciOnline.Repositiories
         Task<Kategoria?> UpdateAsync(Kategoria kategoria);
 
         Task<Kategoria?> DeleteAsync(Guid id);
+
+        Task<int> CountAsync();
     }
 }

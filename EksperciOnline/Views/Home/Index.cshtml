@@ -5,14 +5,14 @@
 
 <style>
     .img-wrapper {
-        text-align: center; /* Center-align text */
-        padding: 10px; /* Add some padding around the images */
+        text-align: center; 
+        padding: 10px; 
     }
 
     img {
         width: 150px;
         height: 150px;
-        border-radius: 50%; /* Makes images circular */
+        border-radius: 50%; 
     }
 </style>
 
@@ -41,7 +41,7 @@
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 img-wrapper">
                         <a asp-area="" asp-controller="Services" asp-action="List">
                             <img src="@kategoria.UrlZdjęcia" />
-                            <p class="mt-2">@kategoria.NazwaKategorii</p>
+                            <span class="badge bg-info">@kategoria.NazwaKategorii</span>
                         </a>
 
                     </div>

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace EksperciOnline.Models.ViewModels
 {
@@ -6,12 +7,44 @@ namespace EksperciOnline.Models.ViewModels
     {
         [Required]
         public string Username { get; set; }
-        public string PhoneNumber { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
         [Required]
-        [MinLength(6, ErrorMessage = "Hasło musi mieć conajmniej 6 znaków")]
+        [PasswordComplexity]
         public string Password { get; set; }
+    }
+
+    public class PasswordComplexityAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            var password = value as string;
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                return new ValidationResult("Hasło jest wymagane.");
+            }
+
+            // Sprawdź wymagania dla hasła
+            if (password.Length < 6)
+                return new ValidationResult("Hasło musi mieć co najmniej 6 znaków.");
+
+            if (!Regex.IsMatch(password, @"[A-Z]"))
+                return new ValidationResult("Hasło musi zawierać co najmniej jedną wielką literę.");
+
+            if (!Regex.IsMatch(password, @"[a-z]"))
+                return new ValidationResult("Hasło musi zawierać co najmniej jedną małą literę.");
+
+            if (!Regex.IsMatch(password, @"\d"))
+                return new ValidationResult("Hasło musi zawierać co najmniej jedną cyfrę.");
+
+            if (!Regex.IsMatch(password, @"[\W_]"))
+                return new ValidationResult("Hasło musi zawierać co najmniej jeden znak specjalny.");
+
+            return ValidationResult.Success;
+        }
     }
 }

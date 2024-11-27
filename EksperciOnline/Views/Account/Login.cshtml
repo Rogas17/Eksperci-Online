@@ -6,7 +6,15 @@
 <div class="container d-flex justify-content-center min-vh-100">
     <div class="bg-light p-4" style="max-width: 500px; width: 100%;">
         <h2 class="text-center pt-5 mb-5">Logowanie</h2>
-
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="text-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <span>@error.ErrorMessage</span>
+                }
+            </div>
+        }
         <form method="post">
             <div class="form-group mb-3">
                 <label for="username">Nazwa użytkownika</label>

@@ -84,9 +84,11 @@ namespace EksperciOnline.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string? searchQuery)
         {
-            var usługi = await serviceRepository.GetAllAsync();
+            ViewBag.SearchQuery = searchQuery;
+
+            var usługi = await serviceRepository.GetAllAsync(searchQuery);
 
             var usługiViewModel = new List<UsługaViewModel>();
 
@@ -300,7 +302,7 @@ namespace EksperciOnline.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(EditServiceRequest editServiceRequest)
         {
-            // talk to repository to delte this service
+            // talk to repository to delete this service
             var deletedService = await serviceRepository.DeleteAsync(editServiceRequest.Id);
 
             if (deletedService != null)

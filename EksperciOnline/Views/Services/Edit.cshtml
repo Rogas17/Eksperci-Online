@@ -16,14 +16,7 @@
         <div class="container my-4 baner" id="banerShow" style="background-image: url(@Model.UrlBaneru);">
                 <div class="row">
                     <div class="col-md-7">
-                        @if (Model.UrlZdjęcia != null)
-                        {
-                            <img src="@Model.UrlZdjęcia" class="zdjecie" id="zdjęcieShow">
-                        }
-                        else
-                        {
-                            <img src="" class="zdjęcie" id="zdjęcieShow">
-                        }
+                    <img src="@Model.UrlZdjęcia" class="zdjecie" id="zdjęcieShow">
                     </div>
                     <div class="col-md-4 bg-black bg-opacity-75 my-2 text-center">
                         <h3 class="my-2" id="priceRange">@Model.CenaOd - @Model.CenaDo PLN</h3>

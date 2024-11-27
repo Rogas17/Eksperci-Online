@@ -4,7 +4,7 @@ namespace EksperciOnline.Repositiories
 {
     public interface IServiceRepository
     {
-        Task<IEnumerable<Usługa>> GetAllAsync();
+        Task<IEnumerable<Usługa>> GetAllAsync(string? searchQuery = null);
 
         Task<Usługa?> GetAsync(Guid id);
 

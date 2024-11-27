@@ -34,9 +34,24 @@ namespace EksperciOnline.Repositiories
             return null;
         }
 
-        public async Task<IEnumerable<Usługa>> GetAllAsync()
+        public async Task<IEnumerable<Usługa>> GetAllAsync(string? searchQuery)
         {
-            return await eksperciOnlineDbContext.Usługi.Include(x => x.Kategoria).ToListAsync();
+            var query = eksperciOnlineDbContext.Usługi.AsQueryable();
+
+            // Filtering
+            if (string.IsNullOrWhiteSpace(searchQuery) == false)
+            {
+                query = query.Where(x => x.Tytuł.Contains(searchQuery));
+            }
+
+            // Sorting
+
+            // Pagination
+
+
+            return await query.Include(x=>x.Kategoria).ToListAsync();
+
+            // return await eksperciOnlineDbContext.Usługi.Include(x => x.Kategoria).ToListAsync();
         }
 
         public async Task<Usługa?> GetAsync(Guid id)

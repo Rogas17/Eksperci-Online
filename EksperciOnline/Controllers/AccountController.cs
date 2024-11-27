@@ -83,35 +83,53 @@ namespace EksperciOnline.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Sprawdź, czy nazwa użytkownika już istnieje
+                var existingUser = await userManager.FindByNameAsync(registerViewModel.Username);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("Username", "Nazwa użytkownika jest już zajęta.");
+                    return View(registerViewModel);
+                }
+
+                // Sprawdź, czy e-mail już istnieje
+                var existingEmail = await userManager.FindByEmailAsync(registerViewModel.Email);
+                if (existingEmail != null)
+                {
+                    ModelState.AddModelError("Email", "Ten adres e-mail jest już używany.");
+                    return View(registerViewModel);
+                }
+
+                // Tworzenie nowego użytkownika
                 var identityUser = new IdentityUser
                 {
                     UserName = registerViewModel.Username,
                     Email = registerViewModel.Email,
-                    PhoneNumber = registerViewModel.PhoneNumber
                 };
 
                 var identityResult = await userManager.CreateAsync(identityUser, registerViewModel.Password);
 
                 if (identityResult.Succeeded)
                 {
-                    // assign this user the "User" role
                     var roleIdentityResult = await userManager.AddToRoleAsync(identityUser, "User");
-
                     if (roleIdentityResult.Succeeded)
                     {
-                        //Show success notification
-                        return RedirectToAction("Register");
+                        return RedirectToAction("Login");
                     }
+                }
+
+                // Dodaj błędy z IdentityResult do ModelState
+                foreach (var error in identityResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            //Show error notification
-            return View();
+            return View(registerViewModel);
 
         }
 
         [HttpGet]
-        public IActionResult Login(string ReturnUrl)
+        public IActionResult Login(string ReturnUrl = "/")
         {
             var model = new LoginViewModel
             {
@@ -126,13 +144,23 @@ namespace EksperciOnline.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(loginViewModel);
             }
 
+            // Sprawdź, czy użytkownik istnieje
+            var user = await userManager.FindByNameAsync(loginViewModel.Username);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Niepoprawna nazwa użytkownika lub hasło.");
+                return View(loginViewModel);
+            }
+
+            // Próba zalogowania
             var signInResult = await signInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, false, false);
 
-            if (signInResult != null && signInResult.Succeeded)
+            if (signInResult.Succeeded)
             {
+                // Jeśli ReturnUrl jest ustawione, przekieruj użytkownika
                 if (!string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl))
                 {
                     return Redirect(loginViewModel.ReturnUrl);
@@ -141,9 +169,11 @@ namespace EksperciOnline.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            // Show errors
-            return View();
+            // Jeżeli hasło jest niepoprawne
+            ModelState.AddModelError(string.Empty, "Niepoprawna nazwa użytkownika lub hasło.");
+            return View(loginViewModel);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Logout()
@@ -157,5 +187,7 @@ namespace EksperciOnline.Controllers
         {
             return View();
         }
+
+
     }
 }

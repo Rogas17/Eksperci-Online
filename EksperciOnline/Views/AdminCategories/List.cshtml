@@ -1,5 +1,8 @@
 ﻿@model List<EksperciOnline.Models.Domain.Kategoria>
 @{
+    int nextPage = Convert.ToInt32(ViewBag.PageNumber) + 1;
+    int prevPage = Convert.ToInt32(ViewBag.PageNumber) - 1;
+
     ViewData["Title"] = "Kategorie";
 }
 
@@ -16,12 +19,31 @@
         <h1>Kategorie</h1>
     </div>
 </div>
-<div class="container mt-4">
-    <div class="container py-3">
-        <button class="btn btn-info">
-            <a class="nav-link" asp-area="" asp-controller="AdminCategories" asp-action="Add">Dodaj Kategorię</a>
-        </button>
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+                <form method="get" asp-controller="AdminCategories" asp-action="List">
+                    <div class="input-group">
+                        <input type="text" class="form-controll" name="searchQuery" value="@ViewBag.SearchQuery" />
+                        <button type="submit" class="btn btn-info">Szukaj</button>
+                    </div>
+                </form>
+
+                <div>
+                    <button class="btn btn-info">
+                        <a class="nav-link" asp-area="" asp-controller="AdminCategories" asp-action="Add">Dodaj Kategorię</a>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
+<div class="container mt-3">
     @if (Model != null && Model.Any())
     {
         <table class="table table-bordered">
@@ -29,7 +51,31 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Zdjęcie</th>
-                    <th scope="col">Nazwa kategorii</th>
+                    <th scope="col">
+                        Nazwa kategorii
+                        <span>
+                            <span>
+                                <a class="btn btn-info"
+                                   asp-controller="AdminCategories"
+                                   asp-action="List"
+                                   asp-route-sortBy="NazwaKategorii"
+                                   asp-route-sortDirection="Asc"
+                                   asp-route-searchQuery="@ViewBag.SearchQuery">
+                                    <i class="bi bi-arrow-up"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a class="btn btn-info"
+                                   asp-controller="AdminCategories"
+                                   asp-action="List"
+                                   asp-route-sortBy="NazwaKategorii"
+                                   asp-route-sortDirection="Desc"
+                                   asp-route-searchQuery="@ViewBag.SearchQuery">
+                                    <i class="bi bi-arrow-down"></i>
+                                </a>
+                            </span>
+                        </span>
+                    </th>
                     <th scope="col">Akcje</th>
                 </tr>
             </thead>
@@ -46,6 +92,51 @@
                 }
             </tbody>
         </table>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="AdminCategories"
+                       asp-action="List"
+                       asp-route-pageNumber="@prevPage"
+                       asp-route-pageSize="@ViewBag.PageSize"
+                       asp-route-sortBy="@ViewBag.SortBy"
+                       asp-route-sortDirection="@ViewBag.SortDirection">
+                        Poprzednia
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item">
+                        <a class="page-link"
+                           asp-controller="AdminCategories"
+                           asp-action="List"
+                           asp-route-pageNumber="@i"
+                           asp-route-pageSize="@ViewBag.PageSize"
+                           asp-route-sortBy="@ViewBag.SortBy"
+                           asp-route-sortDirection="@ViewBag.SortDirection">
+                            >
+                            @i
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="AdminCategories"
+                       asp-action="List"
+                       asp-route-pageNumber="@nextPage"
+                       asp-route-pageSize="@ViewBag.PageSize"
+                       asp-route-sortBy="@ViewBag.SortBy"
+                       asp-route-sortDirection="@ViewBag.SortDirection">
+                        >
+                        Następna
+                    </a>
+                </li>
+            </ul>
+        </nav>
     }
     else
     {
