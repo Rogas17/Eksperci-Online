@@ -1,115 +1,169 @@
 ﻿@model List<EksperciOnline.Models.ViewModels.UsługaViewModel>
 @{
+    int nextPage = Convert.ToInt32(ViewBag.PageNumber) + 1;
+    int prevPage = Convert.ToInt32(ViewBag.PageNumber) - 1;
+
     ViewData["Title"] = "Profil";
 }
 
-<div class="container my-3 py-2">
+<div class="container mt-3 pt-2">
     <div class="row">
-        <div class="container bg-light p-3 mb-3 rounded-3">
+        <div class="container col-md-9 bg-light p-3 mb-3 rounded-3">
             <div class="row">
-
-                <div class="col-md-4">
-                    <label>Imię i nazwisko</label>
-                    <h2 class="fw-bold lh-1 mb-3">Adam Adam</h2>
-                    <label>Numer Telefonu</label>
-                    <h4 class="fw-bold lh-1 mb-3">123456789</h4>
+                <div class="">
+                    <label>Nazwa Użytkownika</label>
+                    <h4 class="fw-bold lh-1 mb-3"></h4>
                 </div>
 
-                <div class="col-md-5">
-                    <label>Nazwa Użytkownika</label>
-                    <h4 class="fw-bold lh-1 mb-3">Adamowski</h4>
+                <div class="">
                     <label>E-mail</label>
                     <h4 class="fw-bold lh-1 mb-3">adamowski@ekspert.online</h4>
                 </div>
-
             </div>
-
-            <a class="btn btn-info" asp-area="" asp-controller="Profile" asp-action="Edit">Edytuj Konto</a>
-
+            <a class="btn btn-info" asp-area="" asp-controller="Account" asp-action="Show">Moje konto</a>
         </div>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
-        <div class="container bg-light pt-2 mb-3 rounded-3">
-            <h2 class="text-center fw-bold lh-1 mb-3">Moje Usługi</h2>
-        </div>
-        <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Add">Dodaj Usługę +</a>
-        @if (Model != null && Model.Any())
-        {
-            @foreach (var usługa in Model)
+        <div class="container col-md-9 p-3 mb-3 rounded-3">
+            <div class="row justify-content-center">
+                <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Add">Dodaj Usługę +</a>
+            </div>
+
+            @if (Model != null && Model.Any())
             {
-                <div class="container bg-light p-3 mb-3 rounded-3">
-                    <div class="row mb-3">
-                        <div class="col-md-2 text-center">
-                            <img src="@usługa.UrlZdjęcia" class="zdjecieLista">
+                <div class="container">
+                    <div class="row justify-content-center my-4">
+                        <div class="card bg-light py-3 text-center">
+                            <div class="container bg-light pt-2 mb-3 rounded-3">
+                                <h2 class="text-center fw-bold lh-1 mb-3">Moje Usługi</h2>
+                            </div>
+                            <form method="get" asp-controller="Account" asp-action="List">
+                                <div class="input-group">
+                                    <input class="form-control form-control-lg" type="text" placeholder="Szukaj" name="searchQuery" value="@ViewBag.SearchQuery">
+                                    <button class="btn btn-info btn-lg" type="submit">Szukaj <i class="bi bi-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
-                            <span class="text-warning">
-                                @for (int i = 1; i <= 5; i++)
+                @foreach (var usługa in Model)
+                {
+                    <div class="container bg-light p-3 mb-3 rounded-3">
+                        <div class="row mb-3">
+                            <div class="col-md-3 text-center">
+                                <img src="@usługa.UrlZdjęcia" class="zdjecieLista">
+
+                                <span class="text-warning">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= Math.Floor(usługa.AverageGrade)) // Pełne gwiazdki
+                                        {
+                                            <i class="bi bi-star-fill"></i>
+                                        }
+                                        else if (i == Math.Ceiling(usługa.AverageGrade) && usługa.AverageGrade % 1 != 0) // Pół gwiazdki
+                                        {
+                                            <i class="bi bi-star-half"></i>
+                                        }
+                                        else // Puste gwiazdki
+                                        {
+                                            <i class="bi bi-star"></i>
+                                        }
+                                    }
+                                </span><br />
+
+                                <span class="text-warning">
+                                    (@usługa.TotalComments oceny)
+                                </span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h4>@usługa.Tytuł</h4>
+                                <span class="badge bg-info">@usługa.Kategoria.NazwaKategorii</span>
+                                <p>@usługa.KrótkiOpis</p>
+                                <label>Usługodawca</label>
+                                <p>@usługa.Autor</p>
+                            </div>
+
+                            <div class="col-md-3 text-end">
+                                <label>Cena</label>
+                                <h4 class="fw-bold">@usługa.CenaOd - @usługa.CenaDo PLN</h4>
+                                @if (usługa.NrTelefonu != null)
                                 {
-                                    if (i <= Math.Floor(usługa.AverageGrade)) // Pełne gwiazdki
-                                    {
-                                        <i class="bi bi-star-fill"></i>
-                                    }
-                                    else if (i == Math.Ceiling(usługa.AverageGrade) && usługa.AverageGrade % 1 != 0) // Pół gwiazdki
-                                    {
-                                        <i class="bi bi-star-half"></i>
-                                    }
-                                    else // Puste gwiazdki
-                                    {
-                                        <i class="bi bi-star"></i>
-                                    }
+                                    <label>Numer Telefonu</label>
+                                    <h4>@usługa.NrTelefonu</h4>
                                 }
-                            </span><br />
-
-                            <span class="text-warning">
-                                (@usługa.TotalComments oceny)
-                            </span>
+                                <label>Data Publikacji</label>
+                                <p>@usługa.DataPulikacji.ToShortDateString()</p>
+                            </div>
                         </div>
 
-                        <div class="col-md-7">
-                            <h4>@usługa.Tytuł</h4>
-                            <span class="badge bg-info">@usługa.Kategoria.NazwaKategorii</span>
-                            <p>@usługa.KrótkiOpis</p>
-                            <label>Usługodawca</label>
-                            <p>@usługa.Autor</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@usługa.Id">Zobacz więcej <i class="bi bi-chevron-right"></i></a>
+                            </div>
+
+                            <div class="col-md-6 text-end">
+                                <a class="btn btn-info mt-3" asp-area="" asp-controller="Services" asp-action="Edit" asp-route-id="@usługa.Id">Edytuj</a>
+                            </div>
                         </div>
 
-                        <div class="col-md-3 text-end">
-                            <label>Cena</label>
-                            <h4 class="fw-bold">@usługa.CenaOd - @usługa.CenaDo PLN</h4>
-                            @if (usługa.NrTelefonu != null)
-                            {
-                                <label>Numer Telefonu</label>
-                                <h4>@usługa.NrTelefonu</h4>
-                            }
-                            <label>Data Publikacji</label>
-                            <p>@usługa.DataPulikacji.ToShortDateString()</p>
-                        </div>
                     </div>
+                }
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link"
+                               asp-controller="Account"
+                               asp-action="List"
+                               asp-route-pageNumber="@prevPage"
+                               asp-route-pageSize="@ViewBag.PageSize"
+                               asp-route-sortBy="@ViewBag.SortBy"
+                               asp-route-sortDirection="@ViewBag.SortDirection">
+                                Poprzednia
+                            </a>
+                        </li>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@usługa.Id">Zobacz więcej <i class="bi bi-chevron-right"></i></a>
-                        </div>
+                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                        {
+                            <li class="page-item">
+                                <a class="page-link"
+                                   asp-controller="Account"
+                                   asp-action="List"
+                                   asp-route-pageNumber="@i"
+                                   asp-route-pageSize="@ViewBag.PageSize"
+                                   asp-route-sortBy="@ViewBag.SortBy"
+                                   asp-route-sortDirection="@ViewBag.SortDirection">
+                                    @i
+                                </a>
+                            </li>
+                        }
 
-                        <div class="col-md-6 text-end">
-                            <a class="btn btn-info mt-3" asp-area="" asp-controller="Services" asp-action="Edit" asp-route-id="@usługa.Id">Edytuj</a>
-                        </div>
-                    </div>
-
+                        <li class="page-item">
+                            <a class="page-link"
+                               asp-controller="Account"
+                               asp-action="List"
+                               asp-route-pageNumber="@nextPage"
+                               asp-route-pageSize="@ViewBag.PageSize"
+                               asp-route-sortBy="@ViewBag.SortBy"
+                               asp-route-sortDirection="@ViewBag.SortDirection">
+                                Następna
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            }
+            else
+            {
+                <div class="container bg-light pt-2 mb-3 rounded-3">
+                    <h2 class="text-center fw-bold lh-1 mb-3">Nie oferujesz żadnych usług</h2>
                 </div>
             }
-        }
-        else
-        {
-            <div class="container bg-light pt-2 mb-3 rounded-3">
-                <h2 class="text-center fw-bold lh-1 mb-3">Nie oferujesz żadnych usług</h2>
-            </div>
-        }
 
-        
 
+        </div>
     </div>
 </div>

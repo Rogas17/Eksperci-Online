@@ -1,5 +1,8 @@
 ﻿@model List<EksperciOnline.Models.Domain.Usługa>
 @{
+    int nextPage = Convert.ToInt32(ViewBag.PageNumber) + 1;
+    int prevPage = Convert.ToInt32(ViewBag.PageNumber) - 1;
+
     ViewData["Title"] = "Usługi";
 }
 
@@ -29,10 +32,56 @@
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Tytuł</th>
+                    <th scope="col">Tytuł
+                        <span>
+                            <span>
+                                <a class="btn"
+                                   asp-controller="AdminServices"
+                                   asp-action="List"
+                                   asp-route-sortBy="Tytuł"
+                                   asp-route-sortDirection="Asc"
+                                   asp-route-searchQuery="@ViewBag.SearchQuery">
+                                    <i class="bi bi-sort-up"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a class="btn"
+                                   asp-controller="AdminServices"
+                                   asp-action="List"
+                                   asp-route-sortBy="Tytuł"
+                                   asp-route-sortDirection="Desc"
+                                   asp-route-searchQuery="@ViewBag.SearchQuery">
+                                    <i class="bi bi-sort-down"></i>
+                                </a>
+                            </span>
+                        </span>
+                    </th>
                     <th scope="col">Autor</th>
                     <th scope="col">Kategoria</th>
-                    <th scope="col">Data Publikacji</th>
+                    <th scope="col">Data Publikacji
+                        <span>
+                            <span>
+                                <a class="btn"
+                                   asp-controller="AdminServices"
+                                   asp-action="List"
+                                   asp-route-sortBy="DataPublikacji"
+                                   asp-route-sortDirection="Asc"
+                                   asp-route-searchQuery="@ViewBag.SearchQuery">
+                                    <i class="bi bi-sort-up"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a class="btn"
+                                   asp-controller="AdminServices"
+                                   asp-action="List"
+                                   asp-route-sortBy="DataPublikacji"
+                                   asp-route-sortDirection="Desc"
+                                   asp-route-searchQuery="@ViewBag.SearchQuery">
+                                    <i class="bi bi-sort-down"></i>
+                                </a>
+                            </span>
+                        </span>
+                    </th>
                     <th scope="col">Akcja</th>
                 </tr>
             </thead>
@@ -50,6 +99,49 @@
                 }
             </tbody>
         </table>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="AdminServices"
+                       asp-action="List"
+                       asp-route-pageNumber="@prevPage"
+                       asp-route-pageSize="@ViewBag.PageSize"
+                       asp-route-sortBy="@ViewBag.SortBy"
+                       asp-route-sortDirection="@ViewBag.SortDirection">
+                        Poprzednia
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item">
+                        <a class="page-link"
+                           asp-controller="AdminServices"
+                           asp-action="List"
+                           asp-route-pageNumber="@i"
+                           asp-route-pageSize="@ViewBag.PageSize"
+                           asp-route-sortBy="@ViewBag.SortBy"
+                           asp-route-sortDirection="@ViewBag.SortDirection">
+                            @i
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="AdminServices"
+                       asp-action="List"
+                       asp-route-pageNumber="@nextPage"
+                       asp-route-pageSize="@ViewBag.PageSize"
+                       asp-route-sortBy="@ViewBag.SortBy"
+                       asp-route-sortDirection="@ViewBag.SortDirection">
+                        Następna
+                    </a>
+                </li>
+            </ul>
+        </nav>
     }
     else
     {

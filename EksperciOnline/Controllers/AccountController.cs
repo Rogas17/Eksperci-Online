@@ -30,9 +30,27 @@ namespace EksperciOnline.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(string? searchQuery, string? sortBy, string? sortDirection, int pageSize = 2, int pageNumber = 1)
         {
-            var usługi = await serviceRepository.GetAllAsync();
+            var totalRecords = await serviceRepository.CountAsync();
+            var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
+
+            if (pageNumber > totalPages)
+            {
+                pageNumber--;
+            }
+
+            if (pageNumber < 1)
+            {
+                pageNumber++;
+            }
+
+            ViewBag.TotalPages = totalPages;
+            ViewBag.SearchQuery = searchQuery;
+            ViewBag.PageSize = pageSize;
+            ViewBag.PageNumber = pageNumber;
+
+            var usługi = await serviceRepository.GetAllAsync(searchQuery, sortBy, sortDirection, pageNumber, pageSize);
 
             var usługiViewModel = new List<UsługaViewModel>();
 
@@ -65,11 +83,63 @@ namespace EksperciOnline.Controllers
             return View(usługiViewModel);
         }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult Edit()
+        public async Task<IActionResult> Show()
         {
             return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Edit()
+        {
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var model = new EditAccountViewModel
+            {
+                Username = user.UserName,
+                Email = user.Email
+            };
+
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditAccountViewModel editAccountViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editAccountViewModel);
+            }
+
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // Aktualizacja danych użytkownika
+            user.UserName = editAccountViewModel.Username;
+            user.Email = editAccountViewModel.Email;
+
+            var result = await userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                TempData["SuccessMessage"] = "Profil został zaktualizowany.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Obsługa błędów
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(editAccountViewModel);
         }
 
         [HttpGet]

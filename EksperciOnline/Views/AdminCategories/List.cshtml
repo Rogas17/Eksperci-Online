@@ -55,23 +55,23 @@
                         Nazwa kategorii
                         <span>
                             <span>
-                                <a class="btn btn-info"
+                                <a class="btn"
                                    asp-controller="AdminCategories"
                                    asp-action="List"
                                    asp-route-sortBy="NazwaKategorii"
                                    asp-route-sortDirection="Asc"
                                    asp-route-searchQuery="@ViewBag.SearchQuery">
-                                    <i class="bi bi-arrow-up"></i>
+                                    <i class="bi bi-sort-up"></i>
                                 </a>
                             </span>
                             <span>
-                                <a class="btn btn-info"
+                                <a class="btn"
                                    asp-controller="AdminCategories"
                                    asp-action="List"
                                    asp-route-sortBy="NazwaKategorii"
                                    asp-route-sortDirection="Desc"
                                    asp-route-searchQuery="@ViewBag.SearchQuery">
-                                    <i class="bi bi-arrow-down"></i>
+                                    <i class="bi bi-sort-down"></i>
                                 </a>
                             </span>
                         </span>
@@ -117,7 +117,6 @@
                            asp-route-pageSize="@ViewBag.PageSize"
                            asp-route-sortBy="@ViewBag.SortBy"
                            asp-route-sortDirection="@ViewBag.SortDirection">
-                            >
                             @i
                         </a>
                     </li>
@@ -131,7 +130,6 @@
                        asp-route-pageSize="@ViewBag.PageSize"
                        asp-route-sortBy="@ViewBag.SortBy"
                        asp-route-sortDirection="@ViewBag.SortDirection">
-                        >
                         Następna
                     </a>
                 </li>

@@ -14,19 +14,19 @@
         </div>
 
         <div class="container my-4 baner" id="banerShow" style="background-image: url(@Model.UrlBaneru);">
-                <div class="row">
-                    <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-7">
                     <img src="@Model.UrlZdjęcia" class="zdjecie" id="zdjęcieShow">
-                    </div>
-                    <div class="col-md-4 bg-black bg-opacity-75 my-2 text-center">
-                        <h3 class="my-2" id="priceRange">@Model.CenaOd - @Model.CenaDo PLN</h3>
-                        <a class="btn btn-info mb-2">Napisz do mnie</a><br />
-                        <label class="mb-2">Lub zadzwoń do mnie</label>
-                        <h4 id="phone">@Model.NrTelefonu</h4>
-                        <label class="mb-2">Usługodawca</label>
-                        <h4 id="serviceProvider">@Model.Autor</h4>
-                    </div>
                 </div>
+                <div class="col-md-4 bg-black bg-opacity-75 my-2 text-center">
+                    <h3 class="my-2" id="priceRange">@Model.CenaOd - @Model.CenaDo PLN</h3>
+                    <a class="btn btn-info mb-2">Napisz do mnie</a><br />
+                    <label class="mb-2">Lub zadzwoń do mnie</label>
+                    <h4 id="phone">@Model.NrTelefonu</h4>
+                    <label class="mb-2">Usługodawca</label>
+                    <h4 id="serviceProvider">@Model.Autor</h4>
+                </div>
+            </div>
         </div>
 
         <!-- Avatar -->
@@ -109,13 +109,15 @@
             <label class="form-check-label">Czy post ma być widoczny?</label>
         </div>
 
-            <!-- Przycisk zatwierdzenia -->
-            <div class="d-flex justify-content-between my-2">
-                <button type="submit" class="btn btn-info">Edytuj</button>
-                <button type="submit" class="btn btn-danger ms-2" asp-area="" asp-controller="Services" asp-action="Delete">Usuń</button>
-                <input type="hidden" asp-for="DataPulikacji" />
-            </div>
-            
+        <!-- Przycisk zatwierdzenia -->
+        <div class="d-flex justify-content-between my-2">
+            <button type="submit" class="btn btn-info">Edytuj</button>
+            <button type="submit" class="btn btn-danger ms-2" asp-area="" asp-controller="Services" asp-action="Delete">Usuń</button>
+            <input type="hidden" asp-for="DataPulikacji" />
+            <input type="hidden" asp-for="Id" />
+
+        </div>
+
     </form>
 </div>
 

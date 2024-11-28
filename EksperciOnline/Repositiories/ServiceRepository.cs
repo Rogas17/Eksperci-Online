@@ -20,6 +20,11 @@ namespace EksperciOnline.Repositiories
             return usługa;
         }
 
+        public async Task<int> CountAsync()
+        {
+            return await eksperciOnlineDbContext.Usługi.CountAsync();
+        }
+
         public async Task<Usługa?> DeleteAsync(Guid id)
         {
             var existingService = await eksperciOnlineDbContext.Usługi.FindAsync(id);
@@ -34,7 +39,7 @@ namespace EksperciOnline.Repositiories
             return null;
         }
 
-        public async Task<IEnumerable<Usługa>> GetAllAsync(string? searchQuery)
+        public async Task<IEnumerable<Usługa>> GetAllAsync(string? searchQuery, string? sortBy, string? sortDirection, int pageNumber = 1, int pageSize = 100)
         {
             var query = eksperciOnlineDbContext.Usługi.AsQueryable();
 
@@ -45,8 +50,41 @@ namespace EksperciOnline.Repositiories
             }
 
             // Sorting
+            if (string.IsNullOrWhiteSpace(sortBy) == false)
+            {
+                var isDesc = string.Equals(sortDirection, "Desc", StringComparison.OrdinalIgnoreCase);
+
+                if (string.Equals(sortBy, "Tytuł", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = isDesc ? query.OrderByDescending(x => x.Tytuł) : query.OrderBy(x => x.Tytuł);
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(sortBy) == false)
+            {
+                var isDesc = string.Equals(sortDirection, "Desc", StringComparison.OrdinalIgnoreCase);
+
+                if (string.Equals(sortBy, "DataPublikacji", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = isDesc ? query.OrderByDescending(x => x.DataPulikacji) : query.OrderBy(x => x.DataPulikacji);
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(sortBy) == false)
+            {
+                var isDesc = string.Equals(sortDirection, "Desc", StringComparison.OrdinalIgnoreCase);
+
+                if (string.Equals(sortBy, "Cena", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = isDesc ? query.OrderByDescending(x => x.CenaOd) : query.OrderBy(x => x.CenaOd);
+                }
+            }
 
             // Pagination
+            // Skip 0 Take 5 -> Page 1 of 5 results
+            // Skip 5 Take next 5 -> Page 1 of 5 results
+            var skipResults = (pageNumber - 1) * pageSize;
+            query = query.Skip(skipResults).Take(pageSize);
 
 
             return await query.Include(x=>x.Kategoria).ToListAsync();
