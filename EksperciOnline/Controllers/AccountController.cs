@@ -50,42 +50,53 @@ namespace EksperciOnline.Controllers
             ViewBag.PageSize = pageSize;
             ViewBag.PageNumber = pageNumber;
 
+            var userId = userManager.GetUserId(User); // Pobranie ID zalogowanego użytkownika
+            if (string.IsNullOrEmpty(userId))
+            {
+                // Jeżeli użytkownik nie jest zalogowany, możesz przekierować go na stronę logowania lub wyświetlić komunikat
+                return RedirectToAction("Login", "Account");
+            }
+
             var usługi = await serviceRepository.GetAllAsync(searchQuery, sortBy, sortDirection, pageNumber, pageSize);
 
             var usługiViewModel = new List<UsługaViewModel>();
 
             foreach (var usługa in usługi)
             {
-                var comments = await serviceCommentRepository.GetCommentsByServiceIdAsync(usługa.Id);
-                double averageGrade = comments.Any() ? comments.Average(c => c.Grade) : 0;
-                int totalComments = comments.Count();
-
-                usługiViewModel.Add(new UsługaViewModel
+                // Sprawdzenie, czy ID autora zgadza się z ID zalogowanego użytkownika
+                if (usługa.AutorId.ToString() == userId)
                 {
-                    Id = usługa.Id,
-                    Tytuł = usługa.Tytuł,
-                    Lokalizacja = usługa.Lokalizacja,
-                    NrTelefonu = usługa.NrTelefonu,
-                    CenaOd = usługa.CenaOd,
-                    CenaDo = usługa.CenaDo,
-                    Opis = usługa.Opis,
-                    KrótkiOpis = usługa.KrótkiOpis,
-                    Widoczność = usługa.Widoczność,
-                    UrlZdjęcia = usługa.UrlZdjęcia,
-                    DataPulikacji = usługa.DataPulikacji,
-                    Autor = usługa.Autor,
-                    Kategoria = usługa.Kategoria,
-                    AverageGrade = averageGrade,
-                    TotalComments = totalComments
-                });
+                    var comments = await serviceCommentRepository.GetCommentsByServiceIdAsync(usługa.Id);
+                    double averageGrade = comments.Any() ? comments.Average(c => c.Grade) : 0;
+                    int totalComments = comments.Count();
+
+                    // Pobranie nazwy użytkownika autora na podstawie jego ID
+                    var autor = await userManager.FindByIdAsync(usługa.AutorId.ToString());
+                    var autorNazwaUżytkownika = autor?.UserName ?? "Anonim";
+
+                    usługiViewModel.Add(new UsługaViewModel
+                    {
+                        Id = usługa.Id,
+                        Tytuł = usługa.Tytuł,
+                        Lokalizacja = usługa.Lokalizacja,
+                        NrTelefonu = usługa.NrTelefonu,
+                        CenaOd = usługa.CenaOd,
+                        CenaDo = usługa.CenaDo,
+                        Opis = usługa.Opis,
+                        KrótkiOpis = usługa.KrótkiOpis,
+                        Widoczność = usługa.Widoczność,
+                        UrlZdjęcia = usługa.UrlZdjęcia,
+                        DataPulikacji = usługa.DataPulikacji,
+                        AutorId = Guid.Parse(userId),
+                        Autor = autorNazwaUżytkownika,
+                        Kategoria = usługa.Kategoria,
+                        AverageGrade = averageGrade,
+                        TotalComments = totalComments
+                    });
+                }
             }
 
             return View(usługiViewModel);
-        }
-
-        public async Task<IActionResult> Show()
-        {
-            return View();
         }
 
         [Authorize]
@@ -243,7 +254,6 @@ namespace EksperciOnline.Controllers
             ModelState.AddModelError(string.Empty, "Niepoprawna nazwa użytkownika lub hasło.");
             return View(loginViewModel);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Logout()

@@ -49,6 +49,7 @@ namespace EksperciOnline.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddServicesRequest addServicesRequest)
         {
+            var userId = userManager.GetUserId(User);
 
             //Map view model to domain model
             var usługa = new Usługa
@@ -64,7 +65,7 @@ namespace EksperciOnline.Controllers
                 UrlZdjęcia = addServicesRequest.UrlZdjęcia,
                 UrlBaneru = addServicesRequest.UrlBaneru,
                 DataPulikacji = DateTime.Now,
-                Autor = addServicesRequest.Autor,
+                AutorId = Guid.Parse(userId)
             };
 
             // Pobieranie i przypisanie wybranej kategorii
@@ -112,32 +113,40 @@ namespace EksperciOnline.Controllers
 
             foreach (var usługa in usługi)
             {
-                var comments = await serviceCommentRepository.GetCommentsByServiceIdAsync(usługa.Id);
-                double averageGrade = comments.Any() ? comments.Average(c => c.Grade) : 0;
-                int totalComments = comments.Count();
-
-                usługiViewModel.Add(new UsługaViewModel
+                if (usługa.Widoczność)
                 {
-                    Id = usługa.Id,
-                    Tytuł = usługa.Tytuł,
-                    Lokalizacja = usługa.Lokalizacja,
-                    NrTelefonu = usługa.NrTelefonu,
-                    CenaOd = usługa.CenaOd,
-                    CenaDo = usługa.CenaDo,
-                    Opis = usługa.Opis,
-                    KrótkiOpis = usługa.KrótkiOpis,
-                    Widoczność = usługa.Widoczność,
-                    UrlZdjęcia = usługa.UrlZdjęcia,
-                    DataPulikacji = usługa.DataPulikacji,
-                    Autor = usługa.Autor,
-                    Kategoria = usługa.Kategoria,
-                    AverageGrade = averageGrade,
-                    TotalComments = totalComments
-                });
+                    var comments = await serviceCommentRepository.GetCommentsByServiceIdAsync(usługa.Id);
+                    double averageGrade = comments.Any() ? comments.Average(c => c.Grade) : 0;
+                    int totalComments = comments.Count();
+
+                    // Pobierz nazwę użytkownika autora na podstawie jego ID
+                    var autor = await userManager.FindByIdAsync(usługa.AutorId.ToString());
+                    var autorNazwaUżytkownika = autor?.UserName ?? "Anonim";
+
+                    usługiViewModel.Add(new UsługaViewModel
+                    {
+                        Id = usługa.Id,
+                        Tytuł = usługa.Tytuł,
+                        Lokalizacja = usługa.Lokalizacja,
+                        NrTelefonu = usługa.NrTelefonu,
+                        CenaOd = usługa.CenaOd,
+                        CenaDo = usługa.CenaDo,
+                        Opis = usługa.Opis,
+                        KrótkiOpis = usługa.KrótkiOpis,
+                        Widoczność = usługa.Widoczność,
+                        UrlZdjęcia = usługa.UrlZdjęcia,
+                        DataPulikacji = usługa.DataPulikacji,
+                        Autor = autorNazwaUżytkownika,
+                        Kategoria = usługa.Kategoria,
+                        AverageGrade = averageGrade,
+                        TotalComments = totalComments
+                    });
+                }
             }
 
             return View(usługiViewModel);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Show(Guid id)
@@ -148,6 +157,9 @@ namespace EksperciOnline.Controllers
 
             if (usługa != null)
             {
+                // Pobierz nazwę użytkownika na podstawie ID autora
+                var autor = await userManager.FindByIdAsync(usługa.AutorId.ToString());
+                var autorNazwaUżytkownika = autor?.UserName ?? "Anonim";
 
                 // Get total comments
                 var totalComments = await serviceCommentRepository.GetTotalComments(usługa.Id);
@@ -171,7 +183,7 @@ namespace EksperciOnline.Controllers
                         Description = serviceComment.Description,
                         Grade = serviceComment.Grade,
                         DateAdded = serviceComment.DateAdded,
-                        Username = (await userManager.FindByIdAsync(serviceComment.UserId.ToString())).UserName
+                        Username = (await userManager.FindByIdAsync(serviceComment.UserId.ToString()))?.UserName ?? "Anonim"
                     });
                 }
 
@@ -189,7 +201,7 @@ namespace EksperciOnline.Controllers
                     UrlZdjęcia = usługa.UrlZdjęcia,
                     UrlBaneru = usługa.UrlBaneru,
                     DataPulikacji = usługa.DataPulikacji,
-                    Autor = usługa.Autor,
+                    Autor = autorNazwaUżytkownika,
                     Kategoria = usługa.Kategoria,
                     TotalComments = totalComments,
                     Comments = serviceCommentForView,
@@ -199,6 +211,7 @@ namespace EksperciOnline.Controllers
 
             return View(serviceDetailViewModel);
         }
+
 
         [Authorize]
         [HttpPost]
@@ -231,6 +244,8 @@ namespace EksperciOnline.Controllers
             var usługa = await serviceRepository.GetAsync(id);
             var categoryDomainModel = await categoryRepository.GetAllAsync();
 
+            var userId = userManager.GetUserId(User);
+
             if (usługa != null)
             {
                 // map domain model into view model
@@ -248,7 +263,7 @@ namespace EksperciOnline.Controllers
                     UrlZdjęcia = usługa.UrlZdjęcia,
                     UrlBaneru = usługa.UrlBaneru,
                     DataPulikacji = usługa.DataPulikacji,
-                    Autor = usługa.Autor,
+                    AutorId = Guid.Parse(userId),
                     Kategorie = categoryDomainModel.Select(x => new SelectListItem
                     {
                         Text = x.NazwaKategorii,
@@ -269,6 +284,7 @@ namespace EksperciOnline.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditServiceRequest editServiceRequest)
         {
+            var userId = userManager.GetUserId(User);
 
             // map view model back to domain model
             var serviceDomainModel = new Usługa
@@ -285,7 +301,7 @@ namespace EksperciOnline.Controllers
                 UrlZdjęcia = editServiceRequest.UrlZdjęcia,
                 UrlBaneru = editServiceRequest.UrlBaneru,
                 DataPulikacji = editServiceRequest.DataPulikacji,
-                Autor = editServiceRequest.Autor,
+                AutorId = Guid.Parse(userId)
             };
 
             // map category into domain model

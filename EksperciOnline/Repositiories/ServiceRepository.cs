@@ -128,7 +128,7 @@ namespace EksperciOnline.Repositiories
                 existingCategory.UrlZdjęcia = usługa.UrlZdjęcia;
                 existingCategory.UrlBaneru = usługa.UrlBaneru;
                 existingCategory.DataPulikacji = usługa.DataPulikacji;
-                existingCategory.Autor = usługa.Autor;
+                existingCategory.AutorId = usługa.AutorId;
                 existingCategory.Kategoria = usługa.Kategoria;
 
                 await eksperciOnlineDbContext.SaveChangesAsync();

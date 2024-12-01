@@ -14,7 +14,7 @@
         public string? UrlZdjęcia { get; set; }
         public string? UrlBaneru { get; set; }
         public DateTime DataPulikacji { get; set; }
-        public string Autor { get; set; }
+        public Guid AutorId { get; set; }
 
         // Navigation Property
         public Kategoria Kategoria { get; set; }

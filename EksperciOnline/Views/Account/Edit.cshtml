@@ -1,24 +1,38 @@
 ﻿@model EksperciOnline.Models.ViewModels.EditAccountViewModel
 @{
-    ViewData["Title"] = "Edytuj Profil";
+    ViewData["Title"] = "Edytuj Konto";
 }
 
-<div class="container d-flex justify-content-center min-vh-100">
-    <div class="bg-light p-4" style="max-width: 500px; width: 100%;">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="container col-md-9 mt-5 rounded-3">
+            <div class="btn-group col-md-12">
+                <a class="btn btn-info" asp-area="" asp-controller="Account" asp-action="List">Moje Usługi</a>
+                <a class="btn btn-info" asp-area="" asp-controller="Account" asp-action="Edit">Edytuj konto</a>
+                <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Add">Dodaj Usługę +</a>
+            </div>
 
-        <h2 class="text-center pt-5 mb-5">Edytuj Profil</h2>
-        <form method="post">
-            <div class="form-group">
-                <label>Nazwa Użytkownika</label>
-                <input asp-for="Username" class="form-control mb-3" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+            <div class="container bg-light justify-content-center py-3">
+                    <h2 class="text-center py-5">Edytuj Profil</h2>
+                    <form method="post">
+                        <div class="form-group">
+                            <label>Nazwa Użytkownika</label>
+                            <input asp-for="Username" class="form-control mb-3" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input asp-for="Email" class="form-control mb-3" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-info">Zapisz zmiany</button>
+                    </form>
             </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input asp-for="Email" class="form-control mb-3" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-info">Zapisz zmiany</button>
-        </form>
+            
+        </div>
     </div>
 </div>
+
+

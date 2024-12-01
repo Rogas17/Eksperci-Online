@@ -6,36 +6,19 @@
     ViewData["Title"] = "Profil";
 }
 
-<div class="container mt-3 pt-2">
-    <div class="row">
-        <div class="container col-md-9 bg-light p-3 mb-3 rounded-3">
-            <div class="row">
-                <div class="">
-                    <label>Nazwa Użytkownika</label>
-                    <h4 class="fw-bold lh-1 mb-3"></h4>
-                </div>
-
-                <div class="">
-                    <label>E-mail</label>
-                    <h4 class="fw-bold lh-1 mb-3">adamowski@ekspert.online</h4>
-                </div>
-            </div>
-            <a class="btn btn-info" asp-area="" asp-controller="Account" asp-action="Show">Moje konto</a>
-        </div>
-    </div>
-</div>
-
 <div class="container">
-    <div class="row">
-        <div class="container col-md-9 p-3 mb-3 rounded-3">
-            <div class="row justify-content-center">
+    <div class="row justify-content-center">
+        <div class="container col-md-9 mt-5 rounded-3">
+            <div class="btn-group col-md-12">
+                <a class="btn btn-info" asp-area="" asp-controller="Account" asp-action="List">Moje Usługi</a>
+                <a class="btn btn-info" asp-area="" asp-controller="Account" asp-action="Edit">Edytuj konto</a>
                 <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Add">Dodaj Usługę +</a>
             </div>
 
             @if (Model != null && Model.Any())
             {
                 <div class="container">
-                    <div class="row justify-content-center my-4">
+                    <div class="row justify-content-center mb-4">
                         <div class="card bg-light py-3 text-center">
                             <div class="container bg-light pt-2 mb-3 rounded-3">
                                 <h2 class="text-center fw-bold lh-1 mb-3">Moje Usługi</h2>

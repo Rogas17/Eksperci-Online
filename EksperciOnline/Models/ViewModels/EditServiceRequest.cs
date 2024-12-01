@@ -16,7 +16,7 @@ namespace EksperciOnline.Models.ViewModels
         public string? UrlZdjęcia { get; set; }
         public string? UrlBaneru { get; set; }
         public DateTime DataPulikacji { get; set; }
-        public string Autor { get; set; }
+        public Guid AutorId { get; set; }
 
         public IEnumerable<SelectListItem> Kategorie { get; set; }
         public string WybranaKategoria { get; set; }

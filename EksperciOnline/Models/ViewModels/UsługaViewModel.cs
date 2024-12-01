@@ -1,5 +1,4 @@
 ﻿using EksperciOnline.Models.Domain;
-using 
 
 namespace EksperciOnline.Models.ViewModels
 {
@@ -16,7 +15,8 @@ namespace EksperciOnline.Models.ViewModels
         public bool Widoczność { get; set; }
         public string? UrlZdjęcia { get; set; }
         public DateTime DataPulikacji { get; set; }
-        public string Autor { get; set; }
+        public Guid AutorId { get; set; }
+        public string Autor {  get; set; }
         public Kategoria Kategoria { get; set; }
         public double AverageGrade { get; set; }
         public int TotalComments { get; set; }
