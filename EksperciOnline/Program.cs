@@ -33,6 +33,7 @@ builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IImageRepository, CloudinaryImageRepository>();
 builder.Services.AddScoped<IServiceCommentRepository, ServiceCommentRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IFavoriteServiceRepository, FavoriteServiceRepository>();
 
 var app = builder.Build();
 

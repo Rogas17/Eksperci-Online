@@ -22,7 +22,7 @@
                     <div class="row justify-content-center mb-4">
                         <div class="card bg-light py-3 text-center">
                             <div class="container bg-light pt-2 mb-3 rounded-3">
-                                <h2 class="text-center fw-bold lh-1 mb-3">Moje Usługi</h2>
+                                <h2 class="text-center fw-bold lh-1 mb-3">Moje ulubione usługi</h2>
                             </div>
                             <form method="get" asp-controller="Account" asp-action="List">
                                 <div class="input-group">
@@ -91,7 +91,10 @@
                             </div>
 
                             <div class="col-md-6 text-end">
-                                <a class="btn btn-info mt-3" asp-area="" asp-controller="Services" asp-action="Edit" asp-route-id="@usługa.Id">Edytuj</a>
+                                <form asp-action="Remove" asp-controller="Favorite" method="post" style="display:inline;">
+                                    <input type="hidden" name="serviceId" value="@usługa.Id" />
+                                    <a class="btn btn-info" type="submit">Usuń z ulubionych</a>
+                                </form>
                             </div>
                         </div>
 
@@ -101,8 +104,8 @@
                     <ul class="pagination">
                         <li class="page-item">
                             <a class="page-link"
-                               asp-controller="Account"
-                               asp-action="List"
+                               asp-controller="Favorite"
+                               asp-action="MyFavorites"
                                asp-route-pageNumber="@prevPage"
                                asp-route-pageSize="@ViewBag.PageSize"
                                asp-route-sortBy="@ViewBag.SortBy"
@@ -115,8 +118,8 @@
                         {
                             <li class="page-item">
                                 <a class="page-link"
-                                   asp-controller="Account"
-                                   asp-action="List"
+                                   asp-controller="Favorite"
+                                   asp-action="MyFavorites"
                                    asp-route-pageNumber="@i"
                                    asp-route-pageSize="@ViewBag.PageSize"
                                    asp-route-sortBy="@ViewBag.SortBy"
@@ -128,8 +131,8 @@
 
                         <li class="page-item">
                             <a class="page-link"
-                               asp-controller="Account"
-                               asp-action="List"
+                               asp-controller="Favorite"
+                               asp-action="MyFavorites"
                                asp-route-pageNumber="@nextPage"
                                asp-route-pageSize="@ViewBag.PageSize"
                                asp-route-sortBy="@ViewBag.SortBy"
@@ -143,11 +146,10 @@
             else
             {
                 <div class="container bg-light pt-2 mb-3 rounded-3">
-                    <h2 class="text-center fw-bold lh-1 mb-3">Nie oferujesz żadnych usług</h2>
+                    <h2 class="text-center fw-bold lh-1 mb-3">Nie masz żadnych ulubionych usług</h2>
                 </div>
             }
 
 
         </div>
     </div>
-</div>
