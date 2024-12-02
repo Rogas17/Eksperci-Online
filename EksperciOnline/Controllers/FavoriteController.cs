@@ -13,15 +13,18 @@ namespace EksperciOnline.Controllers
         private readonly IFavoriteServiceRepository favoriteServiceRepository;
         private readonly IServiceRepository serviceRepository;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly IServiceCommentRepository serviceCommentRepository;
 
         public FavoriteController(
             IFavoriteServiceRepository favoriteServiceRepository,
             IServiceRepository serviceRepository,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            IServiceCommentRepository serviceCommentRepository)
         {
             this.favoriteServiceRepository = favoriteServiceRepository;
             this.serviceRepository = serviceRepository;
             this.userManager = userManager;
+            this.serviceCommentRepository = serviceCommentRepository;
         }
 
         [HttpPost]
@@ -66,24 +69,30 @@ namespace EksperciOnline.Controllers
 
             foreach (var favorite in favorites)
             {
-                var service = await serviceRepository.GetAsync(favorite.ServiceId);
+                var usługa = await serviceRepository.GetAsync(favorite.ServiceId);
 
-                if (service != null)
+                if (usługa != null)
                 {
+                    var comments = await serviceCommentRepository.GetCommentsByServiceIdAsync(usługa.Id);
+                    double averageGrade = comments.Any() ? comments.Average(c => c.Grade) : 0;
+                    int totalComments = comments.Count();
+
                     favoriteServices.Add(new UsługaViewModel
                     {
-                        Id = service.Id,
-                        Tytuł = service.Tytuł,
-                        Lokalizacja = service.Lokalizacja,
-                        NrTelefonu = service.NrTelefonu,
-                        CenaOd = service.CenaOd,
-                        CenaDo = service.CenaDo,
-                        Opis = service.Opis,
-                        KrótkiOpis = service.KrótkiOpis,
-                        Widoczność = service.Widoczność,
-                        UrlZdjęcia = service.UrlZdjęcia,
-                        DataPulikacji = service.DataPulikacji,
-                        Kategoria = service.Kategoria
+                        Id = usługa.Id,
+                        Tytuł = usługa.Tytuł,
+                        Lokalizacja = usługa.Lokalizacja,
+                        NrTelefonu = usługa.NrTelefonu,
+                        CenaOd = usługa.CenaOd,
+                        CenaDo = usługa.CenaDo,
+                        Opis = usługa.Opis,
+                        KrótkiOpis = usługa.KrótkiOpis,
+                        Widoczność = usługa.Widoczność,
+                        UrlZdjęcia = usługa.UrlZdjęcia,
+                        DataPulikacji = usługa.DataPulikacji,
+                        Kategoria = usługa.Kategoria,
+                        AverageGrade = averageGrade,
+                        TotalComments = totalComments
                     });
                 }
             }
