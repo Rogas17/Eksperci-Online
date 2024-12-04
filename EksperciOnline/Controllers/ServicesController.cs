@@ -17,18 +17,21 @@ namespace EksperciOnline.Controllers
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly UserManager<IdentityUser> userManager;
         private readonly IServiceCommentRepository serviceCommentRepository;
+        private readonly IZgłoszenieRepository zgłoszenieRepository;
 
         public ServicesController(ICategoryRepository categoryRepository,
             IServiceRepository serviceRepository,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            IServiceCommentRepository serviceCommentRepository)
+            IServiceCommentRepository serviceCommentRepository,
+            IZgłoszenieRepository zgłoszenieRepository)
         {
             this.categoryRepository = categoryRepository;
             this.serviceRepository = serviceRepository;
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.serviceCommentRepository = serviceCommentRepository;
+            this.zgłoszenieRepository = zgłoszenieRepository;
         }
 
         [Authorize]
@@ -61,7 +64,7 @@ namespace EksperciOnline.Controllers
                 CenaDo = addServicesRequest.CenaDo,
                 Opis = addServicesRequest.Opis,
                 KrótkiOpis = addServicesRequest.KrótkiOpis,
-                Widoczność = addServicesRequest.Widoczność,
+                Widoczność = true,
                 UrlZdjęcia = addServicesRequest.UrlZdjęcia,
                 UrlBaneru = addServicesRequest.UrlBaneru,
                 DataPulikacji = DateTime.Now,
@@ -85,7 +88,7 @@ namespace EksperciOnline.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> List(string? searchQuery, string? sortBy, string? sortDirection, int pageSize = 2, int pageNumber = 1)
+        public async Task<IActionResult> List(string? searchQuery, string? sortBy, string? sortDirection, int pageSize = 15, int pageNumber = 1)
         {
             var totalRecords = await serviceRepository.CountAsync();
             var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
@@ -297,7 +300,7 @@ namespace EksperciOnline.Controllers
                 CenaDo = editServiceRequest.CenaDo,
                 Opis = editServiceRequest.Opis,
                 KrótkiOpis = editServiceRequest.KrótkiOpis,
-                Widoczność = editServiceRequest.Widoczność,
+                Widoczność = true,
                 UrlZdjęcia = editServiceRequest.UrlZdjęcia,
                 UrlBaneru = editServiceRequest.UrlBaneru,
                 DataPulikacji = editServiceRequest.DataPulikacji,
@@ -349,5 +352,41 @@ namespace EksperciOnline.Controllers
 
             // display the response
         }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Report(Guid id)
+        {
+            var model = new ZgłoszenieViewModel
+            {
+                UsługaId = id
+            };
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Report(ZgłoszenieViewModel zgłoszenieViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var zgłoszenie = new Zgłoszenie
+                {
+                    Id = Guid.NewGuid(),
+                    UsługaId = zgłoszenieViewModel.UsługaId,
+                    Powód = zgłoszenieViewModel.Powód,
+                    Opis = zgłoszenieViewModel.Opis,
+                    DataZgłoszenia = DateTime.Now,
+                    CzyRozpatrzone = false,
+                    CzyZablokowane = false
+                };
+
+                await zgłoszenieRepository.AddAsync(zgłoszenie);
+                return RedirectToAction("List", "Services");
+            }
+
+            return View(zgłoszenieViewModel);
+        }
+
     }
 }

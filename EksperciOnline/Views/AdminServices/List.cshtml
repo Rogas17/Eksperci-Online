@@ -82,7 +82,7 @@
                             </span>
                         </span>
                     </th>
-                    <th scope="col">Akcja</th>
+                    <th scope="col">Akcje</th>
                 </tr>
             </thead>
             <tbody>
@@ -94,7 +94,7 @@
                         <td>@usługa.AutorId</td>
                         <td>@usługa.Kategoria.NazwaKategorii</td>
                         <td>@usługa.DataPulikacji</td>
-                        <td><a asp-area="" asp-controller="Services" asp-action="Edit" asp-route-id="@usługa.Id">Edytuj</a></td>
+                        <td><a asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@usługa.Id">Pokaż</a></td>
                     </tr>
                 }
             </tbody>

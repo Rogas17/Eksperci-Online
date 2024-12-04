@@ -106,10 +106,11 @@
                             <textarea class="form-control" id="komentarz" rows="3" asp-for="CommentDescription"></textarea>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-3">
                             <button type="submit" class="btn btn-info">Dodaj komentarz</button>
                             <input type="hidden" asp-for="Id" />
                             <input type="hidden" id="ocena" name="Grade" asp-for="Grade" />
+                            <a class="btn btn-danger" asp-area="" asp-controller="Services" asp-action="Report" asp-route-id="@Model.Id">Zgłoś usługę!</a>
                         </div>
                     </form>
                 }

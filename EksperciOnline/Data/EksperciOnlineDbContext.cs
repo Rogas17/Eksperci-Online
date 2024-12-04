@@ -16,5 +16,8 @@ namespace EksperciOnline.Data
         public DbSet<ServiceComment> ServiceComment { get; set; }
 
         public DbSet<FavoriteService> FavoriteServices { get; set; }
+
+        public DbSet<Zgłoszenie> Zgłoszenia { get; set; }
+
     }
 }

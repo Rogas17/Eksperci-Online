@@ -40,28 +40,39 @@
                         <div class="row mb-3">
                             <div class="col-md-3 text-center">
                                 <img src="@usługa.UrlZdjęcia" class="zdjecieLista">
+                                @if (!usługa.Widoczność)
+                                {
+                                    <div class="alert alert-danger">
+                                        Usługa została zablokowana.
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-warning">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= Math.Floor(usługa.AverageGrade)) // Pełne gwiazdki
+                                            {
+                                                <i class="bi bi-star-fill"></i>
+                                            }
+                                            else if (i == Math.Ceiling(usługa.AverageGrade) && usługa.AverageGrade % 1 != 0) // Pół gwiazdki
+                                            {
+                                                <i class="bi bi-star-half"></i>
+                                            }
+                                            else // Puste gwiazdki
+                                            {
+                                                <i class="bi bi-star"></i>
+                                            }
+                                        }
+                                    </span>
 
-                                <span class="text-warning">
-                                    @for (int i = 1; i <= 5; i++)
-                                    {
-                                        if (i <= Math.Floor(usługa.AverageGrade)) // Pełne gwiazdki
-                                        {
-                                            <i class="bi bi-star-fill"></i>
-                                        }
-                                        else if (i == Math.Ceiling(usługa.AverageGrade) && usługa.AverageGrade % 1 != 0) // Pół gwiazdki
-                                        {
-                                            <i class="bi bi-star-half"></i>
-                                        }
-                                        else // Puste gwiazdki
-                                        {
-                                            <i class="bi bi-star"></i>
-                                        }
-                                    }
-                                </span><br />
+                                    <br />
 
-                                <span class="text-warning">
-                                    (@usługa.TotalComments oceny)
-                                </span>
+                                    <span class="text-warning">
+                                        (@usługa.TotalComments oceny)
+                                    </span>
+                                }
+                                
                             </div>
 
                             <div class="col-md-6">

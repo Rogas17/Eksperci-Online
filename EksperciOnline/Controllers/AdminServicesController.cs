@@ -8,14 +8,16 @@ namespace EksperciOnline.Controllers
     public class AdminServicesController : Controller
     {
         private readonly IServiceRepository serviceRepository;
+        private readonly IZgłoszenieRepository zgłoszenieRepository;
 
-        public AdminServicesController(IServiceRepository serviceRepository)
+        public AdminServicesController(IServiceRepository serviceRepository, IZgłoszenieRepository zgłoszenieRepository)
         {
             this.serviceRepository = serviceRepository;
+            this.zgłoszenieRepository = zgłoszenieRepository;
         }
 
 
-        public async Task<IActionResult> List(string? searchQuery, string? sortBy, string? sortDirection, int pageSize = 2, int pageNumber = 1)
+        public async Task<IActionResult> List(string? searchQuery, string? sortBy, string? sortDirection, int pageSize = 15, int pageNumber = 1)
         {
             var totalRecords = await serviceRepository.CountAsync();
             var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
@@ -42,5 +44,35 @@ namespace EksperciOnline.Controllers
 
             return View(blogPosts);
         }
+
+        public async Task<IActionResult> Reports()
+        {
+            var zgłoszenia = await zgłoszenieRepository.GetAllAsync();
+            return View(zgłoszenia);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BlockService(Guid id)
+        {
+            var zgłoszenie = await zgłoszenieRepository.GetAsync(id);
+            if (zgłoszenie != null)
+            {
+                zgłoszenie.CzyRozpatrzone = true;
+                zgłoszenie.CzyZablokowane = true;
+
+                // Zablokowanie usługi
+                var usługa = await serviceRepository.GetAsync(zgłoszenie.UsługaId);
+                if (usługa != null)
+                {
+                    usługa.Widoczność = false;
+                    await serviceRepository.UpdateAsync(usługa);
+                }
+
+                await zgłoszenieRepository.UpdateAsync(zgłoszenie);
+            }
+
+            return RedirectToAction("Reports");
+        }
+
     }
 }

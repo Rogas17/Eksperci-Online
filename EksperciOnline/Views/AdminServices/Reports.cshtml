@@ -1,0 +1,44 @@
+﻿@model List<EksperciOnline.Models.Domain.Zgłoszenie>
+@{
+    ViewData["Title"] = "Zgłoszenia";
+}
+
+<div class="bg-light py-2">
+    <div class="container">
+        <h1>Zgłoszenia</h1>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Usługa</th>
+            <th>Powód</th>
+            <th>Opis</th>
+            <th>Data zgłoszenia</th>
+            <th>Zobacz Usługę</th>
+            <th>Zablokuj Usługę</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var zgłoszenie in Model)
+        {
+            <tr>
+                <td>@zgłoszenie.UsługaId</td>
+                <td>@zgłoszenie.Powód</td>
+                <td>@zgłoszenie.Opis</td>
+                <td>@zgłoszenie.DataZgłoszenia</td>
+                <td>
+                    <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@zgłoszenie.UsługaId">Zobacz</a>
+                </td>
+
+                <td>
+                    <form asp-action="BlockService" asp-controller="AdminServices" method="post">
+                        <input type="hidden" name="id" value="@zgłoszenie.Id" />
+                        <button type="submit" class="btn btn-danger">Zablokuj</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

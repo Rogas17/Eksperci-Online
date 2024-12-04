@@ -1062,3 +1062,6 @@ C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\obj\Debug\net7.0\EksperciO
 C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\obj\Debug\net7.0\EksperciOnline.genruntimeconfig.cache
 C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\obj\Debug\net7.0\ref\EksperciOnline.dll
 C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\bin\Debug\net7.0\dotenv.net.dll
+C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\bin\Debug\net7.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\bin\Debug\net7.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\Admin\Desktop\Eksperci-Online\EksperciOnline\bin\Debug\net7.0\Microsoft.Extensions.Features.dll
