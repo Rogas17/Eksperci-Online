@@ -30,7 +30,7 @@ namespace EksperciOnline.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> List(string? searchQuery, string? sortBy, string? sortDirection, int pageSize = 15, int pageNumber = 1)
+        public async Task<IActionResult> List(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, int pageSize = 15, int pageNumber = 1)
         {
             var totalRecords = await serviceRepository.CountAsync();
             var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
@@ -57,7 +57,7 @@ namespace EksperciOnline.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            var usługi = await serviceRepository.GetAllAsync(searchQuery, sortBy, sortDirection, pageNumber, pageSize);
+            var usługi = await serviceRepository.GetAllAsync(searchQuery, searchLocalQuery, sortBy, sortDirection, pageNumber, pageSize);
 
             var usługiViewModel = new List<UsługaViewModel>();
 

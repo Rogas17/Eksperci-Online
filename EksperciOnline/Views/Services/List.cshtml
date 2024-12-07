@@ -13,7 +13,7 @@
             <form method="get" asp-controller="Services" asp-action="List">
                 <div class="input-group">
                     <input class="form-control form-control-lg" type="text" placeholder="Szukaj" name="searchQuery" value="@ViewBag.SearchQuery">
-                    <input class="form-control form-control-lg" type="text" placeholder="Lokalizacja" name="location" style="max-width: 200px;">
+                    <input class="form-control form-control-lg" type="text" placeholder="Lokalizacja" name="searchLocalQuery" style="max-width: 200px;" value="@ViewBag.SearchLocalQuery">
                     <button class="btn btn-info btn-lg" type="submit">Szukaj <i class="bi bi-search"></i></button>
                 </div>
             </form>
@@ -50,17 +50,11 @@
                     </div>
 
                     <div class="form-group mb-2">
-                        <label>Wybierz przedział cenowy</label>
-                        <div class="form-group">
-                            <label>Cena od:</label>
-                            <input type="range" class="form-control-range" id="price-from" name="priceFrom" min="0" max="2000" step="10">
-                            <input type="number" id="price-from-display" class="form-control" readonly>
-                        </div>
+                        <label>Wybierz cenę</label>
 
                         <div class="form-group">
-                            <label>Cena do:</label>
-                            <input type="range" class="form-control-range" id="price-to" name="priceTo" min="0" max="2000" step="10">
-                            <input type="number" id="price-to-display" class="form-control" readonly>
+                            <label>Cena:</label>
+                            <input type="number" id="price-from-display" class="form-control" readonly>
                         </div>
                     </div>
 

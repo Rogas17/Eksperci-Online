@@ -23,7 +23,7 @@
             <form method="get" asp-controller="Services" asp-action="List">
                 <div class="input-group">
                     <input class="form-control form-control-lg" type="text" placeholder="Szukaj" name="searchQuery" value="@ViewBag.SearchQuery">
-                    <input class="form-control form-control-lg" type="text" placeholder="Lokalizacja" style="max-width: 200px;">
+                    <input class="form-control form-control-lg" type="text" placeholder="Lokalizacja" name="searchLocalQuery" style="max-width: 200px;" value="@ViewBag.SearchLocalQuery">
                     <button class="btn btn-info btn-lg" type="submit">Szukaj <i class="bi bi-search"></i></button>
                 </div>
             </form>

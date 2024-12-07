@@ -6,6 +6,7 @@ namespace EksperciOnline.Repositiories
     {
         Task<IEnumerable<Usługa>> GetAllAsync(
             string? searchQuery = null,
+            string? searchLocalQuery = null,
             string? sortBy = null,
             string? sortDirection = null,
             int pageNumber = 1,

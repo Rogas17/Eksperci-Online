@@ -39,7 +39,7 @@ namespace EksperciOnline.Repositiories
             return null;
         }
 
-        public async Task<IEnumerable<Usługa>> GetAllAsync(string? searchQuery, string? sortBy, string? sortDirection, int pageNumber = 1, int pageSize = 100)
+        public async Task<IEnumerable<Usługa>> GetAllAsync(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, int pageNumber = 1, int pageSize = 100)
         {
             var query = eksperciOnlineDbContext.Usługi.AsQueryable();
 
@@ -47,6 +47,11 @@ namespace EksperciOnline.Repositiories
             if (string.IsNullOrWhiteSpace(searchQuery) == false)
             {
                 query = query.Where(x => x.Tytuł.Contains(searchQuery));
+            }
+
+            if (string.IsNullOrWhiteSpace(searchLocalQuery) == false)
+            {
+                query = query.Where(x => x.Lokalizacja.Contains(searchLocalQuery));
             }
 
             // Sorting

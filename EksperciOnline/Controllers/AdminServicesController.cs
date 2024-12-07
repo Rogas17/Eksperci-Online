@@ -16,8 +16,7 @@ namespace EksperciOnline.Controllers
             this.zgłoszenieRepository = zgłoszenieRepository;
         }
 
-
-        public async Task<IActionResult> List(string? searchQuery, string? sortBy, string? sortDirection, int pageSize = 15, int pageNumber = 1)
+        public async Task<IActionResult> List(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, int pageSize = 15, int pageNumber = 1)
         {
             var totalRecords = await serviceRepository.CountAsync();
             var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
@@ -40,7 +39,7 @@ namespace EksperciOnline.Controllers
             ViewBag.PageNumber = pageNumber;
 
             // Call the repository
-            var blogPosts = await serviceRepository.GetAllAsync(searchQuery, sortBy, sortDirection, pageNumber, pageSize);
+            var blogPosts = await serviceRepository.GetAllAsync(searchQuery, searchLocalQuery, sortBy, sortDirection, pageNumber, pageSize);
 
             return View(blogPosts);
         }
