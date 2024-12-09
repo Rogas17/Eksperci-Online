@@ -19,5 +19,9 @@ namespace EksperciOnline.Data
 
         public DbSet<Zgłoszenie> Zgłoszenia { get; set; }
 
+        public DbSet<Chat> Chats { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
+
     }
 }

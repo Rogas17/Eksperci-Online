@@ -3,6 +3,7 @@ using System;
 using EksperciOnline.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EksperciOnline.Migrations
 {
     [DbContext(typeof(EksperciOnlineDbContext))]
-    partial class EksperciOnlineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241209111428_AddChatAndMessages")]
+    partial class AddChatAndMessages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.20");
@@ -86,10 +89,6 @@ namespace EksperciOnline.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SenderId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SenderName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

@@ -63,7 +63,7 @@
                         <div class="col-md-4 bg-black bg-opacity-75 my-2 text-center">
                             <h3 class="my-2">@Model.CenaOd - @Model.CenaDo PLN</h3>
 
-                            <a class="btn btn-info mb-2" asp-area="" asp-controller="Messege" asp-action="List">Napisz do mnie</a><br />
+                            <a class="btn btn-info mb-2" asp-controller="Messege" asp-action="StartChat" asp-route-serviceProviderId="@Model.AutorId">Napisz <i class="bi bi-chat"></i></a>
 
                             @if (Model.NrTelefonu != null)
                             {

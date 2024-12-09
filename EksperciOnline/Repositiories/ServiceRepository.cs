@@ -39,7 +39,14 @@ namespace EksperciOnline.Repositiories
             return null;
         }
 
-        public async Task<IEnumerable<Usługa>> GetAllAsync(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, Guid? kategoriaId, int pageNumber = 1, int pageSize = 100)
+        public async Task<IEnumerable<Usługa>> GetAllAsync(
+            string? searchQuery,
+            string? searchLocalQuery,
+            string? sortBy,
+            string? sortDirection,
+            Guid? kategoriaId,
+            int pageNumber = 1,
+            int pageSize = 100)
         {
             var query = eksperciOnlineDbContext.Usługi.AsQueryable();
 

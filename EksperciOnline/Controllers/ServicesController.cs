@@ -145,6 +145,7 @@ namespace EksperciOnline.Controllers
                         Widoczność = usługa.Widoczność,
                         UrlZdjęcia = usługa.UrlZdjęcia,
                         DataPulikacji = usługa.DataPulikacji,
+                        AutorId = usługa.AutorId,
                         Autor = autorNazwaUżytkownika,
                         Kategoria = usługa.Kategoria,
                         AverageGrade = averageGrade,

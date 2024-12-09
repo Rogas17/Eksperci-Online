@@ -1,20 +1,51 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using EksperciOnline.Data;
+using EksperciOnline.Models.Domain;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 
 public class ChatHub : Hub
 {
-    public async Task SendMessage(string roomId, string user, string message)
+    private readonly EksperciOnlineDbContext eksperciOnlineDbContext;
+    private readonly SignInManager<IdentityUser> signInManager;
+    private readonly UserManager<IdentityUser> userManager;
+
+    public ChatHub(EksperciOnlineDbContext eksperciOnlineDbContext, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
     {
-        // Wysyłanie wiadomości do pokoju
-        await Clients.Group(roomId).SendAsync("ReceiveMessage", user, message);
+        this.eksperciOnlineDbContext = eksperciOnlineDbContext;
+        this.signInManager = signInManager;
+        this.userManager = userManager;
     }
 
-    public async Task JoinRoom(string roomId)
+    public async Task SendMessage(string chatId, string content)
     {
-        await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
+        var userId = Context.UserIdentifier; // Uzyskanie identyfikatora użytkownika z kontekstu
+        var sender = await userManager.FindByIdAsync(userId);
+
+        var message = new Message
+        {
+            Id = Guid.NewGuid(),
+            ChatId = Guid.Parse(chatId),
+            SenderId = userId,
+            SenderName = sender?.UserName ?? "Anonim",
+            Content = content,
+            Timestamp = DateTime.UtcNow
+        };
+
+        eksperciOnlineDbContext.Messages.Add(message);
+        await eksperciOnlineDbContext.SaveChangesAsync();
+
+        await Clients.Group(chatId).SendAsync("ReceiveMessage", message.SenderName, content);
     }
 
-    public async Task LeaveRoom(string roomId)
+
+    public override async Task OnConnectedAsync()
     {
-        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId);
+        var chatId = Context.GetHttpContext().Request.Query["chatId"];
+        if (!string.IsNullOrEmpty(chatId))
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, chatId);
+        }
+        await base.OnConnectedAsync();
     }
 }
