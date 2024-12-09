@@ -23,61 +23,156 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3 bg-light rounded-3">
-            <!-- Form for filters -->
-            <form method="get">
+        @if (Model != null && Model.Any())
+        {
+            <div class="col-md-3 bg-light rounded-3">
+                <!-- Form for filters -->
                 <div class="container p-3">
                     <h4>Filtry</h4>
 
-                    <div class="form-group mb-2">
-                        <label>Wybierz ocenę:</label>
-                        <select class="form-control" name="ratingFilter">
-                            <option value="">Dowolne</option>
-                            <option value="5">★★★★★</option>
-                            <option value="4">≥ ★★★★☆</option>
-                            <option value="3">≥ ★★★☆☆</option>
-                            <option value="2">≥ ★★☆☆☆</option>
-                            <option value="1">≥ ★☆☆☆☆</option>
-                        </select>
+                    <label>Sortuj według nazwy:</label>
+
+                    <div class="mb-2">
+                        <span>
+                            <a class="btn btn-info"
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-sortBy="Tytuł"
+                               asp-route-sortDirection="Asc"
+                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                                <i class="bi bi-arrow-down"></i>A
+                            </a>
+                        </span>
+
+                        <span>
+                            <a class="btn btn-info"
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-sortBy="Tytuł"
+                               asp-route-sortDirection="Desc"
+                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                                <i class="bi bi-arrow-up"></i>Z
+                            </a>
+                        </span>
                     </div>
 
-                    <div class="form-group mb-2">
-                        <label>Sortuj według ceny:</label>
-                        <select class="form-control" name="sortOrder">
-                            <option value="asc">Rosnąco</option>
-                            <option value="desc">Malejąco</option>
-                        </select>
+                    <label>Sortuj według ceny:</label>
+
+                    <div class="mb-2">
+                        <span>
+                            <a class="btn btn-info"
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-sortBy="Cena"
+                               asp-route-sortDirection="Asc"
+                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                                Rosnąco
+                            </a>
+                        </span>
+
+                        <span>
+                            <a class="btn btn-info"
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-sortBy="Cena"
+                               asp-route-sortDirection="Desc"
+                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                                Malejąco
+                            </a>
+                        </span>
                     </div>
 
-                    <div class="form-group mb-2">
-                        <label>Wybierz cenę</label>
+                    <label>Sortuj według oceny:</label>
 
-                        <div class="form-group">
-                            <label>Cena:</label>
-                            <input type="number" id="price-from-display" class="form-control" readonly>
-                        </div>
+                    <div class="mb-2">
+                        <span>
+                            <a class="btn btn-info"
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-sortBy="AverageGrade"
+                               asp-route-sortDirection="Asc"
+                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                                Rosnąco
+                            </a>
+                        </span>
+
+                        <span>
+                            <a class="btn btn-info"
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-sortBy="AverageGrade"
+                               asp-route-sortDirection="Desc"
+                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                                Malejąco
+                            </a>
+                        </span>
                     </div>
 
-                    <div class="form-group mb-2">
-                        <label>Kategoria:</label>
-                        <select class="form-control" name="categoryFilter">
-                            <option value="">Dowolna</option>
-                            <option value="Informatyk">Informatyk</option>
-                            <option value="Hydraulik">Hydraulik</option>
-                            <option value="Stolarz">Stolarz</option>
-                        </select>
+                    <label>Sortuj według popularności:</label>
+
+                    <div class="mb-2">
+                        <span>
+                            <a class="btn btn-info"
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-sortBy="TotalComments"
+                               asp-route-sortDirection="Asc"
+                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                                Rosnąco
+                            </a>
+                        </span>
+
+                        <span>
+                            <a class="btn btn-info"
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-sortBy="TotalComments"
+                               asp-route-sortDirection="Desc"
+                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                                Malejąco
+                            </a>
+                        </span>
                     </div>
 
-                    <div class="form-group mb-2">
-                        <button class="btn btn-info w-100">Filtruj</button>
+                    <label>Sortuj od:</label>
+
+                    <div class="mb-2">
+                        <span>
+                            <a class="btn btn-info"
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-sortBy="DataPublikacji"
+                               asp-route-sortDirection="Asc"
+                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                                Najstarszych
+                            </a>
+                        </span>
+
+                        <span>
+                            <a class="btn btn-info"
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-sortBy="DataPublikacji"
+                               asp-route-sortDirection="Desc"
+                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                                Najnowszych
+                            </a>
+                        </span>
                     </div>
+
+                    <label>Kategorie:</label>
+                    <div class="mb-2">
+                        @foreach (var kategoria in ViewBag.Kategorie)
+                        {
+                            <a asp-area="" asp-controller="Services" asp-action="List" asp-route-kategoriaId="@kategoria.Id">
+                                <span class="badge bg-info">@kategoria.NazwaKategorii</span>
+                            </a>
+                        }
+                    </div>
+
                 </div>
-            </form>
-        </div>
-
-        <div class="col-md-9">
-            @if (Model != null && Model.Any())
-            {
+            </div>
+            <div class="col-md-9">
                 @foreach (var usługa in Model)
                 {
                     <div class="container bg-light p-3 mb-3 rounded-3">
@@ -148,6 +243,8 @@
                                asp-action="List"
                                asp-route-pageNumber="@prevPage"
                                asp-route-pageSize="@ViewBag.PageSize"
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
                                asp-route-sortBy="@ViewBag.SortBy"
                                asp-route-sortDirection="@ViewBag.SortDirection">
                                 Poprzednia
@@ -162,6 +259,8 @@
                                    asp-action="List"
                                    asp-route-pageNumber="@i"
                                    asp-route-pageSize="@ViewBag.PageSize"
+                                   asp-route-searchQuery="@ViewBag.SearchQuery"
+                                   asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
                                    asp-route-sortBy="@ViewBag.SortBy"
                                    asp-route-sortDirection="@ViewBag.SortDirection">
                                     @i
@@ -175,6 +274,8 @@
                                asp-action="List"
                                asp-route-pageNumber="@nextPage"
                                asp-route-pageSize="@ViewBag.PageSize"
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
                                asp-route-sortBy="@ViewBag.SortBy"
                                asp-route-sortDirection="@ViewBag.SortDirection">
                                 Następna
@@ -182,11 +283,12 @@
                         </li>
                     </ul>
                 </nav>
-            }
-            else
-            {
-                <p>Brak Usług</p>
-            }
-        </div>
+            </div>
+        }
+        else
+        {
+            <p>Brak Usług</p>
+        }
+
     </div>
 </div>

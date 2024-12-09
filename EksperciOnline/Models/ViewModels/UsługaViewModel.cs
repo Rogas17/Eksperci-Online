@@ -20,5 +20,6 @@ namespace EksperciOnline.Models.ViewModels
         public Kategoria Kategoria { get; set; }
         public double AverageGrade { get; set; }
         public int TotalComments { get; set; }
+
     }
 }

@@ -39,11 +39,10 @@
                 @foreach (var kategoria in Model)
                 {
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 img-wrapper">
-                        <a asp-area="" asp-controller="Services" asp-action="List">
-                            <img src="@kategoria.UrlZdjęcia" />
+                        <a asp-area="" asp-controller="Services" asp-action="List" asp-route-kategoriaId="@kategoria.Id">
+                            <img class="mb-1" src="@kategoria.UrlZdjęcia" />
                             <span class="badge bg-info">@kategoria.NazwaKategorii</span>
                         </a>
-
                     </div>
                 }
             }

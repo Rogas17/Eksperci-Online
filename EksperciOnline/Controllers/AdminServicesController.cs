@@ -1,4 +1,5 @@
-﻿using EksperciOnline.Repositiories;
+﻿using EksperciOnline.Models.Domain;
+using EksperciOnline.Repositiories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace EksperciOnline.Controllers
             this.zgłoszenieRepository = zgłoszenieRepository;
         }
 
-        public async Task<IActionResult> List(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, int pageSize = 15, int pageNumber = 1)
+        public async Task<IActionResult> List(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, Guid? kategoriaId, int pageSize = 15, int pageNumber = 1)
         {
             var totalRecords = await serviceRepository.CountAsync();
             var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
@@ -39,7 +40,7 @@ namespace EksperciOnline.Controllers
             ViewBag.PageNumber = pageNumber;
 
             // Call the repository
-            var blogPosts = await serviceRepository.GetAllAsync(searchQuery, searchLocalQuery, sortBy, sortDirection, pageNumber, pageSize);
+            var blogPosts = await serviceRepository.GetAllAsync(searchQuery, searchLocalQuery, sortBy, sortDirection, kategoriaId, pageNumber, pageSize);
 
             return View(blogPosts);
         }

@@ -39,63 +39,72 @@ namespace EksperciOnline.Repositiories
             return null;
         }
 
-        public async Task<IEnumerable<Usługa>> GetAllAsync(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, int pageNumber = 1, int pageSize = 100)
+        public async Task<IEnumerable<Usługa>> GetAllAsync(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, Guid? kategoriaId, int pageNumber = 1, int pageSize = 100)
         {
             var query = eksperciOnlineDbContext.Usługi.AsQueryable();
 
             // Filtering
-            if (string.IsNullOrWhiteSpace(searchQuery) == false)
+            if (!string.IsNullOrWhiteSpace(searchQuery))
             {
-                query = query.Where(x => x.Tytuł.Contains(searchQuery));
+                query = query.Where(x => x.Tytuł.Contains(searchQuery) || x.KrótkiOpis.Contains(searchQuery));
             }
 
-            if (string.IsNullOrWhiteSpace(searchLocalQuery) == false)
+            if (kategoriaId.HasValue)
+            {
+                query = query.Where(u => u.Kategoria.Id == kategoriaId.Value);
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchLocalQuery))
             {
                 query = query.Where(x => x.Lokalizacja.Contains(searchLocalQuery));
             }
 
             // Sorting
-            if (string.IsNullOrWhiteSpace(sortBy) == false)
+            var isDesc = string.Equals(sortDirection, "Desc", StringComparison.OrdinalIgnoreCase);
+            switch (sortBy)
             {
-                var isDesc = string.Equals(sortDirection, "Desc", StringComparison.OrdinalIgnoreCase);
-
-                if (string.Equals(sortBy, "Tytuł", StringComparison.OrdinalIgnoreCase))
-                {
+                case "Tytuł":
                     query = isDesc ? query.OrderByDescending(x => x.Tytuł) : query.OrderBy(x => x.Tytuł);
-                }
-            }
-
-            if (string.IsNullOrWhiteSpace(sortBy) == false)
-            {
-                var isDesc = string.Equals(sortDirection, "Desc", StringComparison.OrdinalIgnoreCase);
-
-                if (string.Equals(sortBy, "DataPublikacji", StringComparison.OrdinalIgnoreCase))
-                {
+                    break;
+                case "DataPublikacji":
                     query = isDesc ? query.OrderByDescending(x => x.DataPulikacji) : query.OrderBy(x => x.DataPulikacji);
-                }
-            }
-
-            if (string.IsNullOrWhiteSpace(sortBy) == false)
-            {
-                var isDesc = string.Equals(sortDirection, "Desc", StringComparison.OrdinalIgnoreCase);
-
-                if (string.Equals(sortBy, "Cena", StringComparison.OrdinalIgnoreCase))
-                {
+                    break;
+                case "Cena":
                     query = isDesc ? query.OrderByDescending(x => x.CenaOd) : query.OrderBy(x => x.CenaOd);
-                }
+                    break;
+                case "AverageGrade":
+                    query = query
+                        .Select(x => new
+                        {
+                            Usługa = x,
+                            AverageGrade = eksperciOnlineDbContext.ServiceComment
+                                .Where(k => k.ServiceId == x.Id)
+                                .Select(k => k.Grade)
+                                .Average()
+                        })
+                        .OrderBy(x => isDesc ? x.AverageGrade * -1 : x.AverageGrade)
+                        .Select(x => x.Usługa);
+                    break;
+                case "TotalComments":
+                    query = query
+                        .Select(x => new
+                        {
+                            Usługa = x,
+                            TotalComments = eksperciOnlineDbContext.ServiceComment
+                                .Count(k => k.ServiceId == x.Id)
+                        })
+                        .OrderBy(x => isDesc ? x.TotalComments * -1 : x.TotalComments)
+                        .Select(x => x.Usługa);
+                    break;
             }
 
             // Pagination
-            // Skip 0 Take 5 -> Page 1 of 5 results
-            // Skip 5 Take next 5 -> Page 1 of 5 results
             var skipResults = (pageNumber - 1) * pageSize;
             query = query.Skip(skipResults).Take(pageSize);
 
-
-            return await query.Include(x=>x.Kategoria).ToListAsync();
-
-            // return await eksperciOnlineDbContext.Usługi.Include(x => x.Kategoria).ToListAsync();
+            return await query.Include(x => x.Kategoria).ToListAsync();
         }
+
 
         public async Task<Usługa?> GetAsync(Guid id)
         {

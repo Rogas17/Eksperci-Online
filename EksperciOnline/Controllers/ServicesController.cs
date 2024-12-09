@@ -87,7 +87,7 @@ namespace EksperciOnline.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> List(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, int pageSize = 15, int pageNumber = 1)
+        public async Task<IActionResult> List(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, Guid? kategoriaId, int pageSize = 15, int pageNumber = 1)
         {
             var totalRecords = await serviceRepository.CountAsync();
             var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
@@ -107,10 +107,12 @@ namespace EksperciOnline.Controllers
             ViewBag.SearchLocalQuery = searchLocalQuery;
             ViewBag.SortBy = sortBy;
             ViewBag.SortDirection = sortDirection;
+            ViewBag.KategoriaId = kategoriaId;
             ViewBag.PageSize = pageSize;
             ViewBag.PageNumber = pageNumber;
+     
 
-            var usługi = await serviceRepository.GetAllAsync(searchQuery, searchLocalQuery, sortBy, sortDirection, pageNumber, pageSize);
+            var usługi = await serviceRepository.GetAllAsync(searchQuery, searchLocalQuery, sortBy, sortDirection, kategoriaId, pageNumber, pageSize);
 
             var usługiViewModel = new List<UsługaViewModel>();
 
@@ -125,6 +127,10 @@ namespace EksperciOnline.Controllers
                     // Pobierz nazwę użytkownika autora na podstawie jego ID
                     var autor = await userManager.FindByIdAsync(usługa.AutorId.ToString());
                     var autorNazwaUżytkownika = autor?.UserName ?? "Anonim";
+
+                    var kategorie = await categoryRepository.GetAllAsync();
+                    ViewBag.Kategorie = kategorie.Select(k => new { k.Id, k.NazwaKategorii }).ToList();
+
 
                     usługiViewModel.Add(new UsługaViewModel
                     {
@@ -144,6 +150,7 @@ namespace EksperciOnline.Controllers
                         AverageGrade = averageGrade,
                         TotalComments = totalComments
                     });
+
                 }
             }
 

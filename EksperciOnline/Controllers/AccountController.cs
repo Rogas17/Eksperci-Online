@@ -1,4 +1,5 @@
-﻿using EksperciOnline.Models.ViewModels;
+﻿using EksperciOnline.Models.Domain;
+using EksperciOnline.Models.ViewModels;
 using EksperciOnline.Repositiories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -30,7 +31,7 @@ namespace EksperciOnline.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> List(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, int pageSize = 15, int pageNumber = 1)
+        public async Task<IActionResult> List(string? searchQuery, string? searchLocalQuery, string? sortBy, string? sortDirection, Guid? kategoriaId, int pageSize = 15, int pageNumber = 1)
         {
             var totalRecords = await serviceRepository.CountAsync();
             var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
@@ -57,7 +58,7 @@ namespace EksperciOnline.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            var usługi = await serviceRepository.GetAllAsync(searchQuery, searchLocalQuery, sortBy, sortDirection, pageNumber, pageSize);
+            var usługi = await serviceRepository.GetAllAsync(searchQuery, searchLocalQuery, sortBy, sortDirection, kategoriaId, pageNumber, pageSize);
 
             var usługiViewModel = new List<UsługaViewModel>();
 

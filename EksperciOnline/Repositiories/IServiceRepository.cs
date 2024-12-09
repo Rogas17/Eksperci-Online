@@ -9,6 +9,7 @@ namespace EksperciOnline.Repositiories
             string? searchLocalQuery = null,
             string? sortBy = null,
             string? sortDirection = null,
+            Guid? kategoriaId = null,
             int pageNumber = 1,
             int pageSize = 100);
 
