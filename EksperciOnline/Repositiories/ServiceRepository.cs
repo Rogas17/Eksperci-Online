@@ -86,8 +86,8 @@ namespace EksperciOnline.Repositiories
                             Usługa = x,
                             AverageGrade = eksperciOnlineDbContext.ServiceComment
                                 .Where(k => k.ServiceId == x.Id)
-                                .Select(k => k.Grade)
-                                .Average()
+                                .Select(k => (double?)k.Grade)
+                                .Average() ?? 0
                         })
                         .OrderBy(x => isDesc ? x.AverageGrade * -1 : x.AverageGrade)
                         .Select(x => x.Usługa);

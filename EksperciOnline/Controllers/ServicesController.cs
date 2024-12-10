@@ -251,51 +251,66 @@ namespace EksperciOnline.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            // Retrieve the result from the repository
+            // Pobierz usługę
             var usługa = await serviceRepository.GetAsync(id);
-            var categoryDomainModel = await categoryRepository.GetAllAsync();
-
-            var userId = userManager.GetUserId(User);
-
-            if (usługa != null)
+            if (usługa == null)
             {
-                // map domain model into view model
-                var model = new EditServiceRequest
-                {
-                    Id = usługa.Id,
-                    Tytuł = usługa.Tytuł,
-                    Lokalizacja = usługa.Lokalizacja,
-                    NrTelefonu = usługa.NrTelefonu,
-                    CenaOd = usługa.CenaOd,
-                    CenaDo = usługa.CenaDo,
-                    Opis = usługa.Opis,
-                    KrótkiOpis = usługa.KrótkiOpis,
-                    Widoczność = usługa.Widoczność,
-                    UrlZdjęcia = usługa.UrlZdjęcia,
-                    UrlBaneru = usługa.UrlBaneru,
-                    DataPulikacji = usługa.DataPulikacji,
-                    AutorId = Guid.Parse(userId),
-                    Kategorie = categoryDomainModel.Select(x => new SelectListItem
-                    {
-                        Text = x.NazwaKategorii,
-                        Value = x.Id.ToString()
-                    }),
-                    WybranaKategoria = usługa.Kategoria.Id.ToString()
-                };
-
-                return View(model);
+                return NotFound();
             }
 
-            // Pass data to view
+            // Sprawdź czy użytkownik to właściciel usługi
+            var userId = userManager.GetUserId(User);
+            if (usługa.AutorId.ToString() != userId)
+            {
+                return Forbid();
+            }
 
-            return View(null);
+            // Mapowanie do modelu widoku
+            var categoryDomainModel = await categoryRepository.GetAllAsync();
+            var model = new EditServiceRequest
+            {
+                Id = usługa.Id,
+                Tytuł = usługa.Tytuł,
+                Lokalizacja = usługa.Lokalizacja,
+                NrTelefonu = usługa.NrTelefonu,
+                CenaOd = usługa.CenaOd,
+                CenaDo = usługa.CenaDo,
+                Opis = usługa.Opis,
+                KrótkiOpis = usługa.KrótkiOpis,
+                Widoczność = usługa.Widoczność,
+                UrlZdjęcia = usługa.UrlZdjęcia,
+                UrlBaneru = usługa.UrlBaneru,
+                DataPulikacji = usługa.DataPulikacji,
+                Kategorie = categoryDomainModel.Select(x => new SelectListItem
+                {
+                    Text = x.NazwaKategorii,
+                    Value = x.Id.ToString()
+                }),
+                WybranaKategoria = usługa.Kategoria.Id.ToString()
+            };
+
+            return View(model);
         }
+
 
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Edit(EditServiceRequest editServiceRequest)
         {
             var userId = userManager.GetUserId(User);
+
+            // Pobierz usługę z bazy danych
+            var usługa = await serviceRepository.GetAsync(editServiceRequest.Id);
+            if (usługa == null)
+            {
+                return NotFound();
+            }
+
+            // Sprawdź czy użytkownik to właściciel usługi
+            if (usługa.AutorId.ToString() != userId)
+            {
+                return Forbid();
+            }
 
             // map view model back to domain model
             var serviceDomainModel = new Usługa

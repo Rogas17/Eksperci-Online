@@ -34,23 +34,29 @@
 
                     <div class="mb-2">
                         <span>
-                            <a class="btn btn-info"
+                            <a class="btn @(ViewBag.SortBy == "Tytuł" && ViewBag.SortDirection == "Asc" ? "btn-info" : "btn-secondary")"
                                asp-controller="Services"
                                asp-action="List"
                                asp-route-sortBy="Tytuł"
                                asp-route-sortDirection="Asc"
-                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
+                               asp-route-kategoriaId="@ViewBag.KategoriaId">
+                                
                                 <i class="bi bi-arrow-down"></i>A
                             </a>
                         </span>
 
                         <span>
-                            <a class="btn btn-info"
+                            <a class="btn @(ViewBag.SortBy == "Tytuł" && ViewBag.SortDirection == "Desc" ? "btn-info" : "btn-secondary")"
                                asp-controller="Services"
                                asp-action="List"
                                asp-route-sortBy="Tytuł"
                                asp-route-sortDirection="Desc"
-                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
+                               asp-route-kategoriaId="@ViewBag.KategoriaId">
+                                
                                 <i class="bi bi-arrow-up"></i>Z
                             </a>
                         </span>
@@ -60,23 +66,29 @@
 
                     <div class="mb-2">
                         <span>
-                            <a class="btn btn-info"
+                            <a class="btn @(ViewBag.SortBy == "Cena" && ViewBag.SortDirection == "Asc" ? "btn-info" : "btn-secondary")"
                                asp-controller="Services"
                                asp-action="List"
                                asp-route-sortBy="Cena"
                                asp-route-sortDirection="Asc"
-                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
+                               asp-route-kategoriaId="@ViewBag.KategoriaId">
+                                
                                 Rosnąco
                             </a>
                         </span>
 
                         <span>
-                            <a class="btn btn-info"
+                            <a class="btn @(ViewBag.SortBy == "Cena" && ViewBag.SortDirection == "Desc" ? "btn-info" : "btn-secondary")"
                                asp-controller="Services"
                                asp-action="List"
                                asp-route-sortBy="Cena"
                                asp-route-sortDirection="Desc"
-                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
+                               asp-route-kategoriaId="@ViewBag.KategoriaId">
+                                
                                 Malejąco
                             </a>
                         </span>
@@ -86,24 +98,30 @@
 
                     <div class="mb-2">
                         <span>
-                            <a class="btn btn-info"
+                            <a class="btn @(ViewBag.SortBy == "AverageGrade" && ViewBag.SortDirection == "Asc" ? "btn-info" : "btn-secondary")"
                                asp-controller="Services"
                                asp-action="List"
                                asp-route-sortBy="AverageGrade"
                                asp-route-sortDirection="Asc"
-                               asp-route-searchQuery="@ViewBag.SearchQuery">
-                                Rosnąco
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
+                               asp-route-kategoriaId="@ViewBag.KategoriaId">
+                                
+                                Najgorsze
                             </a>
                         </span>
 
                         <span>
-                            <a class="btn btn-info"
+                            <a class="btn @(ViewBag.SortBy == "AverageGrade" && ViewBag.SortDirection == "Desc" ? "btn-info" : "btn-secondary")"
                                asp-controller="Services"
                                asp-action="List"
                                asp-route-sortBy="AverageGrade"
                                asp-route-sortDirection="Desc"
-                               asp-route-searchQuery="@ViewBag.SearchQuery">
-                                Malejąco
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
+                               asp-route-kategoriaId="@ViewBag.KategoriaId">
+                                
+                                Najlepsze
                             </a>
                         </span>
                     </div>
@@ -112,24 +130,30 @@
 
                     <div class="mb-2">
                         <span>
-                            <a class="btn btn-info"
+                            <a class="btn @(ViewBag.SortBy == "TotalComments" && ViewBag.SortDirection == "Asc" ? "btn-info" : "btn-secondary")"
                                asp-controller="Services"
                                asp-action="List"
                                asp-route-sortBy="TotalComments"
                                asp-route-sortDirection="Asc"
-                               asp-route-searchQuery="@ViewBag.SearchQuery">
-                                Rosnąco
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
+                               asp-route-kategoriaId="@ViewBag.KategoriaId">
+                                
+                                Niepopularne
                             </a>
                         </span>
 
                         <span>
-                            <a class="btn btn-info"
+                            <a class="btn @(ViewBag.SortBy == "TotalComments" && ViewBag.SortDirection == "Desc" ? "btn-info" : "btn-secondary")"
                                asp-controller="Services"
                                asp-action="List"
                                asp-route-sortBy="TotalComments"
                                asp-route-sortDirection="Desc"
-                               asp-route-searchQuery="@ViewBag.SearchQuery">
-                                Malejąco
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
+                               asp-route-kategoriaId="@ViewBag.KategoriaId">
+                                
+                                Popularne
                             </a>
                         </span>
                     </div>
@@ -138,23 +162,28 @@
 
                     <div class="mb-2">
                         <span>
-                            <a class="btn btn-info"
+                            <a class="btn @(ViewBag.SortBy == "DataPublikacji" && ViewBag.SortDirection == "Asc" ? "btn-info" : "btn-secondary")"
                                asp-controller="Services"
                                asp-action="List"
                                asp-route-sortBy="DataPublikacji"
                                asp-route-sortDirection="Asc"
-                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
+                               asp-route-kategoriaId="@ViewBag.KategoriaId">
+
                                 Najstarszych
                             </a>
                         </span>
 
                         <span>
-                            <a class="btn btn-info"
+                            <a class="btn @(ViewBag.SortBy == "DataPublikacji" && ViewBag.SortDirection == "Desc" ? "btn-info" : "btn-secondary")"
                                asp-controller="Services"
                                asp-action="List"
                                asp-route-sortBy="DataPublikacji"
                                asp-route-sortDirection="Desc"
-                               asp-route-searchQuery="@ViewBag.SearchQuery">
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery"
+                               asp-route-kategoriaId="@ViewBag.KategoriaId">
                                 Najnowszych
                             </a>
                         </span>
@@ -164,8 +193,13 @@
                     <div class="mb-2">
                         @foreach (var kategoria in ViewBag.Kategorie)
                         {
-                            <a asp-area="" asp-controller="Services" asp-action="List" asp-route-kategoriaId="@kategoria.Id">
-                                <span class="badge bg-info">@kategoria.NazwaKategorii</span>
+                            <a asp-area=""
+                               asp-controller="Services"
+                               asp-action="List"
+                               asp-route-kategoriaId="@kategoria.Id"
+                               asp-route-searchQuery="@ViewBag.SearchQuery"
+                               asp-route-searchLocalQuery="@ViewBag.SearchLocalQuery">
+                                <span class="badge @(ViewBag.KategoriaId == kategoria.Id ? "bg-info" : "bg-secondary")">@kategoria.NazwaKategorii</span>
                             </a>
                         }
                     </div>
