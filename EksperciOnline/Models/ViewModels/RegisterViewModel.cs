@@ -6,6 +6,7 @@ namespace EksperciOnline.Models.ViewModels
     public class RegisterViewModel
     {
         [Required]
+        [UsernameValidation] // Użycie niestandardowej walidacji
         public string Username { get; set; }
 
         [Required]
@@ -15,6 +16,27 @@ namespace EksperciOnline.Models.ViewModels
         [Required]
         [PasswordComplexity]
         public string Password { get; set; }
+    }
+
+    public class UsernameValidationAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            var username = value as string;
+
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                return new ValidationResult("Nazwa użytkownika nie może być pusta.");
+            }
+
+            // Sprawdzenie czy użytkownik zawiera polskie znaki lub spacje
+            if (Regex.IsMatch(username, @"[ąćęłńóśżźĄĆĘŁŃÓŚŻŹ\s]"))
+            {
+                return new ValidationResult("Nazwa użytkownika nie może zawierać polskich znaków ani spacji.");
+            }
+
+            return ValidationResult.Success;
+        }
     }
 
     public class PasswordComplexityAttribute : ValidationAttribute

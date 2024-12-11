@@ -33,11 +33,30 @@
                 </td>
 
                 <td>
-                    <form asp-action="BlockService" asp-controller="AdminServices" method="post">
-                        <input type="hidden" name="id" value="@zgłoszenie.Id" />
-                        <button type="submit" class="btn btn-danger">Zablokuj</button>
-                    </form>
+                    @if (zgłoszenie.CzyRozpatrzone)
+                    {
+                        if (zgłoszenie.CzyZablokowane)
+                        {
+                            <span class="badge bg-danger">Zablokowane</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Rozpatrzone</span>
+                        }
+                    }
+                    else
+                    {
+                        <form asp-action="BlockService" asp-controller="AdminServices" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@zgłoszenie.Id" />
+                            <button type="submit" class="btn btn-danger">Zablokuj</button>
+                        </form>
+                        <form asp-action="CancelReport" asp-controller="AdminServices" method="post" style="display:inline; margin-left: 5px;">
+                            <input type="hidden" name="id" value="@zgłoszenie.Id" />
+                            <button type="submit" class="btn btn-secondary">Anuluj zgłoszenie</button>
+                        </form>
+                    }
                 </td>
+
             </tr>
         }
     </tbody>

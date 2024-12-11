@@ -74,5 +74,20 @@ namespace EksperciOnline.Controllers
             return RedirectToAction("Reports");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CancelReport(Guid id)
+        {
+            var zgłoszenie = await zgłoszenieRepository.GetAsync(id);
+            if (zgłoszenie != null)
+            {
+                zgłoszenie.CzyRozpatrzone = true;
+                zgłoszenie.CzyZablokowane = false;
+
+                await zgłoszenieRepository.UpdateAsync(zgłoszenie);
+            }
+
+            return RedirectToAction("Reports");
+        }
+
     }
 }
