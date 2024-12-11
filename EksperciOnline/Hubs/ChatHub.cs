@@ -19,7 +19,7 @@ public class ChatHub : Hub
 
     public async Task SendMessage(string chatId, string content)
     {
-        var userId = Context.UserIdentifier; // Uzyskanie identyfikatora użytkownika z kontekstu
+        var userId = Context.UserIdentifier;
         var sender = await userManager.FindByIdAsync(userId);
 
         var message = new Message

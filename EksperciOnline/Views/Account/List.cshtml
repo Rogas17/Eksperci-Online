@@ -48,7 +48,7 @@
                                 }
                                 else
                                 {
-                                    <span class="text-warning">
+                                    <div class="text-warning">
                                         @for (int i = 1; i <= 5; i++)
                                         {
                                             if (i <= Math.Floor(usługa.AverageGrade)) // Pełne gwiazdki
@@ -64,10 +64,7 @@
                                                 <i class="bi bi-star"></i>
                                             }
                                         }
-                                    </span>
-
-                                    <br />
-
+                                    </div>
                                     <span class="text-warning">
                                         (@usługa.TotalComments oceny)
                                     </span>
@@ -86,6 +83,8 @@
                             <div class="col-md-3 text-end">
                                 <label>Cena</label>
                                 <h4 class="fw-bold">@usługa.CenaOd - @usługa.CenaDo PLN</h4>
+                                <label>Lokalizacja</label>
+                                <h5>@usługa.Lokalizacja</h5>
                                 @if (usługa.NrTelefonu != null)
                                 {
                                     <label>Numer Telefonu</label>
@@ -102,7 +101,7 @@
                             </div>
 
                             <div class="col-md-6 text-end">
-                                <a class="btn btn-info mt-3" asp-area="" asp-controller="Services" asp-action="Edit" asp-route-id="@usługa.Id">Edytuj</a>
+                                <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="Edit" asp-route-id="@usługa.Id">Edytuj</a>
                             </div>
                         </div>
 
