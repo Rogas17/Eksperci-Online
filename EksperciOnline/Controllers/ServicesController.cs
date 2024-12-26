@@ -17,13 +17,15 @@ namespace EksperciOnline.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly IServiceCommentRepository serviceCommentRepository;
         private readonly IZgłoszenieRepository zgłoszenieRepository;
+        private readonly IFavoriteServiceRepository favoriteServiceRepository;
 
         public ServicesController(ICategoryRepository categoryRepository,
             IServiceRepository serviceRepository,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             IServiceCommentRepository serviceCommentRepository,
-            IZgłoszenieRepository zgłoszenieRepository)
+            IZgłoszenieRepository zgłoszenieRepository,
+            IFavoriteServiceRepository favoriteServiceRepository)
         {
             this.categoryRepository = categoryRepository;
             this.serviceRepository = serviceRepository;
@@ -31,6 +33,7 @@ namespace EksperciOnline.Controllers
             this.userManager = userManager;
             this.serviceCommentRepository = serviceCommentRepository;
             this.zgłoszenieRepository = zgłoszenieRepository;
+            this.favoriteServiceRepository = favoriteServiceRepository;
         }
 
         [Authorize]
@@ -110,7 +113,7 @@ namespace EksperciOnline.Controllers
             ViewBag.KategoriaId = kategoriaId;
             ViewBag.PageSize = pageSize;
             ViewBag.PageNumber = pageNumber;
-     
+
 
             var usługi = await serviceRepository.GetAllAsync(searchQuery, searchLocalQuery, sortBy, sortDirection, kategoriaId, pageNumber, pageSize);
 
@@ -154,6 +157,19 @@ namespace EksperciOnline.Controllers
 
                 }
             }
+
+
+            var userIdString = userManager.GetUserId(User);
+            if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid userId))
+            {
+                var favorites = await favoriteServiceRepository.GetByUserIdAsync(userId);
+                ViewBag.Favorites = favorites.Select(f => f.ServiceId).ToList();
+            }
+            else
+            {
+                ViewBag.Favorites = new List<Guid>();
+            }
+
 
             return View(usługiViewModel);
         }

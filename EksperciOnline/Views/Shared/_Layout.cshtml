@@ -26,7 +26,10 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item me-2">
-                            <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="List">Oferty</a>
+                            <a class="btn btn-info" asp-area="" asp-controller="Services" asp-action="List">Usługodawcy</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="btn btn-info" asp-area="" asp-controller="Seekers" asp-action="List">Usługobiorcy</a>
                         </li>
                         <li class="nav-item">
                             @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
@@ -39,7 +42,9 @@
                                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
                                             <a class="dropdown-item" asp-area="" asp-controller="AdminCategories" asp-action="List">Kategorie</a>
 
-                                            <a class="dropdown-item" asp-area="" asp-controller="AdminServices" asp-action="List">Usługi</a>
+                                            <a class="dropdown-item" asp-area="" asp-controller="AdminServices" asp-action="List">Usługodawcy</a>
+
+                                            <a class="dropdown-item" asp-area="" asp-controller="AdminSeekers" asp-action="List">Usługobiorcy</a>
 
                                             <a class="dropdown-item" asp-area="" asp-controller="AdminUsers" asp-action="List">Użytkownicy</a>
 
